@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="salaryContainer">
         <div>
             <div>
             <span>图书整理小使者</span>
@@ -12,14 +12,14 @@
             <div>
             <span>工作地点：图书馆2楼</span>
             </div>
-            <button @click="">更多岗位信息</button>
+            <button @click="goToPositionDetail">更多岗位信息</button>
         </div>
         <mt-cell title="薪资明细"></mt-cell>
         <mt-cell v-for="n in 10" title="2015/1/1" value="工作20天 120"></mt-cell>
     </div>
 </template>
 <style>
-    body{
+    .salaryContainer{
         background-color:#fff;
     }
     button{
@@ -37,6 +37,14 @@
 <script>
     import { Cell } from 'mint-ui'
     export default{
+        methods:{
+            goToPositionDetail:function () {
+//                alert('11');
+                this.$router.push('/positionDetail');
+
+            }
+
+        },
         data(){
             return{
                 msg:'hello vue'
