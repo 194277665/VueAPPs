@@ -31,7 +31,9 @@
                             <span class="level">一等奖</span><span class="money">¥8000</span><span class="peopleCount">200人已申请</span>
                         </div>
                         <div class="line">
-                            <span class="date">开放时间</span><span class="dateToDate">05.12--08.25</span><span class="markImage"><img src="../../../static/images/noApply.png" class="mark"></span>
+                            <span class="date">开放时间</span><span class="dateToDate">05.12--08.25</span>
+                            <span class="markImage"><img src="../../../static/images/noApply.png" class="mark"></span>
+                            <!--<span class="noApply">不可申请</span>-->
                         </div>
                     </div>
                     <div class="awardItemRight">
@@ -41,8 +43,7 @@
             </mt-tab-container-item>
 
             <mt-tab-container-item id="2">
-
-                <mt-cell v-for="n in 4" :title="'测试 ' + n"/>
+                <myApply :items="msg"></myApply>
             </mt-tab-container-item>
 
         </mt-tab-container>
@@ -145,8 +146,10 @@
     .markImage{
         display: inline-block;
         float: right;
+        margin-right: 10PX;
         line-height: 50%;
     }
+
     .awardItemRight{
         width: 10%;
         height: 100%;
@@ -164,6 +167,7 @@
 </style>
 <script type="text/javascript">
     import {Navbar, TabItem, TabContainer, TabContainerItem, Cell} from 'mint-ui';
+    import myApply from '../components/myApply.vue'
     export default {
         created() {
         },
@@ -174,7 +178,9 @@
         },
         data(){
             return {
-                selected: "1"
+                selected: "1",
+                msg: [1,2,3]
+
             }
         },
         components: {
@@ -182,7 +188,8 @@
             [TabItem.name]: TabItem,
             [TabContainer.name]: TabContainer,
             [TabContainerItem.name]: TabContainerItem,
-            [Cell.name]: Cell
+            [Cell.name]: Cell,
+            myApply
         },
         watch: {}
     }

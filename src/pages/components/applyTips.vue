@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="">
+        <img src="../../../static/images/Yes.png">
         <!--<div class="tips">-->
             <span>提交成功，我们会尽快审核的</span>
         <!--</div>-->
@@ -16,7 +16,7 @@
         display: block;
         width: 30%;
         height: 30%;
-        margin: 100Px auto;
+        margin: 50Px auto;
     }
 
     span {

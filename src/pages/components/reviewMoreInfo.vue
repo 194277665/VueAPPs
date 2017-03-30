@@ -1,7 +1,5 @@
 <template>
-
-
-    <div class="helpDetailContainer">
+    <div class="container">
         <!--//头部-->
         <div class="helpDetailTop">
             <div class="line">
@@ -30,40 +28,66 @@
         </div>
 
 
+        <!--申请信息-->
+        <div class="applyInfo">
+        <div class="header"><span>申请信息</span></div>
+            <table>
+                <tr>
+                    <td class="desTd">提交时间</td>
+                    <td class="detailTd">2015／11／11</td>
+                </tr>
+                <tr>
+                    <td class="desTd">手机号</td>
+                    <td class="detailTd">12232231243234</td>
+                </tr>
+                <tr>
+                    <td class="desTd">申请理由</td>
+                    <td class="detailTd">我特别想申请到钱我特别想申请到钱我特别想申请到钱
+                        我特别想申请到钱我特别想申请到钱我特别想申请到钱
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
 
         <!--//简介-->
         <div class="introduce">
             <!--<mt-cell title="补助简介"></mt-cell>-->
-            <!--<div>-->
-                <div class="header"><span>补助简介</span></div>
-                <span class="introduceContent">补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
+            <div class="header"><span>补助简介</span></div>
+            <span class="introduceContent">补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
                 补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
                 补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
                 补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
                 补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介</span>
-
-
-            <!--</div>-->
-
+                补助简介补助简介补助简介
+                 <span class="more" @click="more()">更多</span>
+            </span>
         </div>
-        <button class="more" @click="more()">{{moreOrLess}}</button>
 
 
-
-        <!--//条件-->
-        <div class="conditon">
+        <!--评定条件-->
+        <div class="condition">
             <div class="header"><span>评定条件</span></div>
-            <span class="conditionContent">你符合评定条件，快去申请吧</span>
-        </div>
+                <table>
+                    <tr>
+                        <td class="desTd">必须满足</td>
+                        <td class="detailTd">成绩>90分</td>
+                    </tr>
+                    <tr>
+                        <td class="desTd">满足其一</td>
+                        <td class="detailTd">及格数>3科</td>
+                    </tr>
 
-        <!--//我要申请按钮-->
-        <button class="wantApply" @click="iWantToApply">我要申请</button>
+                </table>
+        </div>
     </div>
 </template>
-<style scoped>
-
-    .helpDetailContainer {
+<style>
+    body{
+        background-color:#f9f9f9;
+    }
+    .container {
         background: #f9f9f9;
     }
 
@@ -130,15 +154,42 @@
     }
 
 
+    /*--申请信息--*/
+    .applyInfo{
+        margin-bottom: 20PX;
+    }
+    table{
+        width: 100%;
+    }
+
+    .desTd{
+        width: 25%;
+        background: white;
+        color: #d3d3d3;
+        height: 30PX;
+        text-align: left;
+        padding: 10PX;
+        /*padding: ;*/
+    }
+    .detailTd{
+        width: 75%;
+        background: white;
+        color: #030303;
+        /*height: 30PX;*/
+        text-align: left;
+        padding: 10PX;
+        /*padding: ;*/
+    }
 
 
-        /*简介样式*/
+
+    /*简介样式*/
     .introduce {
-        /*position: relative;*/
+        position: relative;
         overflow: hidden;
         width: 100%;
         height: 100PX;
-        margin-bottom: 1PX;
+        margin-bottom: 20PX;
     }
     .header{
         width: 100%;
@@ -153,88 +204,47 @@
         padding-top: 10PX;
         font-size: 16PX;
     }
-
+    .introduceContent{
+        background-color: white;
+    }
 
     .introduce > span {
         display: inline-block;
         float: right;
     }
 
-    .more {
+    .introduce .more {
         display: block;
-        /*position: absolute;*/
-        /*float: right;*/
+        position: absolute;
+        float: right;
         height: 20PX;
-        width: 100%;
-        /*right: 0;*/
-        /*bottom: 0;*/
+        width: 30PX;
+        right: 0;
+        bottom: 0;
         color: #21c0ae;
-        margin-bottom: 20PX;
-        background: white;
-        border: none;
-        outline: none;
     }
 
     .introduceContent {
         width: 100%;
         height: 100%;
         padding: 10PX 10PX;
-        background-color: white;
     }
 
-    /*条件样式*/
-    .conditionContent {
-        display: block;
-        font-size: 12PX;
-        padding-left: 10PX;
-        Padding-top: 10PX;
-        background-color: white;
-        margin-bottom: 20PX;
-        height: 50PX;
-    }
-    /*我要申请样式*/
-    .wantApply {
-        display: block;
+
+    /*条件*/
+    .condition{
         width: 100%;
-        height: 50PX;
-        color: white;
-        background-color: #21c0ae;
-        border: none;
-        font-size: 18PX;
     }
 
 </style>
 <script>
-    import {Cell} from 'mint-ui'
-    import $ from 'jquery'
     export default{
-        methods: {
-            more: function () {
-                if(this.moreOrLess=='收起')
-                {
-                    $(".introduce").css('height', '100PX');
-                    this.moreOrLess='更多';
-                }else {
-                    $(".introduce").css('height', 'auto');
-                    this.moreOrLess='收起';
-                }
-
-
-            },
-            iWantToApply:function () {
-                this.$router.push('/apply');
-
-            }
-        },
         data(){
-            return {
-                moreOrLess: "更多",
-                msg: 'hello vue'
+            return{
+                msg:'hello vue'
             }
         },
-        components: {
-            [Cell.name]: Cell
-
+        components:{
         }
     }
 </script>
