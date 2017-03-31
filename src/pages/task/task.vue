@@ -46,7 +46,8 @@
         width: 100%;
         height: 30PX;
         font-size: 14PX;
-        margin-bottom: 50PX;
+        margin-bottom: 20PX;
+        background: white;
     }
     button{
         width: 25%;
