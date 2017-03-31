@@ -1,12 +1,14 @@
 import index from './pages/index/index.vue';
+import task from './pages/task/task.vue'
 export default {
     routes: [
         {
-            path: '/',
-            component: index,
-            children: [
-
-            ]
+            path: '/index',
+            component: index
+        },
+        {
+            path: '/task/:taskID',
+            component: task
         }
     ]
 };
