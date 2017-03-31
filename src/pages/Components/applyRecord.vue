@@ -6,7 +6,7 @@
 
     </div>
 </template>
-<style>
+<style scoped>
     body{
     }
     .applyListItem{

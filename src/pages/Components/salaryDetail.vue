@@ -17,8 +17,8 @@
         <mt-cell title="薪资明细"></mt-cell>
         <mt-cell v-for="n in 10" title="2015/1/1" value="工作20天 120"></mt-cell>
     </div>
-</template>
-<style>
+</template >
+<style scoped>
     .salaryContainer{
         background-color:#fff;
     }
