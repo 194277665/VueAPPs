@@ -1,12 +1,12 @@
 <template>
     <div id="app" class="index">
         <mt-navbar v-model="selected">
-            <mt-tab-item id="1">补助一览</mt-tab-item>
+            <mt-tab-item id="1" class="ww">补助一览</mt-tab-item>
             <mt-tab-item id="2">我的申请</mt-tab-item>
         </mt-navbar>
 
         <!-- tab-container -->
-        <mt-tab-container v-model="selected">
+        <mt-tab-container v-model="selected" class="tabContainer">
             <mt-tab-container-item id="1">
                 <span class="sectionHeader">国家困难补助</span>
 
@@ -19,9 +19,12 @@
                             <span class="date">开放时间</span><span class="dateToDate">05.12--08.25</span><span class="markImage"><img src="../../../static/images/noApply.png" class="mark"></span>
                         </div>
                     </div>
-                    <div class="awardItemRight">
-                        <img src="../../../static/images/director.png" class="director">
-                    </div>
+                    <!--<div class="awardItemRight">-->
+                        <div class="director">
+                            <i class="iconfont">&#xe79e;</i>
+                        </div>
+
+                    <!--</div>-->
                 </div>
                 <span class="sectionHeader">校长困难补助</span>
                 <!--<mt-cell v-for="n in 4" :title="'内容 ' + n"/>-->
@@ -36,8 +39,8 @@
                             <!--<span class="noApply">不可申请</span>-->
                         </div>
                     </div>
-                    <div class="awardItemRight">
-                        <img src="../../../static/images/director.png" class="director">
+                    <div class="director">
+                        <i class="iconfont">&#xe79e;</i>
                     </div>
                 </div>
             </mt-tab-container-item>
@@ -54,7 +57,9 @@
     .index {
         background: #f9f9f9;
     }
-
+    .tabContainer{
+        margin-top: 1PX;
+    }
     /*.mint-tab-item-label*/
     /*{*/
     /*color: #55c8b9;*/
@@ -95,6 +100,11 @@
         width: 10%;
         height: 100%;
         float: right;
+    }
+    .director i{
+        font-size: 30PX;
+        color: #d3d3d3;
+        line-height: 80PX;
     }
 
     .line{

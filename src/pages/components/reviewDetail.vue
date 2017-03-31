@@ -9,9 +9,14 @@
                 <span class="people">12个名额，两百人已申请</span><span class="moneyDes">固定金额</span>
             </div>
         </div>
-        <div class="moreInfo">
-            <span @click="moreInfo">更多信息</span>
+        <div class="moreInfo" @click="moreInfo">
+            <span >更多信息</span>
+            <div class="director">
+                <i class="iconfont">&#xe79e;</i>
+            </div>
         </div>
+
+
         <reviewStep></reviewStep>
     </div>
 </template>
@@ -73,12 +78,25 @@
         margin-bottom: 20PX;
     }
     .moreInfo span{
-        display: block;
-        width: 100%;
-        height: 100PX;
+        display: inline-block;
+        width: 200PX;
+        height: 100%;
         line-height: 100%;
         font-size: 16PX;
         padding: 14PX 10PX;
+    }
+    .director{
+        display: inline-block;
+        width: 44PX;
+        height: 100PX;
+        float: right;
+     /*font-size: 20PX;*/
+    }
+    .director i{
+
+        font-size: 30PX;
+        color: #d3d3d3;
+        line-height: 44PX;
     }
 </style>
 <script>

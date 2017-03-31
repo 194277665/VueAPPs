@@ -10,7 +10,8 @@
                     <span>2016.08.23</span>
                     <div>
                     </div>
-                    <img src="../../../static/images/pass.png">
+                    <!--<img src="../../../static/images/pass.png">-->
+                    <i class="iconfont  checkStatus">&#xe68c;</i>
 
                 </div>
                 <div class="rightPart">
@@ -158,6 +159,20 @@
         width: 100%;
         height: auto;
         padding-left: 30PX;
+    }
+
+    .checkStatus
+    {
+        color: #21c0ae;
+        display: block;
+        position: absolute;
+        /*width: 30PX;*/
+        /*height: 30PX;*/
+        font-size: 25PX;
+        top: 0;
+        right: -11PX;
+        background-color: white;
+
     }
 
 </style>
