@@ -66,9 +66,19 @@
 </style>
 <script>
     export default{
+        created(){
+          var random = Math.ceil(Math.random()*10);
+          var a = (random%2 != 0);
+          this.showApplyButton = a;
+
+
+
+
+    },
         data(){
             return{
-                msg:'hello vue'
+                msg:'hello vue',
+                showApplyButton:true
             }
         },
         components:{

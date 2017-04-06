@@ -1,13 +1,21 @@
 <template>
     <div class="container">
         <div class="applyListItem" v-for="item in items">
-            <mt-cell v-for="obj in item" :value="obj"></mt-cell>
+            <mt-cell v-for="obj in item" title="申请于2015/11/11/服从调剂" :value="obj"></mt-cell>
+            <mt-cell v-for="obj in item" title="申请于2015/11/11/服从调剂" :value="obj"></mt-cell>
         </div>
 
     </div>
 </template>
 <style scoped>
     body{
+    }
+    .container{
+        background: red;
+        width: 100%;
+        height: 300PX;
+        overflow: auto;
+
     }
     .applyListItem{
         width:90%;

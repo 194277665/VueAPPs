@@ -8,6 +8,10 @@
         <!-- tab-container -->
         <mt-tab-container v-model="selected" class="tabContainer">
             <mt-tab-container-item id="1">
+                <!--<div>-->
+                    <button v-show="showApplyButton">+申请新岗位</button>
+                <!--</div>-->
+
                 <myPosition></myPosition>
             </mt-tab-container-item>
             <mt-tab-container-item id="2">
@@ -26,6 +30,13 @@
         margin-top: 10PX;
         background-color: #f3f3f3;
     }
+    button{
+        background: #2196f3;
+        width: 100%;
+        height: 50PX;
+        outline: none;
+        border: none;
+    }
 </style>
 <script type="text/javascript">
     import {  Navbar, TabItem, Cell, TabContainer, TabContainerItem } from 'mint-ui'
@@ -33,11 +44,15 @@
     import myPosition from '../Components/myPosition.vue'
     export default {
         created() {
+                var random = Math.ceil(Math.random()*10);
+                var a = (random%2 != 0);
+                this.showApplyButton = a;
         },
         data(){
             return {
                 selected:"1",
-                s:true
+                s:true,
+                showApplyButton:true
             }
         },
         components: {
