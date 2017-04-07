@@ -5,11 +5,11 @@
         <!--//头部-->
         <div class="helpDetailTop">
             <div class="line">
-                <span class="des">一种能源困难学生补助</span><span class="money">¥560</span>
+                <span class="des">{{helpDetail.KNBZMC}}</span><span class="money">¥{{helpDetail.JE}}</span>
             </div>
 
             <div class="line">
-                <span class="people">12个名额，两百人已申请</span><span class="moneyDes">固定金额</span>
+                <span class="people">{{helpDetail.XDRS}}个名额，{{helpDetail.YSQRS}}人已申请</span><span class="moneyDes">{{helpDetail.JELXMC}}</span>
             </div>
 
 
@@ -23,32 +23,26 @@
 
         <div class="topSecond">
             <div><span class="lefSpan">等级</span><span class="rightSpan">一等</span></div>
-            <div><span class="lefSpan">评定学期</span><span class="rightSpan">部分学期</span></div>
-            <div><span class="lefSpan">资金来源</span><span class="rightSpan">企业赞助</span></div>
+            <div><span class="lefSpan">评定学期</span><span class="rightSpan">第{{helpDetail.PDXQ}}学期</span></div>
+            <div><span class="lefSpan">资金来源</span><span class="rightSpan">{{helpDetail.ZJLY}}</span></div>
             <div><span class="lefSpan">允许重复申请</span><span class="rightSpan">是</span></div>
-            <div><span class="lefSpan">设立单位</span><span class="rightSpan">一种能源有限公司</span></div>
+            <div><span class="lefSpan">设立单位</span><span class="rightSpan">{{helpDetail.SLDW}}</span></div>
         </div>
-
 
 
         <!--//简介-->
         <div class="introduce">
             <!--<mt-cell title="补助简介"></mt-cell>-->
             <!--<div>-->
-                <div class="header"><span>补助简介</span></div>
-                <span class="introduceContent">补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介</span>
+            <div class="header"><span>补助简介</span></div>
+            <span class="introduceContent">{{helpDetail.JJ}}
+           </span>
 
 
             <!--</div>-->
 
         </div>
         <button class="more" @click="more()">{{moreOrLess}}</button>
-
 
 
         <!--//条件-->
@@ -111,16 +105,16 @@
         padding-top: 10PX;
         padding-right: 10PX;
     }
-    .topSecond
-    {
+
+    .topSecond {
         width: 100%;
         height: 120PX;
         margin-top: 1px;
         background-color: white;
         margin-bottom: 20PX;
     }
-    .topSecond .lefSpan,.topSecond .rightSpan
-    {
+
+    .topSecond .lefSpan, .topSecond .rightSpan {
         display: inline-block;
         height: 24PX;
         width: 120PX;
@@ -129,10 +123,7 @@
         padding-top: 10PX;
     }
 
-
-
-
-        /*简介样式*/
+    /*简介样式*/
     .introduce {
         /*position: relative;*/
         overflow: hidden;
@@ -140,20 +131,21 @@
         height: 100PX;
         margin-bottom: 1PX;
     }
-    .header{
+
+    .header {
         width: 100%;
         height: 30PX;
         background: #fff;
         margin-bottom: 1PX;
     }
-    .header span{
+
+    .header span {
         display: inline-block;
         line-height: 100%;
         padding-left: 10PX;
         padding-top: 10PX;
         font-size: 16PX;
     }
-
 
     .introduce > span {
         display: inline-block;
@@ -164,7 +156,7 @@
         display: block;
         /*position: absolute;*/
         /*float: right;*/
-        height: 20PX;
+        height: 40PX;
         width: 100%;
         /*right: 0;*/
         /*bottom: 0;*/
@@ -192,6 +184,7 @@
         margin-bottom: 20PX;
         height: 50PX;
     }
+
     /*我要申请样式*/
     .wantApply {
         display: block;
@@ -208,26 +201,47 @@
     import {Cell} from 'mint-ui'
     import $ from 'jquery'
     export default{
+        created() {
+//            console.log('query == '+this.$route.query);
+//            console.log('param == '+this.$route.param);
+
+//
+//            var KNBZDM = this.$route.query.obj;
+//
+//            var KNBZDJDM  = this.$route.query.obj;
+
+            var param = {IDENTITY_ID:'2010056',KNBZDM:this.$route.query.knbzdm,KNBZDJDM:this.$route.query.knbzdjdm};
+//            var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do'
+            var  url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do?IDENTITY_ID=01294&'+'KNBZDM='+this.$route.query.knbzdm+'&KNBZDJDM='+this.$route.query.knbzdjdm;
+       console.log(url);
+            this.$http.get(url).then(res => {
+                return res.json();
+            }).then(res => {
+                this.helpDetail = res.datas;
+                console.log(this.helpDetail);
+
+            });
+        },
         methods: {
             more: function () {
-                if(this.moreOrLess=='收起')
-                {
+                if (this.moreOrLess == '收起') {
                     $(".introduce").css('height', '100PX');
-                    this.moreOrLess='更多';
-                }else {
+                    this.moreOrLess = '更多';
+                } else {
                     $(".introduce").css('height', 'auto');
-                    this.moreOrLess='收起';
+                    this.moreOrLess = '收起';
                 }
 
 
             },
-            iWantToApply:function () {
-                this.$router.push('/apply');
+            iWantToApply: function () {
+                this.$router.push({path:'/apply',query:{id:'2010056',knbzdm:this.$route.query.knbzdm,knbzdjdm:this.$route.query.knbzdjdm}});
 
             }
         },
         data(){
             return {
+                helpDetail: {},
                 moreOrLess: "更多",
                 msg: 'hello vue'
             }

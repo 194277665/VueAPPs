@@ -126,6 +126,16 @@
 </style>
 <script>
     export default{
+        created(){
+            let param = {IDENTITY_ID:2010056};
+            let url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getStuAllApplyInfo.do?IDENTITY_ID=2010056';
+            this.$http.get(url).then(res=>{
+                return res.json();
+            }).then(res=>{
+                console.log(res);
+
+            });
+        },
         methods:{
             goToReviewDetail:function () {
                 this.$router.push('/reviewDetail')
@@ -133,7 +143,8 @@
         },
         data(){
             return{
-                msg:'hello vue'
+                msg:'hello vue',
+                data:[]
             }
         },
 //        props:{
