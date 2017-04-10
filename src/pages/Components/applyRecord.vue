@@ -4,7 +4,7 @@
             <!--<div>-->
                 <span class="sectionHeader">申请于2016/12/1/服从调剂</span>
             <!--</div>-->
-            <mt-cell class="cell" v-for="obj in item" title="图书管理员" :value="obj" isLink></mt-cell>
+            <mt-cell class="cell" v-for="obj in item" title="图书管理员" :value="obj" isLink @click="toSalaryDetail"></mt-cell>
             <!--<mt-cell v-for="obj in item" title="申请于2015/11/11/服从调剂" :value="obj"></mt-cell>-->
         </div>
 
@@ -44,11 +44,10 @@
     import { Cell } from 'mint-ui'
 //    import
     export default{
-//        methods:{
-//            toSalaryDetail:function () {
-//                $.router.push('/salaryDetail/')
-//            }
-//        },
+        methods:{
+            toSalaryDetail:function () {
+            }
+        },
         data(){
 
             return{

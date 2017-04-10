@@ -8,9 +8,7 @@
         <!-- tab-container -->
         <mt-tab-container v-model="selected" class="tabContainer">
             <mt-tab-container-item id="1">
-                <!--<div>-->
-                    <button v-show="showApplyButton">+申请新岗位</button>
-                <!--</div>-->
+                    <button v-show="showApplyButton" @click="goToApply">+申请新岗位</button>
 
                 <myPosition></myPosition>
             </mt-tab-container-item>
@@ -39,7 +37,7 @@
     }
 </style>
 <script type="text/javascript">
-    import {  Navbar, TabItem, Cell, TabContainer, TabContainerItem } from 'mint-ui'
+    import {  Navbar, TabItem, Cell, TabContainer, TabContainerItem, Button } from 'mint-ui'
     import applyRecord from '../Components/applyRecord.vue'
     import myPosition from '../Components/myPosition.vue'
     export default {
@@ -47,6 +45,11 @@
                 let random = Math.ceil(Math.random()*10);
                 let a = (random%2 != 0);
                 this.showApplyButton = a;
+        },
+        methods:{
+            goToApply:function () {
+                this.$router.push('/applyPosition');
+            }
         },
         data(){
             return {
@@ -61,10 +64,9 @@
             [Cell.name]:Cell,
             [TabContainer.name]:TabContainer,
             [TabContainerItem.name]:TabContainerItem,
+            [Button.name]:Button,
             applyRecord,
             myPosition
-
-
         }
     }
 </script>

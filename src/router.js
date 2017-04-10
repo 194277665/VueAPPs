@@ -22,6 +22,6 @@ export default {
             path:'/applyPosition',
             component:applyPosition
 
-        }
+        },
     ]
 };
