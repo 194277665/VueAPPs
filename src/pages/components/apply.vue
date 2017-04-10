@@ -59,7 +59,7 @@
                     return;
                 }
 
-               var id =  this.$route.query.id;;
+               var id =  this.$route.query.id;
                var knbzdm = this.$route.query.knbzdm;
                var knbzdjdm = this.$route.query.knbzdjdm;
 //               var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/saveStuApplyInfo.do?IDENTITY_ID='+id+
@@ -67,6 +67,7 @@
                 var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/saveStuApplyInfo.do';
                 var param = {IDENTITY_ID:id,KNBZDM:knbzdm,KNBZDJDM:knbzdjdm,SQLY:reson};
                 Indicator.open();
+
                this.$http.get(url,param).then(res=>{
                   return res.json();
                }).then(res=>{

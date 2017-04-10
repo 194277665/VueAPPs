@@ -45,7 +45,9 @@
             </mt-tab-container-item>
 
             <mt-tab-container-item id="2">
-                <myApply :items="msg"></myApply>
+                <myApply :items="msg" v-show="applyList.length"></myApply>
+                <nothingTips></nothingTips>
+
             </mt-tab-container-item>
 
         </mt-tab-container>
@@ -57,9 +59,10 @@
 <script type="text/javascript">
     import {Navbar, TabItem, TabContainer, TabContainerItem, Cell, Indicator} from 'mint-ui';
     import myApply from '../components/myApply.vue'
+    import nothingTips from '../components/nothingTips.vue'
     export default {
         created() {
-            var param = {IDENTITY_ID:'2010056'};
+            var param = {IDENTITY_ID:'01294'};
 
 
             this.$http.get('http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getStuAllPoorType.do',param).then(res=>{
@@ -68,7 +71,6 @@
 //                        console.log(res);
                 this.BZList = res.datas;
                 console.log(this.BZList);
-
             });
         },
 
@@ -84,7 +86,8 @@
             return {
                 selected: "1",
                 msg: [1,2,3],
-                BZList:[]
+                BZList:[],
+                applyList:[]
 
             }
         },
@@ -95,7 +98,8 @@
             [TabContainerItem.name]: TabContainerItem,
             [Cell.name]: Cell,
             [Indicator.name]: Indicator,
-            myApply
+            myApply,
+            nothingTips
         },
         watch: {}
     }

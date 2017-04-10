@@ -5,11 +5,13 @@
         <!--//头部-->
         <div class="helpDetailTop">
             <div class="line">
-                <span class="des">{{helpDetail.KNBZMC}}</span><span class="money">¥{{helpDetail.JE}}</span>
+                <span class="des">{{helpDetail.KNBZMC}}</span>
+                <span class="money">¥{{helpDetail.JE}}</span>
             </div>
 
             <div class="line">
-                <span class="people">{{helpDetail.XDRS}}个名额，{{helpDetail.YSQRS}}人已申请</span><span class="moneyDes">{{helpDetail.JELXMC}}</span>
+                <span class="people">{{helpDetail.XDRS}}个名额，{{helpDetail.YSQRS}}人已申请</span>
+                <span class="moneyDes">{{helpDetail.JELXMC}}</span>
             </div>
 
 
@@ -108,7 +110,7 @@
 
     .topSecond {
         width: 100%;
-        height: 120PX;
+        height: auto;
         margin-top: 1px;
         background-color: white;
         margin-bottom: 20PX;
@@ -210,17 +212,24 @@
 //
 //            var KNBZDJDM  = this.$route.query.obj;
 
-            var param = {IDENTITY_ID:'2010056',KNBZDM:this.$route.query.knbzdm,KNBZDJDM:this.$route.query.knbzdjdm};
+            var param = {
+                IDENTITY_ID: '2010056',
+                KNBZDM: this.$route.query.knbzdm,
+                KNBZDJDM: this.$route.query.knbzdjdm
+            };
 //            var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do'
-            var  url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do?IDENTITY_ID=01294&'+'KNBZDM='+this.$route.query.knbzdm+'&KNBZDJDM='+this.$route.query.knbzdjdm;
-       console.log(url);
+            var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do?IDENTITY_ID=01294&' + 'KNBZDM=' + this.$route.query.knbzdm + '&KNBZDJDM=' + this.$route.query.knbzdjdm;
+            console.log(url);
+
             this.$http.get(url).then(res => {
                 return res.json();
-            }).then(res => {
+        }).
+            then(res => {
                 this.helpDetail = res.datas;
-                console.log(this.helpDetail);
+            console.log(this.helpDetail);
 
-            });
+        })
+            ;
         },
         methods: {
             more: function () {
@@ -235,7 +244,10 @@
 
             },
             iWantToApply: function () {
-                this.$router.push({path:'/apply',query:{id:'2010056',knbzdm:this.$route.query.knbzdm,knbzdjdm:this.$route.query.knbzdjdm}});
+                this.$router.push({
+                    path: '/apply',
+                    query: {id: '2010056', knbzdm: this.$route.query.knbzdm, knbzdjdm: this.$route.query.knbzdjdm}
+                });
 
             }
         },
