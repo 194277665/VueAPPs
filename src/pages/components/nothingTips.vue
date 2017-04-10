@@ -1,10 +1,7 @@
 <template>
     <div>
         <img src="../../../static/images/No.png">
-        <!--<div class="tips">-->
         <span>现在什么都还没有呢</span>
-        <!--</div>-->
-        <!--<button @click="goToIndex">返回补助一览</button>-->
     </div>
 </template>
 <style scoped>

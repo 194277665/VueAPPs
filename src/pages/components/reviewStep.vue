@@ -10,7 +10,6 @@
                     <span>2016.08.23</span>
                     <div>
                     </div>
-                    <!--<img src="../../../static/images/pass.png">-->
                     <i class="iconfont  checkStatus">&#xe68c;</i>
 
                 </div>

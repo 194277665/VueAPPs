@@ -7,9 +7,8 @@
 
         <!-- tab-container -->
         <mt-tab-container v-model="selected" class="tabContainer">
-            <mt-tab-container-item id="1">
-                <span class="sectionHeader">国家困难补助</span>
-
+            <mt-tab-container-item id="1" v-show="BZList.length">
+                <!--<span class="sectionHeader">国家困难补助</span>-->
                 <div class="awardItem" v-for="(item,index) in BZList" @click="goToHelpDetail(index)">
                     <div class="awardItemLeft">
                         <div class="line">
@@ -23,31 +22,13 @@
                             <i class="iconfont">&#xe79e;</i>
                         </div>
                 </div>
+                <nothingTips v-show="BZList.length < 1"></nothingTips>
 
-
-                <!--<span class="sectionHeader">校长困难补助</span>-->
-                <!--&lt;!&ndash;<mt-cell v-for="n in 4" :title="'内容 ' + n"/>&ndash;&gt;-->
-                <!--<div class="awardItem" v-for="n in 3">-->
-                    <!--<div class="awardItemLeft">-->
-                        <!--<div class="line">-->
-                            <!--<span class="level">一等奖</span><span class="money">¥8000</span><span class="peopleCount">200人已申请</span>-->
-                        <!--</div>-->
-                        <!--<div class="line">-->
-                            <!--<span class="date">开放时间</span><span class="dateToDate">05.12&#45;&#45;08.25</span>-->
-                            <!--<span class="markImage"><img src="../../../static/images/noApply.png" class="mark"></span>-->
-                            <!--&lt;!&ndash;<span class="noApply">不可申请</span>&ndash;&gt;-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="director">-->
-                        <!--<i class="iconfont">&#xe79e;</i>-->
-                    <!--</div>-->
-                <!--</div>-->
             </mt-tab-container-item>
 
             <mt-tab-container-item id="2">
-                <myApply :items="msg" v-show="applyList.length"></myApply>
-                <nothingTips></nothingTips>
-
+                <myApply :items="item" v-show="applyList.length" v-for="(item,index) in applyList" @click="goToReviewDetail(index)" ></myApply>
+                <nothingTips v-show="applyList.length<1"></nothingTips>
             </mt-tab-container-item>
 
         </mt-tab-container>
@@ -63,13 +44,23 @@
     export default {
         created() {
             let param = {IDENTITY_ID:identityID};
-            let requestUrl = yuMing + getStuAllPoorType;
 
+            //可申请的困难补助列表
+            let requestUrl = yuMing + getStuAllPoorType;
             this.$http.get(requestUrl,param).then(res=>{
                 return res.json();
             }).then(res=>{
                 this.BZList = res.datas;
                 console.log(this.BZList);
+            });
+
+            //我申请过的困难补助列表
+            let requestUrl2 = yuMing + getStuAllApplyInfo;
+            this.$http.get(requestUrl2,param).then(res=>{
+               return res.json();
+            }).then(res=>{
+                console.log('getStuAllApplyInfo'+res);
+                this.applyList = res.datas;
             });
         },
 
@@ -83,10 +74,14 @@
 
         methods:{
             goToHelpDetail:function (index) {
-                var obj = this.BZList[index];
-                var knbzdm = obj.KNBZDM;
-                var knbzdjdm = obj.KNBZDJDM;
+                let obj = this.BZList[index];
+                let knbzdm = obj.KNBZDM;
+                let knbzdjdm = obj.KNBZDJDM;
             this.$router.push({path:'/helpDetail',query:{knbzdm:knbzdm,knbzdjdm:knbzdjdm}});
+            },
+            goToReviewDetail:function (index) {
+                let obj = this.applyList[index];
+
             }
         },
         data(){
@@ -117,7 +112,7 @@
       background: #f9f9f9;
   }
 .tabContainer{
-    margin-top: 1PX;
+    margin-top: 3PX;
 }
 /*.mint-tab-item-label*/
 /*{*/

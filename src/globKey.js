@@ -2,8 +2,8 @@
  * Created by gaomneng on 2017/4/10.
  */
 
-//测试账号
-const identityID = '2010056';
+//测试账号2010007 2010056
+const identityID = '2010007';
 
 //全局域名
 const yuMing = 'http://amptest.wisedu.com/axsfw';
