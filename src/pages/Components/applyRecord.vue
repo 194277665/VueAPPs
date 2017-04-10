@@ -1,26 +1,43 @@
 <template>
     <div class="container">
         <div class="applyListItem" v-for="item in items">
-            <mt-cell v-for="obj in item" title="申请于2015/11/11/服从调剂" :value="obj"></mt-cell>
-            <mt-cell v-for="obj in item" title="申请于2015/11/11/服从调剂" :value="obj"></mt-cell>
+            <!--<div>-->
+                <span class="sectionHeader">申请于2016/12/1/服从调剂</span>
+            <!--</div>-->
+            <mt-cell class="cell" v-for="obj in item" title="图书管理员" :value="obj" isLink></mt-cell>
+            <!--<mt-cell v-for="obj in item" title="申请于2015/11/11/服从调剂" :value="obj"></mt-cell>-->
         </div>
 
     </div>
 </template>
 <style scoped>
     body{
+        color: #f9f9f9;
     }
     .container{
-        background: red;
         width: 100%;
-        height: 300PX;
+        height: 100vh;
         overflow: auto;
 
     }
     .applyListItem{
-        width:90%;
+        width:100%;
+        height: auto;
         margin: 10PX auto;
-        background-color: #fff;
+        background-color: #f9f9f9;
+        verflow: auto;
+    }
+    .sectionHeader{
+        display: block;
+        width: 100%;
+        height: 40PX;
+        line-height: 40PX;
+        font-size: 14PX;
+        color: #333333;
+        padding-left: 10PX;
+    }
+    .cell{
+        margin-bottom: 1PX;
     }
 </style>
 <script>

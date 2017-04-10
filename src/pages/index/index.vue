@@ -44,8 +44,8 @@
     import myPosition from '../Components/myPosition.vue'
     export default {
         created() {
-                var random = Math.ceil(Math.random()*10);
-                var a = (random%2 != 0);
+                let random = Math.ceil(Math.random()*10);
+                let a = (random%2 != 0);
                 this.showApplyButton = a;
         },
         data(){
