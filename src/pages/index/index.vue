@@ -62,17 +62,24 @@
     import nothingTips from '../components/nothingTips.vue'
     export default {
         created() {
-            var param = {IDENTITY_ID:'01294'};
+            let param = {IDENTITY_ID:identityID};
+            let requestUrl = yuMing + getStuAllPoorType;
 
-
-            this.$http.get('http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getStuAllPoorType.do',param).then(res=>{
+            this.$http.get(requestUrl,param).then(res=>{
                 return res.json();
-                    }).then(res=>{
-//                        console.log(res);
+            }).then(res=>{
                 this.BZList = res.datas;
                 console.log(this.BZList);
             });
         },
+
+//            this.$http.get('http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getStuAllPoorType.do',param).then(res=>{
+//                return res.json();
+//                    }).then(res=>{
+//                this.BZList = res.datas;
+//                console.log(this.BZList);
+//            });
+//        },
 
         methods:{
             goToHelpDetail:function (index) {

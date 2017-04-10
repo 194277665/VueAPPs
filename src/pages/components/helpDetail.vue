@@ -212,16 +212,17 @@
 //
 //            var KNBZDJDM  = this.$route.query.obj;
 
-            var param = {
-                IDENTITY_ID: '2010056',
+            let param = {
+                IDENTITY_ID: identityID,
                 KNBZDM: this.$route.query.knbzdm,
                 KNBZDJDM: this.$route.query.knbzdjdm
             };
-//            var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do'
-            var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do?IDENTITY_ID=01294&' + 'KNBZDM=' + this.$route.query.knbzdm + '&KNBZDJDM=' + this.$route.query.knbzdjdm;
-            console.log(url);
+            let requestUrl = yuMing + getPoorTypeDetails;
+            let requestUrl2 = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do?IDENTITY_ID=2010056&' + 'KNBZDM=' + this.$route.query.knbzdm + '&KNBZDJDM=' + this.$route.query.knbzdjdm;
+            console.log(requestUrl2);
 
-            this.$http.get(url).then(res => {
+            this.$http.get(requestUrl2).then(res => {
+                console.log(res);
                 return res.json();
         }).
             then(res => {
@@ -240,8 +241,6 @@
                     $(".introduce").css('height', 'auto');
                     this.moreOrLess = '收起';
                 }
-
-
             },
             iWantToApply: function () {
                 this.$router.push({
@@ -260,7 +259,6 @@
         },
         components: {
             [Cell.name]: Cell
-
         }
     }
 </script>

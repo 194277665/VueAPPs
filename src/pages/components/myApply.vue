@@ -126,17 +126,18 @@
 </style>
 <script>
     export default{
-//        created(){
-//            let param = {IDENTITY_ID:2010056};
-//            let url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getStuAllApplyInfo.do?IDENTITY_ID=2010056';
-//            this.$http.get(url).then(res=>{
-//                return res.json();
-//            }).then(res=>{
-//                console.log(res);
-//                this.data = res.datas;
-//
-//            });
-//        },
+        created(){
+            //学生账号2010007
+            let param = {IDENTITY_ID:2010056};
+            let url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getStuAllApplyInfo.do?IDENTITY_ID=2010056';
+            this.$http.get(url).then(res=>{
+                return res.json();
+            }).then(res=>{
+                console.log('myapply'+ res);
+                this.data = res.datas;
+
+            });
+        },
         methods:{
             goToReviewDetail:function () {
                 this.$router.push('/reviewDetail')
