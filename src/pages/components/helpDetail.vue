@@ -24,10 +24,10 @@
 
 
         <div class="topSecond">
-            <div><span class="lefSpan">等级</span><span class="rightSpan">一等</span></div>
+            <div><span class="lefSpan">等级</span><span class="rightSpan">{{helpDetail.DJMC}}</span></div>
             <div><span class="lefSpan">评定学期</span><span class="rightSpan">第{{helpDetail.PDXQ}}学期</span></div>
             <div><span class="lefSpan">资金来源</span><span class="rightSpan">{{helpDetail.ZJLY}}</span></div>
-            <div><span class="lefSpan">允许重复申请</span><span class="rightSpan">是</span></div>
+            <div><span class="lefSpan">允许重复申请</span><span class="rightSpan"></span></div>
             <div><span class="lefSpan">设立单位</span><span class="rightSpan">{{helpDetail.SLDW}}</span></div>
         </div>
 
@@ -49,8 +49,12 @@
 
         <!--//条件-->
         <div class="conditon">
+
             <div class="header"><span>评定条件</span></div>
-            <span class="conditionContent">你符合评定条件，快去申请吧</span>
+            <div class="conditionContent" v-for="item in helpDetail.ConditionData">
+                <span>{{item.DISPLAYVALUE}}</span><span>{{item.INFO}}</span>
+
+            </div>
         </div>
 
         <!--//我要申请按钮-->
@@ -73,6 +77,8 @@
     .helpDetailTop .line {
         width: 100%;
         height: 33%;
+        display: flex;
+        justify-content: space-between;
     }
 
     .helpDetailTop .line .des {
@@ -196,6 +202,7 @@
         background-color: #21c0ae;
         border: none;
         font-size: 18PX;
+        outline: none;
     }
 
 </style>
@@ -204,33 +211,21 @@
     import $ from 'jquery'
     export default{
         created() {
-//            console.log('query == '+this.$route.query);
-//            console.log('param == '+this.$route.param);
-
-//
-//            var KNBZDM = this.$route.query.obj;
-//
-//            var KNBZDJDM  = this.$route.query.obj;
 
             let param = {
                 IDENTITY_ID: identityID,
                 KNBZDM: this.$route.query.knbzdm,
                 KNBZDJDM: this.$route.query.knbzdjdm
             };
-            let requestUrl = yuMing + getPoorTypeDetails;
-            let requestUrl2 = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getPoorTypeDetails.do?IDENTITY_ID=2010056&' + 'KNBZDM=' + this.$route.query.knbzdm + '&KNBZDJDM=' + this.$route.query.knbzdjdm;
-            console.log(requestUrl2);
+            let requestUrl2 = yuMing + getPoorTypeDetails + '?IDENTITY_ID=2010007&' + 'KNBZDM=' + this.$route.query.knbzdm + '&KNBZDJDM=' + this.$route.query.knbzdjdm;
+            console.log('getPoorTypeDetails'+ requestUrl2);
 
             this.$http.get(requestUrl2).then(res => {
-                console.log(res);
                 return res.json();
-        }).
-            then(res => {
+            }).then(res => {
                 this.helpDetail = res.datas;
-            console.log(this.helpDetail);
 
-        })
-            ;
+            });
         },
         methods: {
             more: function () {
@@ -243,10 +238,15 @@
                 }
             },
             iWantToApply: function () {
-                this.$router.push({
-                    path: '/apply',
-                    query: {id: '2010056', knbzdm: this.$route.query.knbzdm, knbzdjdm: this.$route.query.knbzdjdm}
-                });
+                if (this.helpDetail.SFKSQ == '0') {
+                    return;
+
+                } else {
+                    this.$router.push({
+                        path: '/apply',
+                        query: {id: identityID, knbzdm: this.$route.query.knbzdm, knbzdjdm: this.$route.query.knbzdjdm}
+                    });
+                }
 
             }
         },
@@ -254,7 +254,6 @@
             return {
                 helpDetail: {},
                 moreOrLess: "更多",
-                msg: 'hello vue'
             }
         },
         components: {

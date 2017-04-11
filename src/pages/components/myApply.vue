@@ -1,19 +1,21 @@
 <template>
     <div>
         <!--<p v-for="item in items">{{item}}</p>-->
-        <span class="sectionHeader">国家困难补助</span>
+        <!--<span class="sectionHeader">国家困难补助</span>-->
 
-        <div class="awardItem" v-for="n in 3" @click="goToReviewDetail">
+        <div class="awardItem" @click="goToReviewDetail">
             <div class="awardItemLeft">
                 <div class="line">
-                    <span class="level">一等奖</span><span class="money">¥8000</span><span class="peopleCount">200人已申请</span>
+                    <span class="level">{{items.SQDJ_DISPLAY}}</span><span class="money">¥{{items.JE}}</span><span class="peopleCount">{{items.SHZT_DISPLAY}}</span>
                 </div>
                 <div class="line">
-                    <span class="date">开放时间</span><span class="dateToDate">05.12--08.25</span><span class="markImage"><img src="../../../static/images/noApply.png" class="mark"></span>
+                    <span class="date">开放时间</span><span class="dateToDate">{{items.SQSJ}}</span>
+                    <!--<span class="markImage"><img src="../../../static/images/noApply.png" class="mark"></span>-->
                 </div>
             </div>
-            <div class="awardItemRight">
-                <img src="../../../static/images/director.png" class="director">
+            <div class="director">
+                <i class="iconfont">&#xe79e;</i>
+                <!--<img src="../../../static/images/director.png" class="director">-->
             </div>
         </div>
     </div>
@@ -22,16 +24,16 @@
     body{
         background-color:#ff0000;
     }
-    .sectionHeader {
+    /*.sectionHeader {*/
 
-        display: block;
-        width: 100%;
-        height: 40PX;
-        line-height: 40PX;
-        font-size: 14PX;
-        padding-left: 10PX;
-        background-color: #f9f9f9;
-    }
+        /*display: block;*/
+        /*width: 100%;*/
+        /*height: 40PX;*/
+        /*line-height: 40PX;*/
+        /*font-size: 14PX;*/
+        /*padding-left: 10PX;*/
+        /*background-color: #f9f9f9;*/
+    /*}*/
 
     .awardItem {
         margin-bottom: 1PX;
@@ -49,10 +51,10 @@
         height:100%;
         float: left;
     }
-    .mark {
-        width: 50PX;
-        height: 15PX;
-    }
+    /*.mark {*/
+        /*width: 50PX;*/
+        /*height: 15PX;*/
+    /*}*/
     .director{
         display: inline-block;
         width: 10%;
@@ -106,41 +108,39 @@
         padding-top: 10PX;
         padding-left: 10PX;
     }
-    .markImage{
+    /*.markImage{*/
+        /*display: inline-block;*/
+        /*float: right;*/
+        /*line-height: 50%;*/
+    /*}*/
+    /*.awardItemRight{*/
+        /*width: 10%;*/
+        /*height: 100%;*/
+        /*float: right;*/
+
+    /*}*/
+    .director{
         display: inline-block;
-        float: right;
-        line-height: 50%;
-    }
-    .awardItemRight{
         width: 10%;
         height: 100%;
         float: right;
-
+        font-size: 40PX;
+        color: #d3d3d3;
+        line-height: 80PX;
     }
-    .awardItemRight>img
-    {
-        width: 100%;
-        height: 100%;
-        /*float: right;*/
+    .director>.iconfont{
+        font-size: 30PX;
     }
 </style>
 <script>
     export default{
         created(){
-            //学生账号2010007
-            let param = {IDENTITY_ID:2010056};
-            let url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getStuAllApplyInfo.do?IDENTITY_ID=2010056';
-            this.$http.get(url).then(res=>{
-                return res.json();
-            }).then(res=>{
-                console.log('myapply'+ res);
-                this.data = res.datas;
 
-            });
         },
         methods:{
             goToReviewDetail:function () {
-                this.$router.push('/reviewDetail')
+                this.$router.push({path:'/reviewDetail',query:{KNBZDM: this.items.KNBZDM,KNBZDJDM:this.items.PDDJ,SQBM:this.items.SQBM}});
+
             }
         },
         data(){
@@ -149,9 +149,9 @@
                 data:[]
             }
         },
-//        props:{
-            props: ['items'],
-//        },
+
+        props: ['items'],
+
         components:{
         }
     }

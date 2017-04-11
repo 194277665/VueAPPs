@@ -3,11 +3,12 @@
         <!--//头部-->
         <div class="helpDetailTop">
             <div class="line">
-                <span class="des">一种能源困难学生补助</span><span class="money">¥560</span>
+                <span class="des">{{helpDetail.KNBZMC}}</span><span class="money">¥{{helpDetail.JE}}</span>
             </div>
 
             <div class="line">
-                <span class="people">12个名额，两百人已申请</span><span class="moneyDes">固定金额</span>
+                <span class="people">{{helpDetail.XDRS}}个名额，{{helpDetail.YSQRS}}人已申请</span>
+                <span class="moneyDes">{{helpDetail.JELXMC}}</span>
             </div>
 
 
@@ -20,11 +21,11 @@
 
 
         <div class="topSecond">
-            <div><span class="lefSpan">等级</span><span class="rightSpan">一等</span></div>
-            <div><span class="lefSpan">评定学期</span><span class="rightSpan">部分学期</span></div>
-            <div><span class="lefSpan">资金来源</span><span class="rightSpan">企业赞助</span></div>
-            <div><span class="lefSpan">允许重复申请</span><span class="rightSpan">是</span></div>
-            <div><span class="lefSpan">设立单位</span><span class="rightSpan">一种能源有限公司</span></div>
+            <div><span class="lefSpan">等级</span><span class="rightSpan">{{helpDetail.DJMC}}</span></div>
+            <div><span class="lefSpan">评定学期</span><span class="rightSpan">第{{helpDetail.PDXQ}}学期</span></div>
+            <div><span class="lefSpan">资金来源</span><span class="rightSpan">{{helpDetail.ZJLY}}</span></div>
+            <!--<div><span class="lefSpan">允许重复申请</span><span class="rightSpan"></span></div>-->
+            <div><span class="lefSpan">设立单位</span><span class="rightSpan">{{helpDetail.SLDW}}</span></div>
         </div>
 
 
@@ -34,16 +35,15 @@
             <table>
                 <tr>
                     <td class="desTd">提交时间</td>
-                    <td class="detailTd">2015／11／11</td>
+                    <td class="detailTd">{{applyInfo.SQSJ}}</td>
                 </tr>
-                <tr>
-                    <td class="desTd">手机号</td>
-                    <td class="detailTd">12232231243234</td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td class="desTd">手机号</td>-->
+                    <!--<td class="detailTd">12232231243234</td>-->
+                <!--</tr>-->
                 <tr>
                     <td class="desTd">申请理由</td>
-                    <td class="detailTd">我特别想申请到钱我特别想申请到钱我特别想申请到钱
-                        我特别想申请到钱我特别想申请到钱我特别想申请到钱
+                    <td class="detailTd">{{applyInfo.SQLY}}
                     </td>
                 </tr>
 
@@ -55,28 +55,33 @@
         <div class="introduce">
             <!--<mt-cell title="补助简介"></mt-cell>-->
             <div class="header"><span>补助简介</span></div>
-            <span class="introduceContent">补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介补助简介
-                补助简介补助简介补助简介
-                 <span class="more" @click="more()">更多</span>
+            <span class="introduceContent">{{helpDetail.JJ}}
+                 <!--<span class="more" @click="more()">更多</span>-->
             </span>
         </div>
+        <button class="more" @click="more()">{{moreOrLess}}</button>
+
+
+
+
+        <!--&lt;!&ndash;//条件&ndash;&gt;-->
+        <!--<div class="conditon">-->
+
+            <!--<div class="header"><span>评定条件</span></div>-->
+            <!--<div class="conditionContent" v-for="item in helpDetail.ConditionData">-->
+                <!--<span>{{item.DISPLAYVALUE}}</span><span>{{item.INFO}}</span>-->
+
+            <!--</div>-->
+        <!--</div>-->
 
 
         <!--评定条件-->
         <div class="condition">
             <div class="header"><span>评定条件</span></div>
                 <table>
-                    <tr>
-                        <td class="desTd">必须满足</td>
-                        <td class="detailTd">成绩>90分</td>
-                    </tr>
-                    <tr>
-                        <td class="desTd">满足其一</td>
-                        <td class="detailTd">及格数>3科</td>
+                    <tr v-for="item in helpDetail.ConditionData">
+                        <td class="desTd">{{item.DISPLAYVALUE}}</td>
+                        <td class="detailTd">{{item.INFO}}</td>
                     </tr>
 
                 </table>
@@ -101,6 +106,9 @@
     .helpDetailTop .line {
         width: 100%;
         height: 33%;
+        display: flex;
+        justify-content: space-between;
+        /*padding: 10Px;*/
     }
 
     .helpDetailTop .line .des {
@@ -130,6 +138,7 @@
     }
 
     .moneyDes {
+        display: inline-block;
         float: right;
         font-size: 10PX;
         padding-top: 10PX;
@@ -138,7 +147,7 @@
     .topSecond
     {
         width: 100%;
-        height: 120PX;
+        height: auto;
         margin-top: 1px;
         background-color: white;
         margin-bottom: 20PX;
@@ -189,7 +198,7 @@
         overflow: hidden;
         width: 100%;
         height: 100PX;
-        margin-bottom: 20PX;
+        margin-bottom: 1PX;
     }
     .header{
         width: 100%;
@@ -229,6 +238,20 @@
         height: 100%;
         padding: 10PX 10PX;
     }
+    .more {
+        display: block;
+        /*position: absolute;*/
+        /*float: right;*/
+        height: 40PX;
+        width: 100%;
+        /*right: 0;*/
+        /*bottom: 0;*/
+        color: #21c0ae;
+        margin-bottom: 20PX;
+        background: white;
+        border: none;
+        outline: none;
+    }
 
 
     /*条件*/
@@ -238,10 +261,49 @@
 
 </style>
 <script>
+    import $ from 'jquery'
     export default{
+        created(){
+            //请求申请详情数据
+            let requestUrl = yuMing+getPoorTypeDetails+'?IDENTITY_ID='+identityID + '&KNBZDM=' + this.$route.query.KNBZDM + '&KNBZDJDM=' + this.$route.query.KNBZDJDM;
+            console.log('detail' + requestUrl);
+            this.$http.get(requestUrl).then(res => {
+                return res.json();
+            }).
+            then(res => {
+                this.helpDetail = res.datas;
+            });
+
+
+            //
+            //请求申请信息
+            let requestUrl2 = yuMing+getStuAllApplyInfo+'?IDENTITY_ID='+identityID+'&SQBM='+this.$route.query.SQBM;
+            console.log('222'+requestUrl2);
+            this.$http.get(requestUrl2).then(res=>{
+
+                return res.json();
+            }).then(res=>{
+                this.applyInfo = res.datas[0];
+                console.log(this.applyInfo);
+            });
+
+        },
         data(){
             return{
-                msg:'hello vue'
+                helpDetail:{},
+                applyInfo:{},
+                moreOrLess:'更多'
+            }
+        },
+        methods:{
+            more: function () {
+                if (this.moreOrLess == '收起') {
+                    $(".introduce").css('height', '100PX');
+                    this.moreOrLess = '更多';
+                } else {
+                    $(".introduce").css('height', 'auto');
+                    this.moreOrLess = '收起';
+                }
             }
         },
         components:{

@@ -28,6 +28,7 @@ export default {
         },
         {
             path:'/reviewDetail',
+            name:'reviewDetailName',
             component:reviewDetail
         },
         {

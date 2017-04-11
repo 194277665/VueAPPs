@@ -3,11 +3,11 @@
         <div class="sectionHeader">
           <span>审核流程</span>
         </div>
-        <div class="stepItemContainer">
-            <div class="stepItem" v-for="n in 3">
+        <div class="stepItemContainer" >
+            <div class="stepItem" v-for="item in items">
                 <div class="leftPart">
-                    <span>8:00</span>
-                    <span>2016.08.23</span>
+                    <!--<span>{{}}</span>-->
+                    <span>{{item.CZRQ}}</span>
                     <div>
                     </div>
                     <i class="iconfont  checkStatus">&#xe68c;</i>
@@ -15,9 +15,9 @@
                 </div>
                 <div class="rightPart">
                     <section>
-                        <h2>提交申请</h2>
-                        <span class="reviewDes"> 审核未通过 </span>
-                        <span class="detail">名额限制</span>
+                        <h2>{{item.XBZTDM_DISPLAY}}</h2>
+                        <span class="reviewDes"> {{item.XBZTDM_DISPLAY}} </span>
+                        <span class="detail">{{}}</span>
                     </section>
                 </div>
             </div>
@@ -177,11 +177,15 @@
 </style>
 <script scoped>
     export default{
+        created(){
+          console.log(this.$route.query.item);
+        },
         data(){
             return {
                 msg: 'hello vue'
             }
         },
-        components: {}
+        components: {},
+        props: ['items']
     }
 </script>

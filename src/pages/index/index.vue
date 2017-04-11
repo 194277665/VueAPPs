@@ -15,7 +15,11 @@
                             <span class="level">{{item.DJMC}}</span><span class="money">¥{{item.JE}}</span><span class="peopleCount">{{item.YSQRS}}人已申请</span>
                         </div>
                         <div class="line">
-                            <span class="date">开放时间</span><span class="dateToDate">{{item.SQKSRQ}}--{{item.SQJSRQ}}</span><span class="markImage" v-show="item.SFKSQ != 0"><img src="../../../static/images/noApply.png" class="mark"></span>
+                            <span class="date">开放时间</span><span class="dateToDate">{{item.SQKSRQ}}-{{item.SQJSRQ}}</span>
+                            <span class="markImage" v-show="item.SFKSQ != 0">
+                                不可申请
+                                <!--<img src="../../../static/images/noApply.png" class="mark">-->
+                            </span>
                         </div>
                     </div>
                         <div class="director">
@@ -51,26 +55,20 @@
                 return res.json();
             }).then(res=>{
                 this.BZList = res.datas;
-                console.log(this.BZList);
+//                console.log(this.BZList);
             });
 
             //我申请过的困难补助列表
-            let requestUrl2 = yuMing + getStuAllApplyInfo;
-            this.$http.get(requestUrl2,param).then(res=>{
+//            let requestUrl2 = yuMing + getStuAllApplyInfo;
+            let requestUrl2 = yuMing + getStuAllApplyInfo + '?IDENTITY_ID='+identityID;
+            console.log('我申请过的困难补助列表'== +requestUrl2);
+            this.$http.get(requestUrl2).then(res=>{
                return res.json();
             }).then(res=>{
-                console.log('getStuAllApplyInfo'+res);
                 this.applyList = res.datas;
             });
         },
 
-//            this.$http.get('http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/getStuAllPoorType.do',param).then(res=>{
-//                return res.json();
-//                    }).then(res=>{
-//                this.BZList = res.datas;
-//                console.log(this.BZList);
-//            });
-//        },
 
         methods:{
             goToHelpDetail:function (index) {
@@ -210,8 +208,13 @@
 .markImage{
     display: inline-block;
     float: right;
+    font-size: 12PX;
+    /*width: ;*/
     margin-right: 10PX;
-    line-height: 50%;
+    line-height: 100%;
+    color: red;
+    background: #F9D9D6;
+    padding: 5PX;
 }
 
 .awardItemRight{

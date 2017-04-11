@@ -62,13 +62,16 @@
                var id =  this.$route.query.id;
                var knbzdm = this.$route.query.knbzdm;
                var knbzdjdm = this.$route.query.knbzdjdm;
-//               var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/saveStuApplyInfo.do?IDENTITY_ID='+id+
-//                    '&KNBZDM='+
+               var url2 = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/saveStuApplyInfo.do?IDENTITY_ID='+id+
+                    '&KNBZDM='+ knbzdm + '&KNBZDJDM='+knbzdjdm+'&SQLY='+reson;
+               console.log('url2='+url2);
                 var url = 'http://amptest.wisedu.com/axsfw/sys/knbzapp/MobilePoorStuApply/saveStuApplyInfo.do';
                 var param = {IDENTITY_ID:id,KNBZDM:knbzdm,KNBZDJDM:knbzdjdm,SQLY:reson};
+
+                console.log('id= '+ id + '---------KNBZDM='+ knbzdm +'-----------KNBZDJDM='+knbzdjdm);
                 Indicator.open();
 
-               this.$http.get(url,param).then(res=>{
+               this.$http.get(url2).then(res=>{
                   return res.json();
                }).then(res=>{
                    Indicator.close();
@@ -76,6 +79,7 @@
                    if(this.data.msg.length > 1)
                    {
                        Toast(this.data.msg);
+                       this.showApplyTips();
                    }else {
                        this.showApplyTips();
                    }
