@@ -13,7 +13,7 @@
         <div class="moreInfo" @click="moreInfo">
             <span >更多信息</span>
             <div class="director">
-                <i class="iconfont">&#xe79e;</i>
+                <i class="iconfont pass">&#xe79e;</i>
             </div>
         </div>
 
@@ -93,12 +93,15 @@
         float: right;
      /*font-size: 20PX;*/
     }
-    .director i{
+    .pass{
 
         font-size: 30PX;
         color: #d3d3d3;
         line-height: 44PX;
     }
+
+
+
 </style>
 <script>
     import { Cell } from 'mint-ui'
@@ -140,7 +143,7 @@
                 msg:'hello vue',
                 obj:{},
                 helpDetail:{},
-                logInfo:{}
+                logInfo:[]
 
             }
         },

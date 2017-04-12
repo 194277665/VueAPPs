@@ -70,13 +70,13 @@
     /*头部样式*/
     .helpDetailTop {
         width: 100%;
-        height: 80PX;
+        height: auto;
         background-color: white;
     }
 
     .helpDetailTop .line {
         width: 100%;
-        height: 33%;
+        height: 30PX;
         display: flex;
         justify-content: space-between;
     }
@@ -203,6 +203,7 @@
         border: none;
         font-size: 18PX;
         outline: none;
+        margin-top: 20PX;
     }
 
 </style>
@@ -224,6 +225,10 @@
                 return res.json();
             }).then(res => {
                 this.helpDetail = res.datas;
+                if(this.helpDetail.SFKSQ == '0')
+                {
+                    $('.wantApply').css('background','#939393');
+                }
 
             });
         },

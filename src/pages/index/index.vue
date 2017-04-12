@@ -200,7 +200,7 @@
 .dateToDate{
     display: inline-block;
     line-height: 100%;
-    font-size: 14PX;
+    font-size: 12PX;
     color: #979797;
     padding-top: 10PX;
     padding-left: 10PX;

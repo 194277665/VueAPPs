@@ -15,9 +15,9 @@
                 </div>
                 <div class="rightPart">
                     <section>
-                        <h2>{{item.XBZTDM_DISPLAY}}</h2>
+                        <h2>{{item.DQZTDM_DISPLAY}}</h2>
                         <span class="reviewDes"> {{item.XBZTDM_DISPLAY}} </span>
-                        <span class="detail">{{}}</span>
+                        <span class="detail">{{item.CZZXM}}</span>
                     </section>
                 </div>
             </div>

@@ -11,27 +11,27 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.http.options.credentials = true;
 const router = new VueRouter(route);
-let Init = () => {
+// let Init = () => {
     new Vue({
             el: '#app',
             router: router,
             render: h => h(App)
     });
-}
-if (process.env.NODE_ENV === 'production') {
-    init(() => {
-        var sdk = SDK();
-        if(sdk.UI && sdk.UI.toggleNavBar) {
-            sdk.UI.toggleNavBar(false);
-        }
-        Init()
-    })
-} else {
-    init(() => {
-        var sdk = SDK();
-        if(sdk.UI && sdk.UI.toggleNavBar) {
-            sdk.UI.toggleNavBar(false);
-        }
-        Init()
-    })
-}
+// }
+// if (process.env.NODE_ENV === 'production') {
+//     init(() => {
+//         var sdk = SDK();
+//         if(sdk.UI && sdk.UI.toggleNavBar) {
+//             sdk.UI.toggleNavBar(false);
+//         }
+//         Init()
+//     })
+// } else {
+//     init(() => {
+//         var sdk = SDK();
+//         if(sdk.UI && sdk.UI.toggleNavBar) {
+//             sdk.UI.toggleNavBar(false);
+//         }
+//         Init()
+//     })
+// }

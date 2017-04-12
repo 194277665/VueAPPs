@@ -8,7 +8,7 @@ import  reviewMoreInfo from './pages/components/reviewMoreInfo.vue'
 export default {
     routes: [
         {
-            path: '/index',
+            path: '/',
             component: index,
             children: [
 

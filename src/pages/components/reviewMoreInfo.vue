@@ -266,7 +266,7 @@
         created(){
             //请求申请详情数据
             let requestUrl = yuMing+getPoorTypeDetails+'?IDENTITY_ID='+identityID + '&KNBZDM=' + this.$route.query.KNBZDM + '&KNBZDJDM=' + this.$route.query.KNBZDJDM;
-            console.log('detail' + requestUrl);
+//            console.log('detail' + requestUrl);
             this.$http.get(requestUrl).then(res => {
                 return res.json();
             }).
@@ -275,16 +275,15 @@
             });
 
 
-            //
             //请求申请信息
             let requestUrl2 = yuMing+getStuAllApplyInfo+'?IDENTITY_ID='+identityID+'&SQBM='+this.$route.query.SQBM;
-            console.log('222'+requestUrl2);
+//            console.log('222'+requestUrl2);
             this.$http.get(requestUrl2).then(res=>{
 
                 return res.json();
             }).then(res=>{
                 this.applyInfo = res.datas[0];
-                console.log(this.applyInfo);
+//                console.log(this.applyInfo);
             });
 
         },
