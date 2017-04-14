@@ -2,6 +2,7 @@ import index from './pages/index/index.vue';
 import salaryDetail from './pages/Components/salaryDetail.vue'
 import positionDetail from './pages/Components/positionDetail.vue'
 import applyPosition from './pages/index/applyPosition.vue'
+import reviewDetail from './pages/index/reviewDetail.vue'
 export default {
     routes: [
         {
@@ -23,5 +24,9 @@ export default {
             component:applyPosition
 
         },
+        {
+            path:'/reviewDetail',
+            component:reviewDetail
+        }
     ]
 };

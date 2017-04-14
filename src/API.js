@@ -7,5 +7,7 @@ export default {
     service:'http://amptest.wisedu.com/axsfw',
     setDefaultRole:'/sys/qgzxapp/swMobileService/checkAuth/setDefaultRole.do',
     queryStudentWorkJob:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentWorkJob.do',
-    queryStudentWorkSalary:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentWorkSalary.do'
+    queryStudentWorkSalary:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentWorkSalary.do',
+    queryStudentJobInfo:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentJobInfo.do',
+    queryStudentJobApplyRecord:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentJobApplyRecord.do'
 }

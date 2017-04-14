@@ -1,33 +1,35 @@
 <template>
     <div class="container">
         <div class="applyListItem" v-for="item in items">
-            <!--<div>-->
-                <span class="sectionHeader">申请于2016/12/1/服从调剂</span>
-            <!--</div>-->
-            <mt-cell class="cell" v-for="obj in item" title="图书管理员" :value="obj" isLink @click="toSalaryDetail"></mt-cell>
-            <!--<mt-cell v-for="obj in item" title="申请于2015/11/11/服从调剂" :value="obj"></mt-cell>-->
+            <span class="sectionHeader">申请于:{{item.SQRQ}} </span>
+            <div class="cell" v-for="obj in item.GWSQARRAY" @click="toSalaryDetail">
+                <mt-cell :title="obj.GWMC" :value="obj.SHZT_DISPLAY" isLink></mt-cell>
+            </div>
         </div>
 
     </div>
 </template>
 <style scoped>
-    body{
+    body {
         color: #f9f9f9;
     }
-    .container{
+
+    .container {
         width: 100%;
         height: 100vh;
         overflow: auto;
 
     }
-    .applyListItem{
-        width:100%;
+
+    .applyListItem {
+        width: 100%;
         height: auto;
         margin: 10PX auto;
         background-color: #f9f9f9;
         verflow: auto;
     }
-    .sectionHeader{
+
+    .sectionHeader {
         display: block;
         width: 100%;
         height: 40PX;
@@ -36,51 +38,38 @@
         color: #333333;
         padding-left: 10PX;
     }
-    .cell{
+
+    .cell {
         margin-bottom: 1PX;
     }
 </style>
 <script>
-    import { Cell } from 'mint-ui'
-//    import
+    import {Cell} from 'mint-ui'
+    import API from '../../API'
     export default{
-        methods:{
-            toSalaryDetail:function () {
+        created(){
+            let requestUrl = API.service + API.queryStudentJobApplyRecord + '?IDENTITY_ID=' +
+                API.id + '&IDENTITY_TYPE=' + API.type;
+            this.$http.get(requestUrl).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                this.items = res.data;
+            });
+        },
+        methods: {
+            toSalaryDetail: function () {
+                this.$router.push('reviewDetail');
+
             }
         },
         data(){
-
-            return{
-                items:[
-                    {
-                        obj1:'申请与辅导费',
-                        obj2:'申请与辅导费',
-                        obj3:'申请与辅导费',
-                        obj4:'申请与辅导费'
-                     },
-                    {
-                        obj1:'申请与辅导费',
-                        obj2:'申请与辅导费',
-                        obj3:'申请与辅导费',
-                        obj4:'申请与辅导费'
-
-                    },
-                    {
-                        obj1:'申请与辅导费',
-                        obj2:'申请与辅导费',
-                        obj3:'申请与辅导费',
-                        obj4:'申请与辅导费'
-                    },{
-                        obj1:'申请与辅导费',
-                        obj2:'申请与辅导费',
-                        obj3:'申请与辅导费',
-                        obj4:'申请与辅导费'
-                    }]
+            return {
+                items: []
 
             }
         },
-        components:{
-            [Cell.name]:Cell
+        components: {
+            [Cell.name]: Cell
         }
     }
 </script>

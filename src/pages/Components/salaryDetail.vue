@@ -2,28 +2,27 @@
     <div class="salaryContainer">
         <div class="top-header">
             <div class="line">
-                <span class="left-span title">图书整理小使者</span>
-                <span class="right-span money">560</span>
+                <span class="left-span title">{{GWbOject.GWMC}}</span>
+                <span class="right-span money">￥{{GWbOject.XZZH}}</span>
             </div>
             <div class="line">
-                <span class="left-span">工作时间：2017／1／1</span>
+                <span class="left-span">工作时间：{{GWbOject.GZKSSJ}}-{{GWbOject.GZJSSJ}}</span>
                 <span class="right-span">已获薪资</span>
             </div>
             <div class="line">
-                <span class="left-span">工作地点：图书馆2楼</span>
+                <span class="left-span">工作地点：{{GWbOject.GZDD}}</span>
             </div>
             <button @click="goToPositionDetail">更多岗位信息</button>
         </div>
 
         <mt-cell title="薪资明细"></mt-cell>
-        <!--<mt-cell v-for="n in 10" title="2015/1/1" value="工作20天 120"></mt-cell>-->
-        <div class="detail-item" v-for="n in 3">
+        <div class="detail-item" v-for="item in GWbOject.SALARYARRAY">
             <div class="detail-item-left">
-                <span>2015年5月</span>
+                <span>{{GWbOject.FFYF}}</span>
             </div>
             <div class="detail-item-right">
-                <span>+160</span>
-                <span>工作20天</span>
+                <span>+{{GWbOject.SFJE}}</span>
+                <span>{{GWbOject.GS}}</span>
             </div>
         </div>
 
@@ -82,10 +81,11 @@
         display: block;
         width: 50%;
         height: 30PX;
-        background-color: #2196F3;
+        background-color: #93D36E;
         border: none;
         color: white;
         margin: 10PX auto;
+        outline: none;
     }
     .detail-item{
         display: flex;
@@ -118,28 +118,26 @@
     export default{
         created(){
             let SGBH = this.$route.query.SGBH;
-            let requestUrl = API.service + API.queryStudentWorkSalary +'?SGBH='+SGBH+'+&IDENTITY_ID='+API.id+'&IDENTITY_TYPE='+API.type;
+            let requestUrl = API.service + API.queryStudentWorkSalary +'?SGBH='+SGBH+'&IDENTITY_ID='+API.id+'&IDENTITY_TYPE='+API.type;
             console.log('request =='+requestUrl);
             this.$http.get(requestUrl).then(res=>{
                 return res.json();
             }).then(res=>{
-                console.log(res.data);
+//                console.log(res.data);
+                this.GWbOject = res.data;
             });
 
 
         },
         methods: {
             goToPositionDetail: function () {
-//                alert('11');
-                this.$router.push('/positionDetail');
-//                $.('button').css
-
+                this.$router.push({path:'/positionDetail',query:{GWDM:this.GWbOject.GWDM}});
             }
 
         },
         data(){
             return {
-                msg: 'hello vue'
+                GWbOject:{}
             }
         },
         components: {

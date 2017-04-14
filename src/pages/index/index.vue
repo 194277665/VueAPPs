@@ -60,7 +60,6 @@
             this.showApplyButton = a;
 
             let requestUrlRole = API.service + API.setDefaultRole + '?IDENTITY_ID='+API.id
-            console.log(requestUrlRole);
             this.$http.get(requestUrlRole).then(res=>{
                 return res.json();
             }).then(res=>{
@@ -70,6 +69,7 @@
 
 
             let requestUrl = API.service+API.queryStudentWorkJob+'?IDENTITY_ID='+API.id;
+            console.log(requestUrl);
             this.$http.get(requestUrl).then(res=>{
                 return res.json();
             }).then(res=>{
@@ -85,8 +85,6 @@
             return {
                 selected: "1",
                 object:{}
-//                s: true,
-//                showApplyButton: true
             }
         },
         components: {
