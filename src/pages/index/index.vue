@@ -33,11 +33,19 @@
     }
 
     button {
-        background: #2196f3;
+        background: #93D36E;
         width: 100%;
         height: 50PX;
         outline: none;
         border: none;
+    }
+
+
+    /*修改蜜桃-UI的样式*/
+    .mint-navbar .mint-tab-item.is-selected {
+        border-bottom: 3px solid #93D36E;
+        color: #93D36E;
+        margin-bottom: -3px;
     }
 </style>
 <script type="text/javascript">
