@@ -10,7 +10,8 @@
                     <span>{{item.CZRQ}}</span>
                     <div>
                     </div>
-                    <i class="iconfont  checkStatus">&#xe68c;</i>
+                    <i class="iconfont checkStatusYes" v-if="item.SHZT">&#xe68c;</i>
+                    <i class="iconfont checkStatusNo" v-else="!item.SHZT">&#xe67a;</i>
 
                 </div>
                 <div class="rightPart">
@@ -160,7 +161,7 @@
         padding-left: 30PX;
     }
 
-    .checkStatus
+    .checkStatusYes
     {
         color: #21c0ae;
         display: block;
@@ -172,6 +173,18 @@
         right: -11PX;
         background-color: white;
 
+    }
+    .checkStatusNo
+    {
+        color: #ff3333;
+        display: block;
+        position: absolute;
+        /*width: 30PX;*/
+        /*height: 30PX;*/
+        font-size: 25PX;
+        top: 0;
+        right: -11PX;
+        background-color: white;
     }
 
 </style>

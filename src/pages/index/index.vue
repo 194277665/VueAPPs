@@ -229,5 +229,17 @@
     height: 100%;
     /*float: right;*/
 }
+/*修改mitui的样式*/
+  .mint-navbar .mint-tab-item.is-selected {
+      border-bottom: 3px solid #93D36E;
+      color: #93D36E;
+      margin-bottom: -3px;
+  }
+  a {
+      background-color: transparent;
+      color: #939393;
+      text-decoration: none;
+  }
+
 
   </style>
