@@ -7,14 +7,17 @@
 
         <!-- tab-container -->
         <mt-tab-container v-model="selected" class="tabContainer">
-            <mt-tab-container-item id="1">
-                    <button v-show="showApplyButton" @click="goToApply">+申请新岗位</button>
 
-                <myPosition></myPosition>
+            <mt-tab-container-item id="1">
+                <!--<button v-show="object.SFKSQ" @click="goToApply">+申请新岗位</button>-->
+                <button @click="goToApply">+申请新岗位</button>
+                <myPosition :items="object.SGXX"></myPosition>
             </mt-tab-container-item>
+
             <mt-tab-container-item id="2">
                 <applyRecord></applyRecord>
             </mt-tab-container-item>
+
         </mt-tab-container>
     </div>
 </template>
@@ -23,12 +26,13 @@
     .index {
         background: #f3f3f3;
     }
-    .tabContainer
-    {
+
+    .tabContainer {
         margin-top: 10PX;
         background-color: #f3f3f3;
     }
-    button{
+
+    button {
         background: #2196f3;
         width: 100%;
         height: 50PX;
@@ -37,34 +41,53 @@
     }
 </style>
 <script type="text/javascript">
-    import {  Navbar, TabItem, Cell, TabContainer, TabContainerItem, Button } from 'mint-ui'
+    import {Navbar, TabItem, Cell, TabContainer, TabContainerItem, Button} from 'mint-ui'
     import applyRecord from '../Components/applyRecord.vue'
     import myPosition from '../Components/myPosition.vue'
+    import API from '../../API'
     export default {
         created() {
-                let random = Math.ceil(Math.random()*10);
-                let a = (random%2 != 0);
-                this.showApplyButton = a;
+            let random = Math.ceil(Math.random() * 10);
+            let a = (random % 2 != 0);
+            this.showApplyButton = a;
+
+            let requestUrlRole = API.service + API.setDefaultRole + '?IDENTITY_ID='+API.id
+            console.log(requestUrlRole);
+            this.$http.get(requestUrlRole).then(res=>{
+                return res.json();
+            }).then(res=>{
+               API.type = res.data.IDENTITY_TYPE;
+               console.log('heollo '+API.type);
+            });
+
+
+            let requestUrl = API.service+API.queryStudentWorkJob+'?IDENTITY_ID='+API.id;
+            this.$http.get(requestUrl).then(res=>{
+                return res.json();
+            }).then(res=>{
+                this.object = res.data;
+            });
         },
-        methods:{
-            goToApply:function () {
+        methods: {
+            goToApply: function () {
                 this.$router.push('/applyPosition');
             }
         },
         data(){
             return {
-                selected:"1",
-                s:true,
-                showApplyButton:true
+                selected: "1",
+                object:{}
+//                s: true,
+//                showApplyButton: true
             }
         },
         components: {
-            [Navbar.name]:Navbar,
-            [TabItem.name]:TabItem,
-            [Cell.name]:Cell,
-            [TabContainer.name]:TabContainer,
-            [TabContainerItem.name]:TabContainerItem,
-            [Button.name]:Button,
+            [Navbar.name]: Navbar,
+            [TabItem.name]: TabItem,
+            [Cell.name]: Cell,
+            [TabContainer.name]: TabContainer,
+            [TabContainerItem.name]: TabContainerItem,
+            [Button.name]: Button,
             applyRecord,
             myPosition
         }

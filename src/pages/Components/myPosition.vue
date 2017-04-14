@@ -1,12 +1,12 @@
 <template>
     <div class="container">
-        <div class="positionListItem" v-for="item in items"  @click="toSalaryDetail(item.salary)">
-           <img src="../../assets/logo.png" v-show="item.isLeave">
-            <div  class="Line">
-                <span  class="des">{{item.position}}</span><span class="salary">{{item.salary}}</span>
+        <div class="positionListItem" v-for="(item,index) in items"  @click="toSalaryDetail(index)">
+           <img src="../../assets/logo.png" v-show="item.LGLBDM == 1">
+            <div  class="line">
+                <span  class="des">{{item.GWMC}}</span><span class="salary">{{item.XZZH}}</span>
             </div>
-            <div class="Line">
-                <span  class="date" >{{item.date}}</span><span  class="yhxiz">{{item.des}}</span>
+            <div class="line">
+                <span  class="date" >{{item.GZKSRQ}}-{{item.GZJSRQ}}</span><span  class="yhxiz">{{item.XZZH}}</span>
             </div>
 
         </div>
@@ -14,9 +14,9 @@
 </template>
 <style scoped>
     body {
-        background-color: #fff;
+        background-color: #f9f9f9;
     }
-    .Line{
+    .line{
         height:40PX;
     }
     span{
@@ -34,7 +34,7 @@
         color: #ef971c;
     }
     .positionListItem{
-        width: 90%;
+        width: 100%;
         height: 80PX;
         margin: 10PX auto;
         background-color: #ffffff;
@@ -57,68 +57,26 @@
         color: #d3d3d3;
         float: right;
         margin-right: 10PX;
-
     }
 
 </style>
 <script>
     export default{
+        created(){
+        },
         methods:{
-            toSalaryDetail:function (id) {
-               this.$router.push('/salaryDetail/'+id)
+            toSalaryDetail:function (index) {
+               this.$router.push({path:'/salaryDetail',query:{SGBH:this.items[index].SGBH}});
             }
         },
         data(){
             return {
-                items: [
-                    {
-                        position: '申请与辅导费',
-                        salary: '560',
-                        date: '2017/1/1至今',
-                        des: '申请与辅导费',
-                        isLeave:true
-                    },
-                    {
-                        position: '申请与辅导费',
-                        salary: '560',
-                        date: '2017/1/1至今',
-                        des: '申请与辅导费',
-                        isLeave:false
 
-                    },
-                    {
-                        position: '申请与辅导费',
-                        salary: '560',
-                        date: '2017/1/1至今',
-                        des: '申请与辅导费',
-                        isLeave:true
-                    }, {
-                        position: '申请与辅导费',
-                        salary: '560',
-                        date: '2017/1/1至今',
-                        des: '申请与辅导费',
-                        isLeave:false
-                    },{
-                        position: '申请与辅导费',
-                        salary: '560',
-                        date: '2017/1/1至今',
-                        des: '申请与辅导费',
-                        isLeave:true
-                    },{
-                        position: '申请与辅导费',
-                        salary: '560',
-                        date: '2017/1/1至今',
-                        des: '申请与辅导费',
-                        isLeave:false
-                    },{
-                        position: '申请与辅导费',
-                        salary: '560',
-                        date: '2017/1/1至今',
-                        des: '申请与辅导费',
-                        isLeave:false
-                    }]
             }
         },
-        components: {}
+        components: {
+
+        },
+        props:['items']
     }
 </script>

@@ -12,7 +12,7 @@ export default {
             // ]
         },
         {
-            path:'/salaryDetail/:id',
+            path:'/salaryDetail',
             component:salaryDetail
         },
         {
