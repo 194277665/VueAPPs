@@ -19,7 +19,7 @@
                 <span>工作地点：图书馆</span>
             </div>
             <div class="line">
-                <span>人数{{object.XQRS}}个</span>
+                <span>人数：{{object.XQRS}}个</span>
             </div>
             <div class="line">
                 <span>学年：{{object.XN_DISPLAY}}</span>

@@ -2,27 +2,28 @@
     <div class="container">
         <div class="top-header">
             <div class="line">
-                <span class="left-span title">图书管理员</span>
-                <span class="right-span money">15欧元/月</span>
+                <span class="left-span title">{{object.GWMC}}</span>
+                <span class="right-span money">{{object.BCBZ}}元/月</span>
             </div>
             <div class="line">
-                <span class="left-span">来自图书馆</span>
-                <span class="right-span">上线690园</span>
+                <span class="left-span"></span>
+                <span class="right-span">上限:{{object.YGZSX}}</span>
             </div>
             <button @click="goToPositionDetail">更多岗位信息</button>
         </div>
 
-        <stepView></stepView>
+        <reviewStep :items="object.SHXXARRAY"></reviewStep>
     </div>
 </template>
 <style scoped>
     body {
         background-color: #f9f9f9;
+        margin: 0;
     }
     .top-header {
         margin-bottom: 20PX;
         background: #fff;
-        padding: 0 0 10PX 0;
+        padding-bottom:10PX;
     }
 
     .line {
@@ -68,19 +69,31 @@
     }
 
 </style>
-<script scoped>
+<script>
+    import reviewStep from '../Components/reviewStep.vue';
+    import API from '../../API';
     export default{
+        created(){
+            let SGBH = this.$route.query.SGBH;
+            let requestUrl = API.service + API.queryApplyJobInfo +'?SGBH=' + SGBH + '&IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
+            this.$http.get(requestUrl).then(res=>{
+                 return res.json();
+            }).then(res=>{
+                this.object = res.data;
+            });
+        },
         methods:{
             goToPositionDetail:function () {
-                this.$router.push({path:'/positionDetail',query:{GWDM:this.GWbOject.GWDM}});
+                this.$router.push({path:'/positionDetail',query:{GWDM:this.object.GWDM}});
             },
         },
         data(){
             return {
-                msg: 'hello vue'
+                object:{}
             }
         },
         components: {
+            reviewStep
         }
     }
 </script>

@@ -1,53 +1,89 @@
 <template>
     <div class="container">
 
-        <div class="search"></div>
+        <div class="search-out">
+            <div class="search-in">
+                <span>
+                <i class="iconfont checkStatusNo">&#xe895;</i>
+                <span>输入关键字进行搜索</span>
+                    </span>
+            </div>
 
+        </div>
 
-        <!--<div class="filter" @click="clickFilter">-->
-            <!--<div class="filterLeft" v-show="showFilter">-->
-                <!--<div class="filterItem" v-for="(n,index) in 6"> 筛选条件{{index}}</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<select>-->
-            <!--<option value ="volvo">Volvo</option>-->
-            <!--<option value ="saab">Saab</option>-->
-            <!--<option value="opel">Opel</option>-->
-            <!--<option value="audi">Audi</option>-->
-        <!--</select>-->
-
+        <div class="filter">
+            <button class="filter-left" @click="clickFilterLeft">选择校区</button>
+            <button class="filter-right" @click="clickFilterRight">选择岗位</button>
+        </div>
 
 
         <div class="timeLimit">
-            工作时间：6.12-明年8.12 申请截止8.12
+            <span>工作时间：6.12-明年8.12 申请截止8.12</span>
         </div>
 
         <div class="main">
-            <applyPositionCell v-for="n in 10" class="cell"></applyPositionCell>
-        </div>
-        <!--<div class="main">-->
-            <!--<div class="item" v-for="n in 10">-->
+
+            <!--<div class="applyPositionCell" v-for="(n,index) in list" @click="clickApplyPositionCell(index)">-->
+            <!--<div class="left">-->
+            <!--<span>-->
+            <!--<i class="iconfont check-box-selected">&#xe68c;</i>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--<div class="middle">-->
+            <!--<div class="line">-->
+            <!--<span>图书管路员</span>-->
+            <!--</div>-->
+            <!--<div class="line">-->
+            <!--<span>来自图书馆</span>-->
+            <!--</div>-->
+            <!--<div class="line">-->
+            <!--<span class="campus">四平校区</span>-->
+            <!--</div>-->
 
             <!--</div>-->
-        <!--</div>-->
+            <!--<div class="right">-->
+            <!--<span class="money">￥560元/每月</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <applyPositionCell class="applyPositionCell" :item="item" v-for="(item,index) in canApplyPositions"
+                               v-on:clickCell="clickCell"></applyPositionCell>
+
+
+        </div>
+
         <div class="bottom">
             <button class="bottomLeft" @click="clickSelected">
-                <span>已选中{{list.length}}个岗位</span>
-                <span>还可以选{{5 - list.length}}个职位</span>
+                <!--<i class="iconfont "> &#xe62c;</i>>-->
+                <span>已选中{{GWDMArray.length}}个岗位</span>
+                <span>还可以选{{5 - GWDMArray.length}}个职位</span>
             </button>
-            <button class="bottomRight">选好了</button>
+            <button class="bottomRight" @click="commit">提交</button>
         </div>
 
 
         <div class="drag-super" v-show="showSelected">
             <div class="drag">
+                <div>
+                </div>
                 <draggable :list="list" class="dragArea">
                     <div class="drag-cell" v-for="(element,index) in list">
                          <span>志愿{{index + 1}}:{{element.name}}
                          </span>
                     </div>
                 </draggable>
+            </div>
+        </div>
+
+
+        <div class="filter-item-container" v-show="showFilterLeft">
+            <div class="filter-item" v-for="(option,index) in campusList" @click="choseCampus(index)">
+                <span>{{option.XQMC}}</span>
+            </div>
+        </div>
+
+        <div class="filter-item-container" v-show="showFilterRight">
+            <div class="filter-item" v-for="(option,index) in positionList" @click="chosePosition(index)">
+                {{option.GWLXMC}}
             </div>
         </div>
 
@@ -68,47 +104,87 @@
         height: 100vh;
     }
 
-    .search {
+    .search-out {
         width: 100%;
+        height: 40PX;
+        background: #d9d9d9;
+        margin: 0;
+        padding: 5PX;
+    }
+
+    .search-in {
+        width: 94%;
         height: 30PX;
-        background: #403f44;
-        color: white;
+        background: #f9f9f9;
+        color: #939393;
+        border-radius: 3PX;
+        margin: auto;
+        font-size: 15PX;
+        padding-left: 10PX;
+        /*line-height: 100%;*/
+    }
+
+    .search-in > span {
+        line-height: 30PX;
     }
 
     .filter {
         width: 100%;
-        height: 30PX;
+        height: 40PX;
         color: white;
         background: blueviolet;
-        position: relative;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .filter-left {
+        width: 50%;
+        height: 100%;
+        background: white;
+        outline: none;
+        border: none;
+        border: solid #f9f9f9 1PX;
+    }
+
+    .filter-right {
+        width: 50%;
+        height: 100%;
+        background: white;
+        outline: none;
+        border: none;
+        border: solid #f9f9f9 1PX;
 
     }
 
-    .filterLeft {
-        width: 100%;
-        height: 200PX;
-        background: rgba(30, 39, 30, 0.5);
-        /*display: none;*/
-        /*margin-top: 30PX;*/
-        z-index: 100;
+    .filter-item-container {
         position: absolute;
-        top: 30PX;
+        width: 100%;
         height: calc(100vh - 60PX);
-
+        top: 80PX;
+        background: rgba(100, 100, 100, 0.5);
+        z-index: 100;
     }
 
-    .filterItem {
-        width: 100%;
-        height: 30PX;
+    .filter-item {
         background: #fff;
+        width: 100%;
+        height: 40PX;
         margin-bottom: 1PX;
+        padding: 10PX;
     }
 
     .timeLimit {
         width: 100%;
-        height: 20PX;
-        background: #f9f9f9;
-        color: #403f44;
+        height: 30PX;
+        background: #fefcec;
+        padding: 5PX;
+    }
+
+    .timeLimit > span {
+        display: block;
+        line-height: 20PX;
+        color: orange;
+
     }
 
     .main {
@@ -124,9 +200,71 @@
         height: 70PX;
     }
 
-    .cell{
-        /*border-bottom: ;*/
-        /*border-bottom: solid #403f44 1PX;*/
+    .applyPositionCell {
+        width: 100%;
+        height: auto;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1PX;
+    }
+
+    .left {
+        width: 10%;
+        height: auto;
+
+    }
+
+    .left > span {
+        width: 100%;
+        display: block;
+        line-height: 60PX;
+        text-align: center;
+    }
+
+    .check-box-selected {
+        font-size: 30PX;
+        color: #56C2AF;
+        line-height: 100%;
+    }
+
+    .middle {
+        width: 60%;
+        height: auto;
+        padding: 10PX;
+    }
+
+    .middle > .line {
+        width: 100%;
+        height: auto;
+        padding: 3PX;
+        font-size: 14PX;
+        padding: 2PX;
+    }
+
+    .campus {
+        display: inline-block;
+        border: solid #93D36E 1PX;
+        color: #93D36E;
+        font-size: 14PX;
+
+    }
+
+    .right {
+        width: 30%;
+        height: auto;
+
+    }
+
+    .money {
+        display: block;
+        width: 100%;
+        height: 100%;
+        line-height: 100%;
+
+    }
+
+    applyPositionCell {
         margin-bottom: 1PX;
     }
 
@@ -134,46 +272,45 @@
         display: flex;
         justify-content: flex-start;
         width: 100%;
-        height: 44PX;
+        height: 60PX;
         bottom: 0PX;
         background: rgba(46, 37, 85, 0.86);
         color: #fff;
         position: absolute;
         bottom: 0;
     }
-    .bottomLeft{
+
+    .bottomLeft {
         width: 70%;
         height: 100%;
-        background: #c9c9c9;
+        background: #2f343b;
         border: none;
         outline: none;
     }
-    .bottomRight{
+
+    .bottomLeft span {
+        display: block;
+        width: 100%;
+        color: white;
+
+    }
+
+    .bottomRight {
         width: 30%;
         height: 100%;
-        background: #939393;
+        background: #56c2af;
         color: white;
         border: none;
         outline: none;
-    }
-
-    /*.bottom{*/
-    /*!*calc(100vh - 6);*!*/
-    /*width: 100%;*/
-    /*height:60PX;*/
-    /*background: green;*/
-    /*}*/
-
-    .normal {
-        background-color: grey;
+        font-size: 18PX;
     }
 
     .drag-super {
         position: absolute;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(100, 100, 100, 0.5);
         width: 100%;
         height: calc(100vh - 44PX);
-        bottom: 44PX;
+        bottom: 60PX;
         /*z-index: 9999;*/
 
     }
@@ -188,9 +325,9 @@
     }
 
     /*.dragArea {*/
-        /*min-height: 10px;*/
+    /*min-height: 10px;*/
     /*}.dragArea {*/
-        /*min-height: 10px;*/
+    /*min-height: 10px;*/
     /*}*/
 
     .drag-cell {
@@ -200,7 +337,8 @@
         margin-bottom: 1PX;
         padding: 10PX;
     }
-    .drag-cell>span{
+
+    .drag-cell > span {
         display: inline-block;
         width: 80%;
         font-size: 14PX;
@@ -212,42 +350,155 @@
 <script>
     import draggable from 'vuedraggable'
     import applyPositionCell from '../Components/applyPositionCell.vue'
-    import { Checklist } from 'mint-ui'
+    import API from '../../API'
+    import $ from 'jquery'
     export default{
+        created(){
+
+            //请求校区选项
+
+            this.queryCampus();
+
+            //请求岗位选项
+            this.queryWorkType();
+
+            //  请求可申请的岗位
+            this.queryCanApplyJob();
+        },
         methods: {
-            handleChange (value) {
-                this.value = value
+            queryCampus: function () {
+                let requestUrl = API.service + API.queryCampus + '?IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
+                console.log('quecampus' + requestUrl);
+                this.$http.get(requestUrl).then(res => {
+                    return res.json();
+                }).then(res => {
+                    this.campusList = res.data;
+                });
             },
-            clickFilter: function () {
-                this.showFilter = !this.showFilter;
+            queryWorkType: function () {
 
+                let requestUrl2 = API.service + API.queryWorkType + '?IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
+                console.log('position' + requestUrl2);
+                this.$http.get(requestUrl2).then(res => {
+                    return res.json();
+                }).then(res => {
+                    this.positionList = res.data;
+                });
             },
-            clickSelected:function () {
-                this.showSelected=!this.showSelected;
+            queryCanApplyJob: function () {
+                let requestUrl3 = API.service + API.queryCanApplyJob + '?GWLXDM=' + this.GWLXDM + '&XQDM=' + this.XQDM +
+                    '&KEYWORD=' + this.KEYWORD + '&PAGESIZE=' + this.PAGESIZE + '&PAGENUM=' + 1 + '&IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
+                console.log('//  请求可申请的岗位' + requestUrl3);
+                this.$http.get(requestUrl3).then(res => {
+                    return res.json();
+
+                }).then(res => {
+                    this.canApplyPositions = res.data;
+                });
+            },
+
+            clickCell: function (args) {
+//                console.log(args);
+                let obj = args;
+//                let index ;
+//                alert(11);
+//                console.log(this.GWDMArray.length);
+
+                let exist = false;
+                let i;
+
+                $.each(this.GWDMArray, function (index, value) {
+
+                    alert(index);
+                    console.log(index + '---' + value);
+
+                    if (value == obj.GWDM) {
+                        exist = true
+                        i = index;
+                        alert(22);
+                    }
+                    alert(333);
+
+                });
+
+            if(exist)
+            {
+                this.GWDMArray.splice(i,1);
+            }else {
+                this.GWDMArray.push(obj);
             }
+            console.log(this.GWDMArray.length+'-------'+this.GWDMArray);
 
 
         },
-        data(){
-            return {
-                value: '1',
-                msg: 'hello vue',
-                list:[
-                        {name: "图书管理员3"},
-                        {name: "图书管理员2"},
-                        {name: "图书管理员1"},
-                    ],
-                showSelected: false,
-                showFilter:false
+
+        clickFilterLeft: function () {
+            this.showFilterRight = false;
+            this.showFilterLeft = !this.showFilterLeft;
+
+        },
+        clickFilterRight: function () {
+            this.showFilterLeft = false;
+            this.showFilterRight = !this.showFilterRight;
+
+        },
+        clickSelected: function () {
+            this.showSelected = !this.showSelected;
+        },
+        commit: function () {
+            this.$router.push('/commitApply');
+
+        },
+        choseCampus: function (index) {
+            let campus = this.campusList[index]
+            $('.filter-left').text(campus.XQMC);
+            this.XQDM = campus.XQDM;
+            this.showFilterLeft = false;
+            this.queryCanApplyJob();
+
+
+        },
+        chosePosition: function (index) {
+            let postiton = this.positionList[index]
+            $('.filter-right').text(postiton.GWLXMC);
+            this.GWLXDM = postiton.GWLXDM;
+            this.showFilterRight = false;
+            this.queryCanApplyJob();
+        }
+    }
+    ,
+
+
+    data()
+    {
+        return {
+            value: '1',
+            msg: 'hello vue',
+            list: [
+                {name: "图书管理员3"},
+                {name: "图书管理员2"},
+                {name: "图书管理员1"},
+            ],
+            showSelected: false,
+            showFilterRight: false,
+            showFilterLeft: false,
+            campusList: [],
+            positionList: [],
+            canApplyPositions: [],
+            GWLXDM: '',
+            XQMC: '',
+            KEYWORD: '',
+            PAGESIZE: 10,
+            slelectedPositions: [],
+            GWDMArray: []
 
 
         }
-        },
-        components: {
-            draggable,
+    }
+    ,
+    components: {
+        draggable,
             applyPositionCell,
-            [Checklist.name]:Checklist,
-//            [menuItem.name]:menuItem
-        }
+    }
     }
 </script>

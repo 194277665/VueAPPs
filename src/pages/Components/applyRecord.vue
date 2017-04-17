@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <div class="applyListItem" v-for="item in items">
+        <div class="applyListItem" v-for="(item,index1) in items">
             <span class="sectionHeader">申请于:{{item.SQRQ}} </span>
-            <div class="cell" v-for="obj in item.GWSQARRAY" @click="toSalaryDetail">
+            <div class="cell" v-for="(obj,index2) in item.GWSQARRAY" @click="toSalaryDetail(index1,index2)">
                 <mt-cell :title="obj.GWMC" :value="obj.SHZT_DISPLAY" isLink></mt-cell>
             </div>
         </div>
@@ -57,9 +57,9 @@
             });
         },
         methods: {
-            toSalaryDetail: function () {
-                this.$router.push('reviewDetail');
-
+            toSalaryDetail: function (index1,index2) {
+                let SGBH = this.items[index1].GWSQARRAY[index2].SGBH;
+                this.$router.push({path:'reviewDetail',query:{SGBH:SGBH}});
             }
         },
         data(){

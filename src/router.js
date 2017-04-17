@@ -3,6 +3,7 @@ import salaryDetail from './pages/Components/salaryDetail.vue'
 import positionDetail from './pages/Components/positionDetail.vue'
 import applyPosition from './pages/index/applyPosition.vue'
 import reviewDetail from './pages/index/reviewDetail.vue'
+import commitApply from './pages/index/commitApply.vue'
 export default {
     routes: [
         {
@@ -27,6 +28,11 @@ export default {
         {
             path:'/reviewDetail',
             component:reviewDetail
+        },
+        {
+            path:'/commitApply',
+            component:commitApply
+
         }
     ]
 };
