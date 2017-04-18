@@ -91,6 +91,7 @@
         width: 100%;
         height: 100%;
         line-height: 100%;
+        padding: 10PX;
     }
     .check-box-selected{
         font-size: 25PX;
@@ -109,10 +110,20 @@
 </style>
 <script>
     export default{
+        created(){
+//            thi
+
+        },
         methods: {
             clickCell:function () {
                 this.$emit('clickCell',this.item);
-               this.cellIsSelected = !this.cellIsSelected
+                console.log(this.length);
+                if(this.length>2)
+                {
+                    this.cellIsSelected = false;
+                }else {
+                    this.cellIsSelected = !this.cellIsSelected;
+                }
             }
 
         },
@@ -125,6 +136,7 @@
         components: {
 
         },
-        props:['item']
+        props: ['item','length'],
+
     }
 </script>

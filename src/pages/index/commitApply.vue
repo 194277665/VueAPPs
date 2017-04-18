@@ -8,6 +8,7 @@
         </div>
         <div class="allowChange">
             <span>服从调剂</span>
+            <!--<mu-switch label="开关" class="demo-switch" />-->
         </div>
 
             <mt-button class="mt-button" @click.native="commit">提交</mt-button>
@@ -43,7 +44,7 @@
         width: 100%;
         height: 100%;
         font-size: 15PX;
-        color: #f9f9f9;
+        color: #030303;
         padding: 10PX;
 
     }
@@ -68,28 +69,62 @@
         color: white;
         width: 90%;
     }
+    .demo-switch {
+        margin-bottom: 16px;
+    }
 </style>
 <script>
     import { Button } from 'mint-ui';
     import $ from 'jquery'
     import API from '../../API'
+//    import MuseUI  from 'muse-ui'
     export default{
+        created(){
+            this.GWDMList = this.$route.query.GWDMArray;
+        },
+
         methods:{
             commit:function () {
                let LXFS = $('.textfiled').val();
                let SQLY  = $('textarea').val();
-               let SFFCTJ = true;
+               let SFFCTJ = 1;
+                let gwdm = JSON.stringify(this.GWDMList);
+                console.log('dfasdfdsafasf-----'+gwdm);
+//               let requestUrl = API.service + API.applyStudentWokrStudy + '?SQLY='+SQLY+'&LXFS='+LXFS+'&IDENTITY_ID='+API.id
+//                +'&IDENTITY_TYPE='+API.type+'&GWARRAY='+JSON.stringify(this.GWDMList)+'&SFFCTJ='+1;
+//               console.log(requestUrl);
+                let requestUrl = API.service + API.applyStudentWokrStudy;
+                console.log(requestUrl);
+
+               let param = {
+                   LXFS:LXFS,
+                   SQLY:SQLY,
+                   SFFCTJ:SFFCTJ,
+                   GWARRAY:{INDATA:this.GWDMList},
+                   IDENTITY_ID:API.id,
+                   IDENTITY_TYPE:API.type
+
+               }
+               this.$http.post(requestUrl,param).then(res=>{
+
+                   return res.json();
+               }).then(res=>{
+                   console.log(res.data);
+               });
+
 
 
             }
         },
         data(){
             return {
-                msg: 'hello vue'
+                msg: 'hello vue',
+                GWDMList:[]
             }
         },
         components: {
-            [Button.name]:Button
+            [Button.name]:Button,
+//            [Swicth.name]:Swicth
         }
     }
 </script>

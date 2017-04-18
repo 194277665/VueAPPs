@@ -6,7 +6,7 @@
         <div class="stepItemContainer">
             <div class="stepItem" v-for="item in items">
                 <div class="leftPart">
-                    <span>{{item.SHSJ}}</span>
+                    <span>{{item.CZRQ}}</span>
                     <i class="iconfont checkStatusYes" v-if="item.DQZTDM == 0">&#xe68c;</i>
                     <i class="iconfont checkStatusNo" v-else="">&#xe67a;</i>
 

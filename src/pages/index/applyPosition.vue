@@ -1,91 +1,96 @@
 <template>
     <div class="container">
 
-        <div class="search-out">
-            <div class="search-in">
-                <span>
-                <i class="iconfont checkStatusNo">&#xe895;</i>
-                <span>输入关键字进行搜索</span>
-                    </span>
+        <!--<div class="search-out" @click="goToSearch">-->
+        <!--<div class="search-in">-->
+        <!--<span>-->
+        <!--<i class="iconfont checkStatusNo">&#xe895;</i>-->
+        <!--<span>输入关键字进行搜索</span>-->
+        <!--</span>-->
+        <!--</div>-->
+
+        <!--</div>-->
+        <mt-search v-model="value" cancel-text="取消" placeholder="搜索" :result.sync="canApplyPositions">
+
+
+            <div class="filter">
+                <button class="filter-left" @click="clickFilterLeft">选择校区</button>
+                <button class="filter-right" @click="clickFilterRight">选择岗位</button>
             </div>
 
-        </div>
 
-        <div class="filter">
-            <button class="filter-left" @click="clickFilterLeft">选择校区</button>
-            <button class="filter-right" @click="clickFilterRight">选择岗位</button>
-        </div>
+            <div class="timeLimit">
+                <span>工作时间：6.12-明年8.12 申请截止8.12</span>
+            </div>
 
+            <div class="main">
 
-        <div class="timeLimit">
-            <span>工作时间：6.12-明年8.12 申请截止8.12</span>
-        </div>
+                <!--<div class="applyPositionCell" v-for="(n,index) in list" @click="clickApplyPositionCell(index)">-->
+                <!--<div class="left">-->
+                <!--<span>-->
+                <!--<i class="iconfont check-box-selected">&#xe68c;</i>-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--<div class="middle">-->
+                <!--<div class="line">-->
+                <!--<span>图书管路员</span>-->
+                <!--</div>-->
+                <!--<div class="line">-->
+                <!--<span>来自图书馆</span>-->
+                <!--</div>-->
+                <!--<div class="line">-->
+                <!--<span class="campus">四平校区</span>-->
+                <!--</div>-->
 
-        <div class="main">
-
-            <!--<div class="applyPositionCell" v-for="(n,index) in list" @click="clickApplyPositionCell(index)">-->
-            <!--<div class="left">-->
-            <!--<span>-->
-            <!--<i class="iconfont check-box-selected">&#xe68c;</i>-->
-            <!--</span>-->
-            <!--</div>-->
-            <!--<div class="middle">-->
-            <!--<div class="line">-->
-            <!--<span>图书管路员</span>-->
-            <!--</div>-->
-            <!--<div class="line">-->
-            <!--<span>来自图书馆</span>-->
-            <!--</div>-->
-            <!--<div class="line">-->
-            <!--<span class="campus">四平校区</span>-->
-            <!--</div>-->
-
-            <!--</div>-->
-            <!--<div class="right">-->
-            <!--<span class="money">￥560元/每月</span>-->
-            <!--</div>-->
-            <!--</div>-->
-            <applyPositionCell class="applyPositionCell" :item="item" v-for="(item,index) in canApplyPositions"
-                               v-on:clickCell="clickCell"></applyPositionCell>
+                <!--</div>-->
+                <!--<div class="right">-->
+                <!--<span class="money">￥560元/每月</span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <applyPositionCell class="applyPositionCell" :item="item" :length="GWDMArray.length"
+                                   v-for="(item,index) in canApplyPositions"
+                                   v-on:clickCell="clickCell"></applyPositionCell>
 
 
-        </div>
+            </div>
 
-        <div class="bottom">
-            <button class="bottomLeft" @click="clickSelected">
-                <!--<i class="iconfont "> &#xe62c;</i>>-->
-                <span>已选中{{GWDMArray.length}}个岗位</span>
-                <span>还可以选{{5 - GWDMArray.length}}个职位</span>
-            </button>
-            <button class="bottomRight" @click="commit">提交</button>
-        </div>
+            <div class="bottom">
+                <button class="bottomLeft" @click="clickSelected">
+                    <!--<i class="iconfont "> &#xe62c;</i>>-->
+                    <span>已选中{{GWDMArray.length}}个岗位</span>
+                    <span>还可以选{{5 - GWDMArray.length}}个职位</span>
+                </button>
+                <button class="bottomRight" @click="commit">提交</button>
+            </div>
 
 
-        <div class="drag-super" v-show="showSelected">
-            <div class="drag">
-                <div>
-                </div>
-                <draggable :list="list" class="dragArea">
-                    <div class="drag-cell" v-for="(element,index) in list">
-                         <span>志愿{{index + 1}}:{{element.name}}
-                         </span>
+            <div class="drag-super" v-show="showSelected">
+                <div class="drag">
+                    <div>
                     </div>
-                </draggable>
+                    <draggable :list="list" class="dragArea">
+                        <mt-cell title="已选岗位" value="调整自愿等级"></mt-cell>
+                        <div class="drag-cell" v-for="(element,index) in GWDMArray">
+                         <span>志愿{{index + 1}}:{{element.GWMC}}
+                         </span>
+                        </div>
+                    </draggable>
+                </div>
             </div>
-        </div>
 
 
-        <div class="filter-item-container" v-show="showFilterLeft">
-            <div class="filter-item" v-for="(option,index) in campusList" @click="choseCampus(index)">
-                <span>{{option.XQMC}}</span>
+            <div class="filter-item-container" v-show="showFilterLeft">
+                <div class="filter-item" v-for="(option,index) in campusList" @click="choseCampus(index)">
+                    <span>{{option.XQMC}}</span>
+                </div>
             </div>
-        </div>
 
-        <div class="filter-item-container" v-show="showFilterRight">
-            <div class="filter-item" v-for="(option,index) in positionList" @click="chosePosition(index)">
-                {{option.GWLXMC}}
+            <div class="filter-item-container" v-show="showFilterRight">
+                <div class="filter-item" v-for="(option,index) in positionList" @click="chosePosition(index)">
+                    {{option.GWLXMC}}
+                </div>
             </div>
-        </div>
+        </mt-search>
 
     </div>
 
@@ -135,6 +140,7 @@
         background: blueviolet;
         display: flex;
         justify-content: flex-start;
+
     }
 
     .filter-left {
@@ -144,6 +150,7 @@
         outline: none;
         border: none;
         border: solid #f9f9f9 1PX;
+        color: #56C2AF;
     }
 
     .filter-right {
@@ -153,6 +160,7 @@
         outline: none;
         border: none;
         border: solid #f9f9f9 1PX;
+        color: #56C2AF;
 
     }
 
@@ -189,7 +197,7 @@
 
     .main {
         width: 100%;
-        height: calc(100vh - 44PX - 60PX - 20PX);
+        height: calc(100vh - 170PX);
         overflow: auto;
     }
 
@@ -334,8 +342,9 @@
         width: 100%;
         height: 44PX;
         background: white;
-        margin-bottom: 1PX;
+        /*margin-bottom: 1PX;*/
         padding: 10PX;
+        border-top:solid 1PX #f9f9f9;
     }
 
     .drag-cell > span {
@@ -352,6 +361,7 @@
     import applyPositionCell from '../Components/applyPositionCell.vue'
     import API from '../../API'
     import $ from 'jquery'
+    import {Toast, Search, Cell} from 'mint-ui';
     export default{
         created(){
 
@@ -396,109 +406,138 @@
                     this.canApplyPositions = res.data;
                 });
             },
+            goToSearch: function () {
+
+                this.$router.push('/searchPosition');
+            },
 
             clickCell: function (args) {
-//                console.log(args);
+
                 let obj = args;
-//                let index ;
-//                alert(11);
-//                console.log(this.GWDMArray.length);
-
                 let exist = false;
-                let i;
-
+                let i = 0;
                 $.each(this.GWDMArray, function (index, value) {
-
-                    alert(index);
-                    console.log(index + '---' + value);
-
-                    if (value == obj.GWDM) {
-                        exist = true
+                    if (value.GWDM == obj.GWDM) {
+                        exist = true;
                         i = index;
-                        alert(22);
                     }
-                    alert(333);
-
                 });
 
-            if(exist)
-            {
-                this.GWDMArray.splice(i,1);
-            }else {
-                this.GWDMArray.push(obj);
+//                alert(exist);
+                console.log(exist);
+                if (exist) {
+
+                    this.GWDMArray.splice(i, 1);
+                } else {
+                    if (this.GWDMArray.length > 2) {
+                        console.log(this.GWDMArray.length);
+                        Toast('不能选取更多');
+                        return;
+                    } else {
+
+                        this.GWDMArray.push(obj);
+                    }
+                }
+                console.log(this.GWDMArray.length + '-------' + this.GWDMArray);
+
+
+            },
+
+            clickFilterLeft: function () {
+                this.showFilterRight = false;
+                this.showFilterLeft = !this.showFilterLeft;
+
+            },
+            clickFilterRight: function () {
+                this.showFilterLeft = false;
+                this.showFilterRight = !this.showFilterRight;
+
+            },
+            clickSelected: function () {
+                this.showSelected = !this.showSelected;
+            },
+            commit: function () {
+
+                let GWArray = new Array();
+                $.each(this.GWDMArray,function (index,value) {
+                    let obj = {GWDM:value.GWDM};
+                    GWArray.push(obj);
+
+                });
+                console.log(GWArray)
+
+                this.$router.push({path:'/commitApply',query:{GWDMArray:GWArray}});
+
+            },
+            choseCampus: function (index) {
+                let campus = this.campusList[index]
+                $('.filter-left').text(campus.XQMC);
+                this.XQDM = campus.XQDM;
+                this.showFilterLeft = false;
+                this.queryCanApplyJob();
+
+
+            },
+            chosePosition: function (index) {
+                let postiton = this.positionList[index]
+                $('.filter-right').text(postiton.GWLXMC);
+                this.GWLXDM = postiton.GWLXDM;
+                this.showFilterRight = false;
+                this.queryCanApplyJob();
+            },
+            trim: function (str) { //删除左右两端的空格
+                return str.replace(/(^\s*)|(\s*$)/g, "");
             }
-            console.log(this.GWDMArray.length+'-------'+this.GWDMArray);
-
-
-        },
-
-        clickFilterLeft: function () {
-            this.showFilterRight = false;
-            this.showFilterLeft = !this.showFilterLeft;
-
-        },
-        clickFilterRight: function () {
-            this.showFilterLeft = false;
-            this.showFilterRight = !this.showFilterRight;
-
-        },
-        clickSelected: function () {
-            this.showSelected = !this.showSelected;
-        },
-        commit: function () {
-            this.$router.push('/commitApply');
-
-        },
-        choseCampus: function (index) {
-            let campus = this.campusList[index]
-            $('.filter-left').text(campus.XQMC);
-            this.XQDM = campus.XQDM;
-            this.showFilterLeft = false;
-            this.queryCanApplyJob();
-
-
-        },
-        chosePosition: function (index) {
-            let postiton = this.positionList[index]
-            $('.filter-right').text(postiton.GWLXMC);
-            this.GWLXDM = postiton.GWLXDM;
-            this.showFilterRight = false;
-            this.queryCanApplyJob();
         }
-    }
-    ,
+        ,
 
 
-    data()
-    {
-        return {
-            value: '1',
-            msg: 'hello vue',
-            list: [
-                {name: "图书管理员3"},
-                {name: "图书管理员2"},
-                {name: "图书管理员1"},
-            ],
-            showSelected: false,
-            showFilterRight: false,
-            showFilterLeft: false,
-            campusList: [],
-            positionList: [],
-            canApplyPositions: [],
-            GWLXDM: '',
-            XQMC: '',
-            KEYWORD: '',
-            PAGESIZE: 10,
-            slelectedPositions: [],
-            GWDMArray: []
+        data()
+        {
+            return {
+                value: ' ',
+                msg: 'hello vue',
+                list: [
+                    {name: "图书管理员3"},
+                    {name: "图书管理员2"},
+                    {name: "图书管理员1"},
+                ],
+                showSelected: false,
+                showFilterRight: false,
+                showFilterLeft: false,
+                campusList: [],
+                positionList: [],
+                canApplyPositions: [],
+                GWLXDM: '',
+                XQMC: '',
+                KEYWORD: '',
+                PAGESIZE: 10,
+                slelectedPositions: [],
+                GWDMArray: []
 
 
+            }
         }
-    }
-    ,
-    components: {
-        draggable,
+        ,
+        components: {
+            draggable,
             applyPositionCell,
-    }
+            [Toast.name]: Toast,
+            [Search.name]: Search,
+            [Cell.name]:Cell
+        },
+        watch:{
+            value:function (newValue,oldValue) {
+
+                this.KEYWORD = this.trim(newValue);
+                console.log('fdasfdfas'+newValue);
+                this.queryCanApplyJob();
+                if(this.value.length < 1)
+                {
+                    this.value = ' ';
+                }
+
+            }
+        },
     }
 </script>

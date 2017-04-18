@@ -24,8 +24,8 @@
     .applyListItem {
         width: 100%;
         height: auto;
-        margin: 10PX auto;
-        background-color: #f9f9f9;
+        /*margin: 10PX auto;*/
+        background-color: #f3f3f3;
         verflow: auto;
     }
 

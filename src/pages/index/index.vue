@@ -10,7 +10,9 @@
 
             <mt-tab-container-item id="1">
                 <!--<button v-show="object.SFKSQ" @click="goToApply">+申请新岗位</button>-->
-                <button @click="goToApply">+申请新岗位</button>
+               <div class="top-button-div">
+                <button class="top-button" @click="goToApply">申请新岗位</button>
+               </div>
                 <myPosition :items="object.SGXX"></myPosition>
             </mt-tab-container-item>
 
@@ -23,28 +25,51 @@
 </template>
 
 <style scoped>
+    body{
+        background-color: #fff;
+    }
     .index {
-        background: #f3f3f3;
+        background: #f9f9f9;
     }
 
     .tabContainer {
         margin-top: 10PX;
-        background-color: #f3f3f3;
+        /*background-color: #f9f9f9;*/
+        background: #f9f9f9;
+        /*text-align: center;*/
+        /*padding: 10PX;*/
     }
 
-    button {
-        background: #93D36E;
+    .top-button-div{
         width: 100%;
+        height: 50PX;
+        text-align: center;
+        margin-bottom:10PX;
+
+    }
+    .top-button {
+        background: #f9f9f9;
+        border-radius: 3PX;
+        /*border: solid 1PX #999;*/
+        box-shadow: 0 0 1PX rgba(0,0,0,0.5);
+        /*box-shadow: 0 0 1PX #f9f9f9;*/
+        width: 96%;
         height: 50PX;
         outline: none;
         border: none;
+        background: white;
+        color: #56c2af;
+        font-size: 16PX;
+        /*margin: 10PX auto;*/
+        text-align: center;
+
     }
 
 
     /*修改蜜桃-UI的样式*/
     .mint-navbar .mint-tab-item.is-selected {
-        border-bottom: 3px solid #93D36E;
-        color: #93D36E;
+        border-bottom: 3px solid #56C2AF;
+        color: #56C2AF;
         margin-bottom: -3px;
     }
 </style>

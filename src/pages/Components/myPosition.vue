@@ -1,12 +1,14 @@
 <template>
     <div class="container">
         <div class="positionListItem" v-for="(item,index) in items"  @click="toSalaryDetail(index)">
-           <img src="../../assets/logo.png" v-show="item.LGLBDM == 1">
+
             <div  class="line">
-                <span  class="des">{{item.GWMC}}</span><span class="salary">{{item.XZZH}}</span>
+                <span  class="des">{{item.GWMC}}</span>
+                <span v-show="item.LGLBDM == 1" class="leave-position">离岗</span>
+                <span class="salary">{{item.XZZH}}</span>
             </div>
             <div class="line">
-                <span  class="date" >{{item.GZKSRQ}}-{{item.GZJSRQ}}</span><span  class="yhxiz">{{item.XZZH}}</span>
+                <span  class="date" >{{item.GZKSRQ}}-{{item.GZJSRQ}}</span><span  class="yhxiz">已获薪资</span>
             </div>
 
         </div>
@@ -14,7 +16,7 @@
 </template>
 <style scoped>
     body {
-        background-color: #f9f9f9;
+        /*background-color: #f9f9f9;*/
     }
     .line{
         height:40PX;
@@ -34,18 +36,31 @@
         color: #ef971c;
     }
     .positionListItem{
-        width: 100%;
+        width: 96%;
         height: 80PX;
         margin: 10PX auto;
         background-color: #ffffff;
         /*position: relative;*/
+        border-radius: 5PX;
+        box-shadow: 0 0 3PX rgba(0,0,0,0.5);
     }
-    img{
-        width: 20PX;
-        height: 20px;
-        /*top:0;*/
-        /*right:0;*/
-        float: right;
+    /*img{*/
+        /*width: 20PX;*/
+        /*height: 20px;*/
+        /*!*top:0;*!*/
+        /*!*right:0;*!*/
+        /*float: right;*/
+    /*}*/
+    .leave-position{
+        /*display: inline-block;*/
+        /*width: 40PX;*/
+        /*height: 20PX;*/
+        background: #f3f3f3;
+        color: #939393;
+        text-align: center;
+        padding-left: 0PX;
+        margin-left: 10PX;
+
     }
     .date
     {

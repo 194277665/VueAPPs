@@ -4,6 +4,7 @@ import positionDetail from './pages/Components/positionDetail.vue'
 import applyPosition from './pages/index/applyPosition.vue'
 import reviewDetail from './pages/index/reviewDetail.vue'
 import commitApply from './pages/index/commitApply.vue'
+import searchPosition from './pages/index/searchPosition.vue'
 export default {
     routes: [
         {
@@ -32,6 +33,11 @@ export default {
         {
             path:'/commitApply',
             component:commitApply
+
+        },
+        {
+            path:'/searchPosition',
+            component:searchPosition
 
         }
     ]

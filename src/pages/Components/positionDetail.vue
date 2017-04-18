@@ -3,10 +3,10 @@
         <!--//职位详情的头部-->
         <div class="container">
             <div class="line">
-                <span class="left-span">{{object.GWMC}}</span><span class="right-span">{{object.BCBZ}}</span>
+                <span class="left-span">{{object.GWMC}}</span><span class="right-span money">{{object.BCBZ}}</span>
             </div>
             <div class="line">
-                <span class="left-span">来自：图书馆</span><span class="right-span">上限{{object.YGZSX}}／月</span>
+                <span class="left-span">来自：图书馆</span><span class="right-span">上限:{{object.YGZSX}}元／月</span>
             </div>
             <div class="line">
                 <span class="mark">{{object.XQMC_DISPLAY}}</span>
@@ -46,9 +46,9 @@
         <div class="container">
             <div class="section-header">申请需求</div>
             <!--<div class="section-content">-->
-                <div class="line">  <span>联系人：{{object.GWYQ}}</span></div>
-                <div class="line">  <span>联系电话:{{object.LXDH}}</span></div>
-                <div class="line">  <span>联系地址：{{object.LXDZ}}</span></div>
+                <div class="line">  <span class="">联系人：</span><span>{{object.GWYQ}}</span></div>
+                <div class="line">  <span class="">联系电话:</span><span>{{object.LXDH}}</span></div>
+                <div class="line">  <span class="">联系地址：</span><span>{{object.LXDZ}}</span></div>
                 <!--<div class="line">  <span>工作地点：{{object.GWYQ}}</span></div>-->
             <!--</div>-->
         </div>
@@ -65,26 +65,32 @@
         width: 100%;
         background-color: #ffffff;
         margin-bottom: 20PX;
+        padding: 10PX;
     }
     .line{
         display: flex;
         justify-content: flex-start;
-        padding: 10PX;
+        padding: 5PX;
         font-size: 14PX;
     }
     .line > .left-span{
         display: inline-block;
-        width: 70%;
+        width: 50%;
 
     }
     .line> .right-span{
         display: inline-block;
-        width: 30%;
+        width: 50%;
         text-align: right;
+        color: #939393;
     }
     .line > .mark{
-        border: solid #93D36E 1PX;
+        /*border: solid #56C2AF 1PX;*/
         color: #93D36E;
+        background: #E3F7F5;
+    }
+    .money{
+        color: red;
     }
 
     /*简介秒速*/
@@ -92,6 +98,10 @@
         width: 100%;
         font-size: 16PX;
         padding: 10PX;
+
+        margin-bottom: 1PX;
+        /*background: white;*/
+        border-bottom: solid 1PX #f9f9f9;
 
     }
     .section-content{

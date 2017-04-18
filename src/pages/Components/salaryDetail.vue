@@ -3,17 +3,25 @@
         <div class="top-header">
             <div class="line">
                 <span class="left-span title">{{GWbOject.GWMC}}</span>
+                <span>已获薪资</span>
                 <span class="right-span money">￥{{GWbOject.XZZH}}</span>
             </div>
             <div class="line">
-                <span class="left-span">工作时间：{{GWbOject.GZKSSJ}}-{{GWbOject.GZJSSJ}}</span>
-                <span class="right-span">已获薪资</span>
+                <span class="left-span sub-des">工作时间：</span>
+                <span>{{GWbOject.GZKSSJ}}-{{GWbOject.GZJSSJ}}</span>
+                <!--<span class="right-span">已获薪资</span>-->
             </div>
             <div class="line">
-                <span class="left-span">工作地点：{{GWbOject.GZDD}}</span>
+                <span class="left-span sub-des">工作地点：</span>
+                <span class="midle-span">{{GWbOject.GZDD}}</span>
             </div>
-            <button @click="goToPositionDetail">更多岗位信息</button>
+            <!--<button @click="goToPositionDetail">更多岗位信息</button>-->
         </div>
+
+        <div class="more"   @click="goToPositionDetail">
+            <mt-cell title="更多详情" isLink></mt-cell>
+        </div>
+
 
         <mt-cell title="薪资明细"></mt-cell>
         <div class="detail-item" v-for="item in GWbOject.SALARYARRAY">
@@ -33,17 +41,20 @@
 <style scoped>
     .salaryContainer {
         background-color: #f9f9f9;
+        width: 100%;
+        height: auto;
+
     }
 
     .salaryContainer {
 
-        width: 100%;
-        height: auto;
+
     }
 
     .top-header {
         margin-bottom: 20PX;
         background: #fff;
+        padding: 10PX;
     }
 
     .line {
@@ -51,30 +62,40 @@
         height: auto;
         display: flex;
         justify-content: flex-start;
-        padding: 10PX;
+        /*padding: 10PX;*/
         font-size: 14PX;
+        padding: 5PX;
 
     }
 
     .line > .left-span {
         display: inline-block;
-        width: 70%;
+        width: 40%;
+        /*color: #f9f9f9;*/
     }
 
-    .line > .right-span {
-        display: inline-block;
-        width: 20%;
-        text-align: right;
-    }
+    /*.line > .right-span {*/
+        /*display: inline-block;*/
+        /*width: 40%;*/
+        /*text-align: right;*/
+
+    /*}*/
 
     .title {
         color: black;
         font-size: 18PX;
 
     }
+    .sub-des{
+        color: #939393;
+    }
+    /*.midle-span{*/
+        /*text-align: right;*/
+    /*}*/
 
     .money {
         color: red;
+        font-size: 18PX;
     }
 
     button {
@@ -87,6 +108,11 @@
         margin: 10PX auto;
         outline: none;
     }
+    .more{
+        background: #fff;
+        margin-bottom: 20PX;
+    }
+
     .detail-item{
         display: flex;
         justify-content: flex-start;
