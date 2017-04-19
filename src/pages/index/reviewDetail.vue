@@ -9,7 +9,11 @@
                 <span class="left-span"></span>
                 <span class="right-span">上限:{{object.YGZSX}}</span>
             </div>
-            <button @click="goToPositionDetail">更多岗位信息</button>
+            <!--<button @click="goToPositionDetail">更多岗位信息</button>-->
+        </div>
+
+        <div class="more"   @click="goToPositionDetail">
+            <mt-cell title="更多详情" isLink></mt-cell>
         </div>
 
         <reviewStep :items="object.SHXXARRAY"></reviewStep>
@@ -67,11 +71,15 @@
         margin: 10PX auto;
         outline: none;
     }
+    .more{
+        margin-bottom: 20PX;
+    }
 
 </style>
 <script>
     import reviewStep from '../Components/reviewStep.vue';
     import API from '../../API';
+    import { Cell } from 'mint-ui'
     export default{
         created(){
             let SGBH = this.$route.query.SGBH;
@@ -93,7 +101,8 @@
             }
         },
         components: {
-            reviewStep
+            reviewStep,
+            [Cell.name]:Cell
         }
     }
 </script>

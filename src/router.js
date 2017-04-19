@@ -5,6 +5,7 @@ import applyPosition from './pages/index/applyPosition.vue'
 import reviewDetail from './pages/index/reviewDetail.vue'
 import commitApply from './pages/index/commitApply.vue'
 import searchPosition from './pages/index/searchPosition.vue'
+import ok from './pages/index/ok.vue'
 export default {
     routes: [
         {
@@ -39,6 +40,10 @@ export default {
             path:'/searchPosition',
             component:searchPosition
 
+        },
+        {
+            path:"/ok",
+            component:ok
         }
     ]
 };

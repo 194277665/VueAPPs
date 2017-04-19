@@ -10,7 +10,7 @@
         <!--</div>-->
 
         <!--</div>-->
-        <mt-search v-model="value" cancel-text="取消" placeholder="搜索" :result.sync="canApplyPositions">
+        <mt-search v-model="value" cancel-text="取消" placeholder="搜索" :result.sync="canApplyPositions" show>
 
 
             <div class="filter">
@@ -47,9 +47,9 @@
                 <!--<span class="money">￥560元/每月</span>-->
                 <!--</div>-->
                 <!--</div>-->
-                <applyPositionCell class="applyPositionCell" :item="item" :length="GWDMArray.length"
+                <applyPositionCell class="applyPositionCell" :item="item" :length="GWDMArray.length" :flag="toggleFlag(item)" :GWDMArray="GWDMArray"
                                    v-for="(item,index) in canApplyPositions"
-                                   v-on:clickCell="clickCell"></applyPositionCell>
+                                   @clickCell="clickCell"></applyPositionCell>
 
 
             </div>
@@ -58,7 +58,7 @@
                 <button class="bottomLeft" @click="clickSelected">
                     <!--<i class="iconfont "> &#xe62c;</i>>-->
                     <span>已选中{{GWDMArray.length}}个岗位</span>
-                    <span>还可以选{{5 - GWDMArray.length}}个职位</span>
+                    <span>还可以选{{3 - GWDMArray.length}}个职位</span>
                 </button>
                 <button class="bottomRight" @click="commit">提交</button>
             </div>
@@ -66,13 +66,15 @@
 
             <div class="drag-super" v-show="showSelected">
                 <div class="drag">
-                    <div>
-                    </div>
-                    <draggable :list="list" class="dragArea">
-                        <mt-cell title="已选岗位" value="调整自愿等级"></mt-cell>
-                        <div class="drag-cell" v-for="(element,index) in GWDMArray">
-                         <span>志愿{{index + 1}}:{{element.GWMC}}
-                         </span>
+                    <!--<div>-->
+                    <!--</div>-->
+                    <mt-cell title="已选岗位" value="调整自愿等级"></mt-cell>
+                    <draggable :list="GWDMArray" class="dragArea">
+
+
+                        <div class="drag-cell" v-for="(item,index) in GWDMArray">
+                         <span>志愿{{index + 1}}:{{item.GWMC}}</span>
+                            <i class="iconfont">&#xe6d5;</i>
                         </div>
                     </draggable>
                 </div>
@@ -177,7 +179,8 @@
         background: #fff;
         width: 100%;
         height: 40PX;
-        margin-bottom: 1PX;
+        /*margin-bottom: 1PX;*/
+        border-top: solid 1PX #f9f9f9;
         padding: 10PX;
     }
 
@@ -349,10 +352,13 @@
 
     .drag-cell > span {
         display: inline-block;
-        width: 80%;
+        width: 90%;
         font-size: 14PX;
         /*line-height: 44PX;*/
         /*padding-left: 10PX;*/
+    }
+    .iconfont{
+        color: red;
     }
 
 </style>
@@ -406,41 +412,28 @@
                     this.canApplyPositions = res.data;
                 });
             },
-            goToSearch: function () {
 
-                this.$router.push('/searchPosition');
-            },
-
-            clickCell: function (args) {
-
-                let obj = args;
-                let exist = false;
-                let i = 0;
-                $.each(this.GWDMArray, function (index, value) {
-                    if (value.GWDM == obj.GWDM) {
-                        exist = true;
-                        i = index;
+            clickCell: function (item) {
+                let index = -1;
+                let tmpArray = this.GWDMArray.filter((el,idx)=>{
+                    if(el.WID===item.WID){
+                        index = idx;
+                        return true
+                    }else{
+                        return false
                     }
                 });
-
-//                alert(exist);
-                console.log(exist);
-                if (exist) {
-
-                    this.GWDMArray.splice(i, 1);
-                } else {
-                    if (this.GWDMArray.length > 2) {
-                        console.log(this.GWDMArray.length);
-                        Toast('不能选取更多');
-                        return;
+                    if (tmpArray.length > 0) {
+                        this.GWDMArray.splice(index, 1);
                     } else {
+                        if(this.GWDMArray.length>=3)
+                        {
+                            Toast('不能选择更多岗位');
 
-                        this.GWDMArray.push(obj);
+                        }else {
+                            this.GWDMArray.push(item);
+                        }
                     }
-                }
-                console.log(this.GWDMArray.length + '-------' + this.GWDMArray);
-
-
             },
 
             clickFilterLeft: function () {
@@ -462,10 +455,7 @@
                 $.each(this.GWDMArray,function (index,value) {
                     let obj = {GWDM:value.GWDM};
                     GWArray.push(obj);
-
                 });
-                console.log(GWArray)
-
                 this.$router.push({path:'/commitApply',query:{GWDMArray:GWArray}});
 
             },
@@ -475,9 +465,8 @@
                 this.XQDM = campus.XQDM;
                 this.showFilterLeft = false;
                 this.queryCanApplyJob();
-
-
             },
+
             chosePosition: function (index) {
                 let postiton = this.positionList[index]
                 $('.filter-right').text(postiton.GWLXMC);
@@ -485,8 +474,10 @@
                 this.showFilterRight = false;
                 this.queryCanApplyJob();
             },
-            trim: function (str) { //删除左右两端的空格
-                return str.replace(/(^\s*)|(\s*$)/g, "");
+            toggleFlag(item){
+                let f = this.GWDMArray.filter(el=>el.WID===item.WID).length>0;
+                console.log(f);
+                return f;
             }
         }
         ,
@@ -495,13 +486,7 @@
         data()
         {
             return {
-                value: ' ',
-                msg: 'hello vue',
-                list: [
-                    {name: "图书管理员3"},
-                    {name: "图书管理员2"},
-                    {name: "图书管理员1"},
-                ],
+                value: '',
                 showSelected: false,
                 showFilterRight: false,
                 showFilterLeft: false,
@@ -513,7 +498,8 @@
                 KEYWORD: '',
                 PAGESIZE: 10,
                 slelectedPositions: [],
-                GWDMArray: []
+                GWDMArray: [],
+
 
 
             }
@@ -529,13 +515,8 @@
         watch:{
             value:function (newValue,oldValue) {
 
-                this.KEYWORD = this.trim(newValue);
-                console.log('fdasfdfas'+newValue);
+                this.KEYWORD = newValue;
                 this.queryCanApplyJob();
-                if(this.value.length < 1)
-                {
-                    this.value = ' ';
-                }
 
             }
         },

@@ -2,8 +2,8 @@
     <div class="container" v-on:click="clickCell">
         <div class="left">
             <span>
-                 <i class="iconfont check-box-selected" v-if="cellIsSelected">&#xe68c;</i>
-                 <i class="iconfont check-box-unselected" v-else="!cellIsSelected">&#xe672;</i>
+                 <i class="iconfont check-box-selected" v-if="flag">&#xe68c;</i>
+                 <i class="iconfont check-box-unselected" v-else="!flag">&#xe672;</i>
             </span>
         </div>
         <div class="middle">
@@ -111,19 +111,50 @@
 <script>
     export default{
         created(){
-//            thi
+//
+//
+//            console.log('created -----'+this.GWDMArray);
+//            for(let i = 0;i<this.GWDMArray.length;i++)
+//            {
+//                if(this.item.GWDM == this.GWDMArray[i].GWDM)
+//                {
+//                    this.cellIsSelected = true;
+//                    return;
+//                }
+//            }
 
         },
         methods: {
             clickCell:function () {
-                this.$emit('clickCell',this.item);
-                console.log(this.length);
-                if(this.length>2)
-                {
-                    this.cellIsSelected = false;
-                }else {
-                    this.cellIsSelected = !this.cellIsSelected;
-                }
+//
+//                let exist = false;
+//                let existIndex;
+//                for(let i = 0; i<this.GWDMArray.length; i++)
+//                {
+//                    if(this.item.GWDM == this.GWDMArray[i].GWDM)
+//                    {
+//                        exist = true;
+//                        existIndex = i;
+//                    }
+//                }
+//                this.cellIsSelected = exist;
+//                if(exist){
+//                    this.GWDMArray.splice(existIndex,1);
+//
+//                }else {
+//                    this.GWDMArray.push(this.item);
+//                }
+
+
+
+                this.$emit('clickCell', this.item);
+
+//                if(this.length>2)
+//                {
+//                    this.cellIsSelected = false;
+//                }else {
+//                    this.cellIsSelected = !this.cellIsSelected;
+//                }
             }
 
         },
@@ -136,7 +167,7 @@
         components: {
 
         },
-        props: ['item','length'],
+        props: ['item','length','GWDMArray', 'flag'],
 
     }
 </script>

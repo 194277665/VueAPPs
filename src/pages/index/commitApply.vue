@@ -8,7 +8,7 @@
         </div>
         <div class="allowChange">
             <span>服从调剂</span>
-            <!--<mu-switch label="开关" class="demo-switch" />-->
+            <mt-switch v-model="switchValue" class="mt-switch" @change="switchChange"></mt-switch>
         </div>
 
             <mt-button class="mt-button" @click.native="commit">提交</mt-button>
@@ -54,6 +54,8 @@
         background: white;
         margin-bottom: 20PX;
         text-align: left;
+        display: flex;
+        justify-content: flex-start;
 
     }
     .allowChange>span{
@@ -62,22 +64,29 @@
         font-size: 18PX;
         color: #333;
         line-height: 100%;
+        width: 80%;
 
+    }
+    .allowChange>.mt-switch{
+        width: 20%;
     }
     .mt-button{
         background: #56C2AF;
         color: white;
         width: 90%;
     }
-    .demo-switch {
-        margin-bottom: 16px;
+    .mt-switch .mint-switch-core {
+        border-color: #56C2AF;
+        background-color: #56C2AF;
     }
+
+
 </style>
 <script>
-    import { Button } from 'mint-ui';
+    import { Button, Switch,Toast } from 'mint-ui';
     import $ from 'jquery'
     import API from '../../API'
-//    import MuseUI  from 'muse-ui'
+//    import  Switch from 'muse-ui/src/switch'
     export default{
         created(){
             this.GWDMList = this.$route.query.GWDMArray;
@@ -87,7 +96,7 @@
             commit:function () {
                let LXFS = $('.textfiled').val();
                let SQLY  = $('textarea').val();
-               let SFFCTJ = 1;
+               let SFFCTJ = this.SFFCTJ;
                 let gwdm = JSON.stringify(this.GWDMList);
                 console.log('dfasdfdsafasf-----'+gwdm);
 //               let requestUrl = API.service + API.applyStudentWokrStudy + '?SQLY='+SQLY+'&LXFS='+LXFS+'&IDENTITY_ID='+API.id
@@ -97,34 +106,56 @@
                 console.log(requestUrl);
 
                let param = {
-                   LXFS:LXFS,
-                   SQLY:SQLY,
-                   SFFCTJ:SFFCTJ,
-                   GWARRAY:{INDATA:this.GWDMList},
-                   IDENTITY_ID:API.id,
-                   IDENTITY_TYPE:API.type
-
+                   INDATA: {
+                       LXFS: LXFS,
+                       SQLY: SQLY,
+                       SFFCTJ: SFFCTJ,
+                       GWARRAY:this.GWDMList,
+                       IDENTITY_ID: API.id,
+                       IDENTITY_TYPE: API.type
+                   }
                }
                this.$http.post(requestUrl,param).then(res=>{
 
                    return res.json();
                }).then(res=>{
-                   console.log(res.data);
+                   if(res.returnCode == '#E000000000000')
+                   {
+                       this.$router.push("/ok");
+                   }else {
+                       Toast(res.description);
+
+                   }
                });
 
-
+            },
+            switchChange:function () {
+                if(this.switchValue){
+                    this.SFFCTJ = 1;
+                }else {
+                    this.SFFCTJ = 0;
+                }
 
             }
         },
         data(){
             return {
                 msg: 'hello vue',
-                GWDMList:[]
+                GWDMList:[],
+                switchValue:'',
+                SFFCTJ:0
             }
         },
         components: {
             [Button.name]:Button,
-//            [Swicth.name]:Swicth
+            [Switch.name]:Switch,
+            [Toast.name]:Toast
+        },
+        watch: {
+            switchValue: function (newValue, oldValue) {
+//                alert(newValue);
+
+            }
         }
     }
 </script>

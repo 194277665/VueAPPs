@@ -2,7 +2,7 @@
     <div>
     </div>
 </template>
-<style>
+<style scoped>
     body {
         background-color: #ff0000;
     }

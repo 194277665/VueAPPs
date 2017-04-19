@@ -3,7 +3,7 @@
         <!--//职位详情的头部-->
         <div class="container">
             <div class="line">
-                <span class="left-span">{{object.GWMC}}</span><span class="right-span money">{{object.BCBZ}}</span>
+                <span class="left-span" id="title">{{object.GWMC}}</span><span class="right-span" id="money">{{object.BCBZ}}</span>
             </div>
             <div class="line">
                 <span class="left-span">来自：图书馆</span><span class="right-span">上限:{{object.YGZSX}}元／月</span>
@@ -16,16 +16,16 @@
         <!--//地点 人数 学期 学年-->
         <div class="container">
             <div class="line">
-                <span>工作地点：图书馆</span>
+                <span class="left-span">工作地点：</span><span></span>
             </div>
             <div class="line">
-                <span>人数：{{object.XQRS}}个</span>
+                <span class="left-span">人数：</span><span>{{object.XQRS}}个</span>
             </div>
             <div class="line">
-                <span>学年：{{object.XN_DISPLAY}}</span>
+                <span class="left-span">学年：</span><span>{{object.XN_DISPLAY}}</span>
             </div>
             <div class="line">
-                <span>学期：{{object.XQ_DISPLAY}}</span>
+                <span class="left-span">学期：</span><span>{{object.XQ_DISPLAY}}</span>
             </div>
 
         </div>
@@ -46,9 +46,9 @@
         <div class="container">
             <div class="section-header">申请需求</div>
             <!--<div class="section-content">-->
-                <div class="line">  <span class="">联系人：</span><span>{{object.GWYQ}}</span></div>
-                <div class="line">  <span class="">联系电话:</span><span>{{object.LXDH}}</span></div>
-                <div class="line">  <span class="">联系地址：</span><span>{{object.LXDZ}}</span></div>
+                <div class="line">  <span class="contact-left">联系人：</span><span class="contact-right">{{object.GWYQ}}</span></div>
+                <div class="line">  <span class="contact-left">联系电话:</span><span class="contact-right">{{object.LXDH}}</span></div>
+                <div class="line">  <span class="contact-left">联系地址：</span><span class="contact-right">{{object.LXDZ}}</span></div>
                 <!--<div class="line">  <span>工作地点：{{object.GWYQ}}</span></div>-->
             <!--</div>-->
         </div>
@@ -76,7 +76,12 @@
     .line > .left-span{
         display: inline-block;
         width: 50%;
+        color: #939393;
 
+    }
+    #title{
+        color: black;
+        font-size: 20PX;
     }
     .line> .right-span{
         display: inline-block;
@@ -89,7 +94,7 @@
         color: #93D36E;
         background: #E3F7F5;
     }
-    .money{
+    #money{
         color: red;
     }
 
@@ -106,9 +111,21 @@
     }
     .section-content{
         width: 100%;
-        font-size: 14PX;
+        font-size: 12PX;
         padding: 10PX;
-        text-indent: 20PX;
+        /*text-indent: 10PX;*/
+    }
+    .contact-left{
+        display: inline-block;
+        width: 30%;
+        height: auto;
+        color: #939393;
+    }
+    .contact-right{
+        display: inline-block;
+        width: 60%;
+        height: auto;
+        /*color: #939393;*/
     }
 
 

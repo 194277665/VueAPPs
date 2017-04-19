@@ -3,7 +3,7 @@
         <div class="top-header">
             <div class="line">
                 <span class="left-span title">{{GWbOject.GWMC}}</span>
-                <span>已获薪资</span>
+                <span class="yhxz">已获薪资</span>
                 <span class="right-span money">￥{{GWbOject.XZZH}}</span>
             </div>
             <div class="line">
@@ -26,11 +26,12 @@
         <mt-cell title="薪资明细"></mt-cell>
         <div class="detail-item" v-for="item in GWbOject.SALARYARRAY">
             <div class="detail-item-left">
-                <span>{{GWbOject.FFYF}}</span>
+                <span class="sj">{{item.FFYF}}</span>
+                <span class="gs">工作{{item.GS}}天</span>
             </div>
             <div class="detail-item-right">
-                <span>+{{GWbOject.SFJE}}</span>
-                <span>{{GWbOject.GS}}</span>
+                <span class="gz">+{{item.SFJE}}</span>
+
             </div>
         </div>
 
@@ -73,13 +74,19 @@
         width: 40%;
         /*color: #f9f9f9;*/
     }
+    .line>.yhxz{
+        display: inline-block;
+        width: 40%;
+        text-align: right;
+        color: #939393;
+    }
 
-    /*.line > .right-span {*/
-        /*display: inline-block;*/
-        /*width: 40%;*/
-        /*text-align: right;*/
+    .line > .right-span {
+        display: inline-block;
+        width: 20%;
+        text-align: right;
 
-    /*}*/
+    }
 
     .title {
         color: black;
@@ -133,7 +140,12 @@
         width: 100%;
         height: auto;
         text-align: right;
-
+    }
+    .gs{
+        color: #939393;
+    }
+    .gz{
+        color: red;
     }
 
 </style>
