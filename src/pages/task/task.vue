@@ -1,9 +1,8 @@
 <template>
     <div class="container">
-        <p class="qq">qq</p>
         <mt-header fixed title="我的任务"></mt-header>
         <div class="containerSecond">
-            <p>{{$route.params.taskID}}</p>
+            <!--<p>{{$route.params.taskID}}</p>-->
             <form>
                 <section v-for="(item, index) in items">
                     <h4>
