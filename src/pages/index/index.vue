@@ -3,6 +3,7 @@
         <mt-header title="行为记录"></mt-header>
         <div class="menu">
             <span>行为类型：</span>
+            <div class="select">
             <select v-model="selected">
                 <option value="visit">客户拜访</option>
                 <option value="meeting">公司会议</option>
@@ -11,6 +12,7 @@
                 <option value="sell">销售支持</option>
                 <option value="other">其他</option>
             </select>
+            </div>
             <router-view></router-view>
         </div>
     </div>
@@ -24,6 +26,7 @@
 
     .menu {
         padding: 10PX;
+        background: #f9f9f9;
     }
 
     span {
@@ -32,6 +35,14 @@
         padding-top: 10PX;
         padding-bottom: 6PX;
     }
+    .select{
+        border: solid #f9f9f9 1PX;
+        width: 100%;
+        background: white;
+    }
+    /*router-view{*/
+        /*background: #f9f9f9;*/
+    /*}*/
 </style>
 <script type="text/javascript">
     import {Header} from 'mint-ui';
@@ -50,6 +61,7 @@
         },
         watch: {
             selected: function (val) {
+                console.log(val);
                 this.$router.push(val)
             }
         }
