@@ -98,24 +98,12 @@
                let SQLY  = $('textarea').val();
                let SFFCTJ = this.SFFCTJ;
                 let gwdm = JSON.stringify(this.GWDMList);
-                console.log('dfasdfdsafasf-----'+gwdm);
-//               let requestUrl = API.service + API.applyStudentWokrStudy + '?SQLY='+SQLY+'&LXFS='+LXFS+'&IDENTITY_ID='+API.id
-//                +'&IDENTITY_TYPE='+API.type+'&GWARRAY='+JSON.stringify(this.GWDMList)+'&SFFCTJ='+1;
-//               console.log(requestUrl);
-                let requestUrl = API.service + API.applyStudentWokrStudy;
-                console.log(requestUrl);
-
-               let param = {
-                   INDATA: {
-                       LXFS: LXFS,
-                       SQLY: SQLY,
-                       SFFCTJ: SFFCTJ,
-                       GWARRAY:this.GWDMList,
-                       IDENTITY_ID: API.id,
-                       IDENTITY_TYPE: API.type
-                   }
-               }
-               this.$http.post(requestUrl,param).then(res=>{
+               let requestUrl = API.service + API.applyStudentWokrStudy + '?SQLY='+SQLY+'&LXFS='+LXFS+'&IDENTITY_ID='+API.id
+                +'&IDENTITY_TYPE='+API.type+'&GWARRAY='+gwdm+'&SFFCTJ='+1;
+               console.log(requestUrl);
+               let encodeUrl =  encodeURI(requestUrl);
+               console.log(encodeUrl);
+               this.$http.get(encodeUrl).then(res=>{
 
                    return res.json();
                }).then(res=>{
