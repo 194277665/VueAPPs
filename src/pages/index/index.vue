@@ -1,13 +1,15 @@
 <template>
     <div id="app" class="index">
         <!--<router-view>-->
-        <mt-search :value.sync="sValue" :result.sync="items">
-            <div id="cell" v-for="item in items">
+        <mt-search v-model="value" cancel-text="取消" placeholder="搜索" show>
+            <div class="cellDiv" v-for="(item,index) in items">
                 <ul>
-                    <li cals="taskLi">任务名称：{{item.title}}</li>
-                    <li>任务期限：{{item.endDate}}</li>
-                    <li>任务状态：{{item.status}}</li>
-                    <li>任务操作：<span @click="gototask(item.taskID)">{{item.operate}}</span></li>
+                    <li cals="taskLi">任务名称：{{item.RWMC}}</li>
+                    <li>任务期限：{{item.WCQX}}</li>
+                    <li>任务状态：{{item.WCQKDM_DISPLAY}}</li>
+                    <li v-show="(item.SFTJ == '0') || (item.SHZTDM == '3')">任务操作：<span class="edit"
+                                                                                                         @click="gototask(index)">编辑</span>
+                    </li>
                 </ul>
             </div>
         </mt-search>
@@ -16,47 +18,108 @@
 
 </template>
 <style>
-    .index{
-        background:#eee;
-    }
-    #cell {
-        width: 96%;
-        height: 80PX;
-        margin: 10PX auto;
-        background-color: white;
+    .index {
+        background: #eee;
     }
 
-    .taskLi{
+    .cellDiv {
+        width: 96%;
+        height: auto;
+        margin: 10PX auto;
+        background-color: white;
+        /*padding: 10PX;*/
+    }
+
+    li {
         list-style: none;
-        font-size: 16px;
+        font-size: 20px;
         color: #666;
-        margin-left: 10px;
+        /*margin-left: 10px;*/
+        padding: 3PX;
+    }
+
+    .edit {
+
+        color: #0a6bb7;
     }
 
 </style>
 <script type="text/javascript">
-    import { Search } from 'mint-ui';
+    import {Search, Indicator} from 'mint-ui';
+    import $ from 'jquery';
     export default {
+        created(){
+
+
+//
+//                        let Url = 'http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/yddrwlbcx.do';
+            let Url = './modules/yddyxgl/yddrwlbcx.do';
+                         Indicator.open();
+                        $.post(Url, (data) => {
+                            Indicator.close();
+                            this.items = data.datas.yddrwlbcx.rows;
+                        });
+
+
+//                    });
+//
+//                })
+
+
+        },
         components: {
             [Search.name]: Search,
+            [Indicator.name]: Indicator,
         },
-        methods:{
-            gototask:function (id) {
+        methods: {
+            parseQueryString(url){
+                let obj = {};
+                let start = url.indexOf("?") + 1;
+                let str = url.substr(start);
+                let arr = str.split("&");
+                for (let i = 0; i < arr.length; i++) {
+                    let arr2 = arr[i].split("=");
+                    obj[arr2[0]] = arr2[1];
+                }
+                return obj;
+            },
 
-                console.log(this);
+            gototask: function (index) {
+                this.$router.push({path: "/task", query: {WID: this.items[index].WID}});
+            },
+            searchTask(keyWord){
 
-                this.$router.push("/task/"+id);
+//                let Url = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/wdrwcx.do');
+                let Url = encodeURI('./modules/yddyxgl/T_RWFP_QUERY.do');
+                let param = {RWMC: this.value}
+                Indicator.open();
+                $.post(Url, param, (data) => {
+                    Indicator.close();
+                    this.items = data.datas.wdrwcx.rows;
+                });
+//                this.$http.post(Url,param).then(res=>{
+//                    Indicator.close();
+//                    return res.json();
+//                }).then(res=>{
+//                    this.items = res.datas.T_RWFP_QUERY.rows;
+//                    console.log(this.items);
+////                    alert(this.items);
+//                });
             }
         },
         data(){
 
             return {
-                sValue:" ",
-                items: [{taskID:"",title: "任务名称", status: "待处理", endDate: "2019／10／24", operate: "编辑"},
-                    {taskID:"",title: "任务名称", status: "待处理", endDate: "2019／10／24", operate: "编辑"},
-                    {taskID:"",title: "任务名称", status: "待处理", endDate: "2019／10／24", operate: "编辑"},
-                    {taskID:"",title: "任务名称", status: "待处理", endDate: "2019／10／24", operate: "编辑"}]
+                value: '',
+                items: []
             }
-        }
+        },
+        watch: {
+            value: function (val) {
+                console.log(val);
+                this.searchTask(val);
+
+            }
+        },
     }
 </script>

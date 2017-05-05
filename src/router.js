@@ -3,11 +3,11 @@ import task from './pages/task/task.vue'
 export default {
     routes: [
         {
-            path: '/index',
+            path: '/',
             component: index
         },
         {
-            path: '/task/:taskID',
+            path: '/task',
             component: task
         }
     ]
