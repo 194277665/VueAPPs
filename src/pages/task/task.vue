@@ -120,8 +120,8 @@
         created(){
 
             let WID = this.$route.query.WID;
-            let RequestUrl = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_QUERY.do');
-//            let RequestUrl = encodeURI('./modules/yddyxgl/T_RWFP_QUERY.do');
+//            let RequestUrl = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_QUERY.do');
+            let RequestUrl = encodeURI('./modules/yddyxgl/T_RWFP_QUERY.do');
 
             let param = {WID: WID}
             console.log(param);
@@ -177,7 +177,7 @@
         methods: {
             clickSave: function () {
 
-//                let RequestUrl = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_MODIFY.do');
+
                 let cg = $('.TF').val();
                 let param =
                     {
@@ -194,6 +194,7 @@
                     }
 
                 Indicator.open();
+                //let RequestUrl = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_MODIFY.do');
                 $.post('./modules/yddyxgl/T_RWFP_MODIFY.do', param, function (data) {
                     Indicator.close();
                     if (data.code == 0) {

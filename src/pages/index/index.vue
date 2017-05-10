@@ -97,14 +97,6 @@
                     Indicator.close();
                     this.items = data.datas.wdrwcx.rows;
                 });
-//                this.$http.post(Url,param).then(res=>{
-//                    Indicator.close();
-//                    return res.json();
-//                }).then(res=>{
-//                    this.items = res.datas.T_RWFP_QUERY.rows;
-//                    console.log(this.items);
-////                    alert(this.items);
-//                });
             }
         },
         data(){
