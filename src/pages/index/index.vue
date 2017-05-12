@@ -52,8 +52,8 @@
 
 
 //
-//                        let Url = 'http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/yddrwlbcx.do';
-            let Url = './modules/yddyxgl/yddrwlbcx.do';
+//                        var Url = 'http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/yddrwlbcx.do';
+            var Url = './modules/yddyxgl/yddrwlbcx.do';
                          Indicator.open();
                         $.post(Url, (data) => {
                             Indicator.close();
@@ -73,12 +73,12 @@
         },
         methods: {
             parseQueryString(url){
-                let obj = {};
-                let start = url.indexOf("?") + 1;
-                let str = url.substr(start);
-                let arr = str.split("&");
-                for (let i = 0; i < arr.length; i++) {
-                    let arr2 = arr[i].split("=");
+                var obj = {};
+                var start = url.indexOf("?") + 1;
+                var str = url.substr(start);
+                var arr = str.split("&");
+                for (var i = 0; i < arr.length; i++) {
+                    var arr2 = arr[i].split("=");
                     obj[arr2[0]] = arr2[1];
                 }
                 return obj;
@@ -89,9 +89,9 @@
             },
             searchTask(keyWord){
 
-//                let Url = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/wdrwcx.do');
-                let Url = encodeURI('./modules/yddyxgl/T_RWFP_QUERY.do');
-                let param = {RWMC: this.value}
+//                var Url = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/wdrwcx.do');
+                var Url = encodeURI('./modules/yddyxgl/T_RWFP_QUERY.do');
+                var param = {RWMC: this.value}
                 Indicator.open();
                 $.post(Url, param, (data) => {
                     Indicator.close();

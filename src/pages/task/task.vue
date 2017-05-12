@@ -119,11 +119,11 @@
     export default{
         created(){
 
-            let WID = this.$route.query.WID;
-//            let RequestUrl = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_QUERY.do');
-            let RequestUrl = encodeURI('./modules/yddyxgl/T_RWFP_QUERY.do');
+            var WID = this.$route.query.WID;
+//            var RequestUrl = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_QUERY.do');
+            var RequestUrl = encodeURI('./modules/yddyxgl/T_RWFP_QUERY.do');
 
-            let param = {WID: WID}
+            var param = {WID: WID}
             console.log(param);
             Indicator.open();
             $.post(RequestUrl, param, (data) => {
@@ -178,8 +178,8 @@
             clickSave: function () {
 
 
-                let cg = $('.TF').val();
-                let param =
+                var cg = $('.TF').val();
+                var param =
                     {
                         WID: this.item.WID,
 //                        ZXRID: '',
@@ -194,7 +194,7 @@
                     }
 
                 Indicator.open();
-                //let RequestUrl = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_MODIFY.do');
+                //var RequestUrl = encodeURI('http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_MODIFY.do');
                 $.post('./modules/yddyxgl/T_RWFP_MODIFY.do', param, function (data) {
                     Indicator.close();
                     if (data.code == 0) {
@@ -205,8 +205,8 @@
 
             },
             clickSubmit: function () {
-              let cg = $('.TF').val();
-                let param =
+                var cg = $('.TF').val();
+                var param =
                     {
                         WID: this.item.WID,
 //                        ZXRID:'',
@@ -222,8 +222,8 @@
                     }
                 Indicator.open();
 
-//                let  url = 'http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_MODIFY.do';
-               let url = './modules/yddyxgl/T_RWFP_MODIFY.do';
+//                var  url = 'http://amptest.wisedu.com/pw/sys/yxgl/modules/yddyxgl/T_RWFP_MODIFY.do';
+                var url = './modules/yddyxgl/T_RWFP_MODIFY.do';
                 $.post(url, param, function (data) {
                     Indicator.close();
                     if (data.code == 0) {
