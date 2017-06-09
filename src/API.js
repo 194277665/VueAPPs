@@ -1,10 +1,16 @@
 /**
  * Created by gaomneng on 2017/4/13.
  */
+// if (process.env.NODE_ENV === 'production') {
+//     global.HOST = location.origin + location.pathname.substring(0, location.pathname.indexOf("/", 1));//'/xsfw';
+// } else {
+//     global.HOST = 'http://amptest.wisedu.com/xsfwfw';
+// }
 export default {
     id:'1950008',
     type:'',
     service:'http://amptest.wisedu.com/axsfw',
+    // service:'../..',
     setDefaultRole:'/sys/qgzxapp/swMobileService/checkAuth/setDefaultRole.do',
     queryStudentWorkJob:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentWorkJob.do',
     queryStudentWorkSalary:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentWorkSalary.do',

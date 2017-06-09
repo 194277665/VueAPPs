@@ -8,10 +8,10 @@
         </div>
         <div class="middle">
             <div class="line">
-                <span>{{item.GWMC}}</span>
+                <span class="gwmc">{{item.GWMC}}</span>
             </div>
             <div class="line">
-                <span>来自{{item.DWDM_DISPLAY}}</span>
+                <span class="from-where">来自:{{item.DWDM_DISPLAY}}</span>
             </div>
             <div class="line">
                 <span class="campus">{{item.XQMC_DISPLAY}}</span>
@@ -19,7 +19,7 @@
 
         </div>
         <div class="right">
-            <span class="money">￥{{item.BCBZ}}元/每月</span>
+            <span class="money">{{item.BCBZ}}</span><span class="danwei">元/每月</span>
         </div>
     </div>
 </template>
@@ -87,11 +87,14 @@
 
     }
     .money{
-        display: block;
-        width: 100%;
+        display: inline-block;
+        width: 50%;
         height: 100%;
         line-height: 100%;
         padding: 10PX;
+        color: red;
+        font-size: 18PX;
+        text-align: right;
     }
     .check-box-selected{
         font-size: 25PX;
@@ -102,6 +105,15 @@
         font-size: 25PX;
         color: #f5f5f5;
 
+    }
+    .gwmc{
+        font-size: 18PX;
+    }
+    .from-where{
+        font-size: 14PX;
+    }
+    .danwei{
+        color: #939393;
     }
 
 

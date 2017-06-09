@@ -3,12 +3,13 @@
         <div class="top-header">
             <div class="line">
                 <span class="left-span title">{{object.GWMC}}</span>
-                <span class="right-span money">{{object.BCBZ}}元/月</span>
+                <span class="midel-span">已获薪资</span>
+                <span class="right-span money">{{object.BCBZ}}</span>
             </div>
-            <div class="line">
-                <span class="left-span"></span>
-                <span class="right-span">上限:{{object.YGZSX}}</span>
-            </div>
+            <!--<div class="line">-->
+                <!--<span class="left-span"></span>-->
+                <!--<span class="right-span">上限:{{object.YGZSX}}</span>-->
+            <!--</div>-->
             <!--<button @click="goToPositionDetail">更多岗位信息</button>-->
         </div>
 
@@ -28,6 +29,7 @@
         margin-bottom: 20PX;
         background: #fff;
         padding-bottom:10PX;
+
     }
 
     .line {
@@ -35,6 +37,7 @@
         height: auto;
         display: flex;
         justify-content: flex-start;
+        align-items: baseline;
         padding: 10PX;
         font-size: 14PX;
 
@@ -42,23 +45,34 @@
 
     .line > .left-span {
         display: inline-block;
-        width: 70%;
+        width: 60%;
+    }
+    .line > .midel-span{
+        display: inline-block;
+        /*width: 15%;*/
+        color: #939393;
+
     }
 
     .line > .right-span {
         display: inline-block;
-        width: 30%;
+        width: 15%;
         text-align: right;
+        font-size: 25PX;
+
     }
 
     .title {
         color: black;
         font-size: 18PX;
+        width: 40%;
+
 
     }
 
     .money {
         color: red;
+        font-size: 18PX;
     }
 
     button {
@@ -79,12 +93,14 @@
 <script>
     import reviewStep from '../Components/reviewStep.vue';
     import API from '../../API';
-    import { Cell } from 'mint-ui'
+    import { Cell, Indicator } from 'mint-ui'
     export default{
         created(){
             let SGBH = this.$route.query.SGBH;
             let requestUrl = API.service + API.queryApplyJobInfo +'?SGBH=' + SGBH + '&IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
+            Indicator.open();
             this.$http.get(requestUrl).then(res=>{
+                Indicator.close();
                  return res.json();
             }).then(res=>{
                 this.object = res.data;

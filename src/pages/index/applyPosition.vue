@@ -11,20 +11,14 @@
 
         <!--</div>-->
         <mt-search v-model="value" cancel-text="取消" placeholder="搜索" :result.sync="canApplyPositions" show>
-
-
             <div class="filter">
                 <button class="filter-left" @click="clickFilterLeft">选择校区</button>
                 <button class="filter-right" @click="clickFilterRight">选择岗位</button>
             </div>
-
-
             <div class="timeLimit">
                 <span>工作时间：6.12-明年8.12 申请截止8.12</span>
             </div>
-
             <div class="main">
-
                 <!--<div class="applyPositionCell" v-for="(n,index) in list" @click="clickApplyPositionCell(index)">-->
                 <!--<div class="left">-->
                 <!--<span>-->
@@ -58,20 +52,16 @@
                 <button class="bottomLeft" @click="clickSelected">
                     <!--<i class="iconfont "> &#xe62c;</i>>-->
                     <span>已选中{{GWDMArray.length}}个岗位</span>
-                    <span>还可以选{{3 - GWDMArray.length}}个职位</span>
+                    <span>还可以选{{2 - GWDMArray.length}}个职位</span>
                 </button>
                 <button class="bottomRight" @click="commit">提交</button>
             </div>
-
-
             <div class="drag-super" v-show="showSelected">
                 <div class="drag">
                     <!--<div>-->
                     <!--</div>-->
                     <mt-cell title="已选岗位" value="调整自愿等级"></mt-cell>
                     <draggable :list="GWDMArray" class="dragArea">
-
-
                         <div class="drag-cell" v-for="(item,index) in GWDMArray">
                          <span>志愿{{index + 1}}:{{item.GWMC}}</span>
                             <i class="iconfont">&#xe6d5;</i>
@@ -79,7 +69,6 @@
                     </draggable>
                 </div>
             </div>
-
 
             <div class="filter-item-container" v-show="showFilterLeft">
                 <div class="filter-item" v-for="(option,index) in campusList" @click="choseCampus(index)">
@@ -367,7 +356,7 @@
     import applyPositionCell from '../Components/applyPositionCell.vue'
     import API from '../../API'
     import $ from 'jquery'
-    import {Toast, Search, Cell} from 'mint-ui';
+    import {Toast, Search, Cell, Indicator} from 'mint-ui';
     export default{
         created(){
 
@@ -385,7 +374,9 @@
             queryCampus: function () {
                 let requestUrl = API.service + API.queryCampus + '?IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
                 console.log('quecampus' + requestUrl);
+                Indicator.open();
                 this.$http.get(requestUrl).then(res => {
+                    Indicator.close();
                     return res.json();
                 }).then(res => {
                     this.campusList = res.data;
@@ -395,7 +386,9 @@
 
                 let requestUrl2 = API.service + API.queryWorkType + '?IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
                 console.log('position' + requestUrl2);
+                Indicator.open();
                 this.$http.get(requestUrl2).then(res => {
+                    Indicator.close();
                     return res.json();
                 }).then(res => {
                     this.positionList = res.data;
@@ -405,7 +398,9 @@
                 let requestUrl3 = API.service + API.queryCanApplyJob + '?GWLXDM=' + this.GWLXDM + '&XQDM=' + this.XQDM +
                     '&KEYWORD=' + this.KEYWORD + '&PAGESIZE=' + this.PAGESIZE + '&PAGENUM=' + 1 + '&IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
                 console.log('//  请求可申请的岗位' + requestUrl3);
+                Indicator.open();
                 this.$http.get(requestUrl3).then(res => {
+                    Indicator.close();
                     return res.json();
 
                 }).then(res => {
@@ -426,7 +421,7 @@
                     if (tmpArray.length > 0) {
                         this.GWDMArray.splice(index, 1);
                     } else {
-                        if(this.GWDMArray.length>=3)
+                        if(this.GWDMArray.length>=2)
                         {
                             Toast('不能选择更多岗位');
 
@@ -452,12 +447,15 @@
             commit: function () {
 
                 let GWArray = new Array();
-                $.each(this.GWDMArray,function (index,value) {
+                $.each(this.GWDMArray,function (index,value){
                     let obj = {GWDM:value.GWDM};
                     GWArray.push(obj);
                 });
+                if (GWArray.length < 1){
+                    Toast('您还没有选中任何岗位');
+                    return;
+                }
                 this.$router.push({path:'/commitApply',query:{GWDMArray:GWArray}});
-
             },
             choseCampus: function (index) {
                 let campus = this.campusList[index]

@@ -34,6 +34,7 @@
         margin-right:10PX;
         float: right;
         color: #ef971c;
+        font-size: 20PX;
     }
     .positionListItem{
         width: 96%;

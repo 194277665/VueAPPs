@@ -74,7 +74,7 @@
     }
 </style>
 <script type="text/javascript">
-    import {Navbar, TabItem, Cell, TabContainer, TabContainerItem, Button} from 'mint-ui'
+    import {Navbar, TabItem, Cell, TabContainer, TabContainerItem, Button,  Indicator} from 'mint-ui'
     import applyRecord from '../Components/applyRecord.vue'
     import myPosition from '../Components/myPosition.vue'
     import API from '../../API'
@@ -82,10 +82,12 @@
         created() {
             let random = Math.ceil(Math.random() * 10);
             let a = (random % 2 != 0);
-            this.showApplyButton = a;
+            this.showApplyButton = true;
 
-            let requestUrlRole = API.service + API.setDefaultRole + '?IDENTITY_ID='+API.id
+            let requestUrlRole = API.service + API.setDefaultRole + '?IDENTITY_ID='+API.id;
+            Indicator.open();
             this.$http.get(requestUrlRole).then(res=>{
+                Indicator.close();
                 return res.json();
             }).then(res=>{
                API.type = res.data.IDENTITY_TYPE;
@@ -95,7 +97,9 @@
 
             let requestUrl = API.service+API.queryStudentWorkJob+'?IDENTITY_ID='+API.id;
             console.log(requestUrl);
+            Indicator.open();
             this.$http.get(requestUrl).then(res=>{
+                Indicator.close();
                 return res.json();
             }).then(res=>{
                 this.object = res.data;

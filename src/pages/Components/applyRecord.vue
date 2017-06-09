@@ -6,7 +6,6 @@
                 <mt-cell :title="obj.GWMC" :value="obj.SHZT_DISPLAY" isLink></mt-cell>
             </div>
         </div>
-
     </div>
 </template>
 <style scoped>

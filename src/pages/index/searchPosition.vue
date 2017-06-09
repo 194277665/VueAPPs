@@ -13,7 +13,7 @@
     }
 </style>
 <script>
-    import { Search } from 'mint-ui'
+    import { Search,  Indicator } from 'mint-ui'
     import API from '../../API'
     import applyPositionCell from '../Components/applyPositionCell.vue'
     export default{
@@ -22,7 +22,9 @@
                 let requestUrl3 = API.service + API.queryCanApplyJob + '?GWLXDM=' + this.GWLXDM + '&XQDM=' + this.XQDM +
                     '&KEYWORD=' + this.KEYWORD + '&PAGESIZE=' + this.PAGESIZE + '&PAGENUM=' + 1 + '&IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
                 console.log('//  请求可申请的岗位' + requestUrl3);
+                Indicator.open();
                 this.$http.get(requestUrl3).then(res => {
+                  Indicator.close();
                     return res.json();
 
                 }).then(res => {

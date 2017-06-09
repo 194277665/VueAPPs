@@ -7,15 +7,17 @@
             <div class="stepItem" v-for="item in items">
                 <div class="leftPart">
                     <span>{{item.CZRQ}}</span>
-                    <i class="iconfont checkStatusYes" v-if="item.DQZTDM == 0">&#xe68c;</i>
+                    <i class="iconfont checkStatusYes" v-if="item.SHYJ.length === 0">&#xe68c;</i>
                     <i class="iconfont checkStatusNo" v-else="">&#xe67a;</i>
-
                 </div>
                 <div class="rightPart">
                     <section>
                         <h2>{{item.DQZTDM_DISPLAY}}</h2>
-                        <span class="reviewDes"> {{item.SHYJ}} </span>
+                        <!--<span class="reviewDes"> {{item.SHYJ}} </span>-->
                         <span class="detail">{{item.CZZXM}}</span>
+                        <div v-for="subItem in item.SHYJ" class="shyj">
+                         <span>{{ subItem.SHYJ }}</span>
+                        </div>
                     </section>
                 </div>
             </div>
@@ -53,9 +55,8 @@
 
     .stepItem {
         width: 100%;
-        height: 100PX;
+        height: 150PX;
         background: white;
-
     }
 
     .leftPart {

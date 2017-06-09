@@ -3,7 +3,7 @@
         <!--//职位详情的头部-->
         <div class="container">
             <div class="line">
-                <span class="left-span" id="title">{{object.GWMC}}</span><span class="right-span" id="money">{{object.BCBZ}}</span>
+                <span class="left-span" id="title">{{object.GWMC}}</span><span class="right-span" id="money">{{object.BCBZ}}</span><span>元／月</span>
             </div>
             <div class="line">
                 <span class="left-span">来自：图书馆</span><span class="right-span">上限:{{object.YGZSX}}元／月</span>
@@ -70,6 +70,7 @@
     .line{
         display: flex;
         justify-content: flex-start;
+        align-items: baseline;
         padding: 5PX;
         font-size: 14PX;
     }
@@ -77,6 +78,7 @@
         display: inline-block;
         width: 50%;
         color: #939393;
+        font-size: 15PX;
 
     }
     #title{
@@ -88,6 +90,7 @@
         width: 50%;
         text-align: right;
         color: #939393;
+        font-size: 15PX;
     }
     .line > .mark{
         /*border: solid #56C2AF 1PX;*/
@@ -95,7 +98,9 @@
         background: #E3F7F5;
     }
     #money{
-        color: red;
+        color: #f9c25e;
+        font-size: 20PX;
+        width: 35%;
     }
 
     /*简介秒速*/
@@ -111,8 +116,9 @@
     }
     .section-content{
         width: 100%;
-        font-size: 12PX;
+        font-size: 15PX;
         padding: 10PX;
+        color: #939393;
         /*text-indent: 10PX;*/
     }
     .contact-left{
@@ -120,12 +126,15 @@
         width: 30%;
         height: auto;
         color: #939393;
+        font-size: 15PX;
     }
     .contact-right{
         display: inline-block;
         width: 60%;
         height: auto;
-        /*color: #939393;*/
+        color: #333333;
+        font-size: 15PX;
+
     }
 
 

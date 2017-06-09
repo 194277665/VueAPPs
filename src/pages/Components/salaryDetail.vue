@@ -1,14 +1,14 @@
 <template>
     <div class="salaryContainer">
         <div class="top-header">
-            <div class="line">
+            <div class="line firstLine">
                 <span class="left-span title">{{GWbOject.GWMC}}</span>
                 <span class="yhxz">已获薪资</span>
-                <span class="right-span money">￥{{GWbOject.XZZH}}</span>
+                <span class="right-span money">{{GWbOject.XZZH}}</span>
             </div>
             <div class="line">
                 <span class="left-span sub-des">工作时间：</span>
-                <span>{{GWbOject.GZKSSJ}}-{{GWbOject.GZJSSJ}}</span>
+                <span class="midle-span">{{GWbOject.GZKSSJ}}-{{GWbOject.GZJSSJ}}</span>
                 <!--<span class="right-span">已获薪资</span>-->
             </div>
             <div class="line">
@@ -56,8 +56,13 @@
         margin-bottom: 20PX;
         background: #fff;
         padding: 10PX;
-    }
 
+    }
+    .firstLine{
+        border-bottom: #f9f9f9 solid 1PX;
+        display: flex;
+        justify-content: flex-start;
+    }
     .line {
         width: 100%;
         height: auto;
@@ -66,19 +71,25 @@
         /*padding: 10PX;*/
         font-size: 14PX;
         padding: 5PX;
+        align-items: baseline;
 
     }
 
     .line > .left-span {
         display: inline-block;
         width: 40%;
+        font-size: 18PX;
         /*color: #f9f9f9;*/
     }
     .line>.yhxz{
         display: inline-block;
-        width: 40%;
+        width: 30%;
         text-align: right;
         color: #939393;
+        line-height: 100%;
+        font-size: 15PX;
+        height: 100%;
+
     }
 
     .line > .right-span {
@@ -86,23 +97,25 @@
         width: 20%;
         text-align: right;
 
+
     }
 
     .title {
         color: black;
-        font-size: 18PX;
+        font-size: 20PX;
 
     }
     .sub-des{
         color: #939393;
     }
-    /*.midle-span{*/
-        /*text-align: right;*/
-    /*}*/
+    .midle-span{
+        text-align: left;
+        font-size: 16PX;
+    }
 
     .money {
         color: red;
-        font-size: 18PX;
+        font-size: 25PX;
     }
 
     button {
@@ -141,11 +154,16 @@
         height: auto;
         text-align: right;
     }
+    .sj{
+        font-size: 18PX;
+    }
     .gs{
         color: #939393;
+        font-size: 14PX;
     }
     .gz{
-        color: red;
+        color: black;
+        font-size: 18PX;
     }
 
 </style>

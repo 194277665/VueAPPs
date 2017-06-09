@@ -83,7 +83,7 @@
 
 </style>
 <script>
-    import { Button, Switch,Toast } from 'mint-ui';
+    import { Button, Switch, Toast,  Indicator } from 'mint-ui';
     import $ from 'jquery'
     import API from '../../API'
 //    import  Switch from 'muse-ui/src/switch'
@@ -97,14 +97,21 @@
                let LXFS = $('.textfiled').val();
                let SQLY  = $('textarea').val();
                let SFFCTJ = this.SFFCTJ;
+               if((LXFS.length < 1) || (SQLY.length < 1) )
+               {
+                   Toast('请完善申请信息');
+                   return;
+               }
+
                 let gwdm = JSON.stringify(this.GWDMList);
                let requestUrl = API.service + API.applyStudentWokrStudy + '?SQLY='+SQLY+'&LXFS='+LXFS+'&IDENTITY_ID='+API.id
                 +'&IDENTITY_TYPE='+API.type+'&GWARRAY='+gwdm+'&SFFCTJ='+1;
                console.log(requestUrl);
                let encodeUrl =  encodeURI(requestUrl);
                console.log(encodeUrl);
+                Indicator.open();
                this.$http.get(encodeUrl).then(res=>{
-
+                   Indicator.close();
                    return res.json();
                }).then(res=>{
                    if(res.returnCode == '#E000000000000')
