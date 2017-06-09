@@ -19,7 +19,7 @@
 
         </div>
         <div class="right">
-            <span class="money">{{item.BCBZ}}</span><span class="danwei">元/每月</span>
+            <span class="money">{{item.BCBZ}}</span><span class="danwei">元/月</span>
         </div>
     </div>
 </template>
