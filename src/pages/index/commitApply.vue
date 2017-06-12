@@ -79,6 +79,10 @@
         border-color: #56C2AF;
         background-color: #56C2AF;
     }
+    .mint-switch-input:checked .mint-switch-core {
+        border-color: #56C2AF;
+        background-color: #56C2AF;
+    }
 
 
 </style>

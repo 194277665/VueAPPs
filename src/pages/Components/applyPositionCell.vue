@@ -15,6 +15,7 @@
             </div>
             <div class="line">
                 <span class="campus">{{item.XQMC_DISPLAY}}</span>
+                <span class="type">{{item.GWLXDM_DISPLAY}}</span>
             </div>
 
         </div>
@@ -79,6 +80,12 @@
         color: #93D36E;
         font-size: 14PX;
 
+    }
+    .type{
+        display: inline-block;
+        border: solid #2196F3 1PX;
+        color: #2196F3;
+        font-size: 14PX;
     }
 
     .right {

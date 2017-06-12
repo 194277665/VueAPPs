@@ -11,7 +11,7 @@
             <mt-tab-container-item id="1">
                 <!--<button v-show="object.SFKSQ" @click="goToApply">+申请新岗位</button>-->
                <div class="top-button-div">
-                <button class="top-button" @click="goToApply">申请新岗位</button>
+                <button class="top-button" @click="goToApply" v-show="object.SFKSQ">申请新岗位</button>
                </div>
                 <myPosition :items="object.SGXX"></myPosition>
             </mt-tab-container-item>
@@ -87,6 +87,7 @@
             let requestUrlRole = API.service + API.setDefaultRole + '?IDENTITY_ID='+API.id;
             Indicator.open();
             this.$http.get(requestUrlRole).then(res=>{
+                console.log(11);
                 Indicator.close();
                 return res.json();
             }).then(res=>{

@@ -1,7 +1,8 @@
 <template>
     <div class="container">
         <div class="applyListItem" v-for="(item,index1) in items">
-            <span class="sectionHeader">申请于:{{item.SQRQ}} </span>
+            <span class="sectionHeader">申请于:{{item.SQRQ}} <span v-if="item.SFFCTJ">/不服从调剂</span>
+            <span v-else="">/服从调剂</span></span>
             <div class="cell" v-for="(obj,index2) in item.GWSQARRAY" @click="toSalaryDetail(index1,index2)">
                 <mt-cell :title="obj.GWMC" :value="obj.SHZT_DISPLAY" isLink></mt-cell>
             </div>

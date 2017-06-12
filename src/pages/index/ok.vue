@@ -2,6 +2,7 @@
 
     <div class="container">
         <img src="../../../static/images/Yes.png">
+        <span>提交成功~请耐心等待审核</span>
         <mt-button class="mt-button" @click.native="goToIndex">返回我的岗位</mt-button>
     </div>
     </div>

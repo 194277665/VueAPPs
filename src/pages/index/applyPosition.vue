@@ -13,10 +13,10 @@
         <mt-search v-model="value" cancel-text="取消" placeholder="搜索" :result.sync="canApplyPositions" show>
             <div class="filter">
                 <button class="filter-left" @click="clickFilterLeft">选择校区</button>
-                <button class="filter-right" @click="clickFilterRight">选择岗位</button>
+                <button class="filter-right" @click="clickFilterRight">岗位类型</button>
             </div>
             <div class="timeLimit">
-                <span>工作时间：6.12-明年8.12 申请截止8.12</span>
+                <span>工作时间：{{setting.GZKSRQ}}-{{setting.GZJSRQ}} 申请截止:{{setting.SQJSRQ}}</span>
             </div>
             <div class="main">
                 <!--<div class="applyPositionCell" v-for="(n,index) in list" @click="clickApplyPositionCell(index)">-->
@@ -52,7 +52,7 @@
                 <button class="bottomLeft" @click="clickSelected">
                     <!--<i class="iconfont "> &#xe62c;</i>>-->
                     <span>已选中{{GWDMArray.length}}个岗位</span>
-                    <span>还可以选{{2 - GWDMArray.length}}个职位</span>
+                    <span>还可以选{{setting.YCGWS - GWDMArray.length}}个职位</span>
                 </button>
                 <button class="bottomRight" @click="commit">提交</button>
             </div>
@@ -60,7 +60,7 @@
                 <div class="drag">
                     <!--<div>-->
                     <!--</div>-->
-                    <mt-cell title="已选岗位" value="调整自愿等级"></mt-cell>
+                    <mt-cell :title="已选岗位" value="调整志愿等级"></mt-cell>
                     <draggable :list="GWDMArray" class="dragArea">
                         <div class="drag-cell" v-for="(item,index) in GWDMArray">
                          <span>志愿{{index + 1}}:{{item.GWMC}}</span>
@@ -178,6 +178,7 @@
         height: 30PX;
         background: #fefcec;
         padding: 5PX;
+        /*text-align: right;*/
     }
 
     .timeLimit > span {
@@ -364,6 +365,8 @@
 
             this.queryCampus();
 
+            this.queryWorkStudySetting();
+
             //请求岗位选项
             this.queryWorkType();
 
@@ -371,6 +374,16 @@
             this.queryCanApplyJob();
         },
         methods: {
+            queryWorkStudySetting:function () {
+                let requestUrl = API.service + API.queryWorkStudySetting;
+                Indicator.open();
+                this.$http.get(requestUrl).then(res => {
+                    Indicator.close();
+                    return res.json();
+                }).then(res => {
+                    this.setting = res.data;
+                });
+            },
             queryCampus: function () {
                 let requestUrl = API.service + API.queryCampus + '?IDENTITY_ID=' + API.id + '&IDENTITY_TYPE=' + API.type;
                 console.log('quecampus' + requestUrl);
@@ -379,7 +392,7 @@
                     Indicator.close();
                     return res.json();
                 }).then(res => {
-                    this.campusList = res.data;
+                    this.campusList = res.data.CAMPUSARRAY;
                 });
             },
             queryWorkType: function () {
@@ -421,7 +434,7 @@
                     if (tmpArray.length > 0) {
                         this.GWDMArray.splice(index, 1);
                     } else {
-                        if(this.GWDMArray.length>=2)
+                        if(this.GWDMArray.length>=this.setting.YCGWS)
                         {
                             Toast('不能选择更多岗位');
 
@@ -494,9 +507,10 @@
                 GWLXDM: '',
                 XQMC: '',
                 KEYWORD: '',
-                PAGESIZE: 10,
+                PAGESIZE: 100000,
                 slelectedPositions: [],
                 GWDMArray: [],
+                setting:{},
 
 
 

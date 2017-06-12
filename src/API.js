@@ -22,5 +22,6 @@ export default {
     queryWorkType:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryWorkType.do',
     queryWorkStudySetting:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryWorkStudySetting.do',
     queryCanApplyJob:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryCanApplyJob.do',
-    applyStudentWokrStudy:'/sys/qgzxapp/swMobileService/studentWorkStudy/applyStudentWokrStudy.do'
+    applyStudentWokrStudy:'/sys/qgzxapp/swMobileService/studentWorkStudy/applyStudentWokrStudy.do',
+    // queryWorkStudySetting:'/sys/qgzxapp /swMobileService/studentWorkStudy/queryWorkStudySetting.do',
 }

@@ -4,7 +4,7 @@
 
             <div  class="line">
                 <span  class="des">{{item.GWMC}}</span>
-                <span v-show="item.LGLBDM == 1" class="leave-position">离岗</span>
+                <span  class="leave-position">{{item.LGLBDM_DISPLAY}}</span>
                 <span class="salary">{{item.XZZH}}</span>
             </div>
             <div class="line">
