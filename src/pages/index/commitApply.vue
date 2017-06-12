@@ -100,6 +100,14 @@
             commit:function () {
                let LXFS = $('.textfiled').val();
                let SQLY  = $('textarea').val();
+                var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+                if(!myreg.test(LXFS))
+                {
+                    Toast('请填写正确的手机号码');
+                    return;
+                }
+
+
                let SFFCTJ = this.SFFCTJ;
                if((LXFS.length < 1) || (SQLY.length < 1) )
                {

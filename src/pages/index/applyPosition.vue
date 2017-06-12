@@ -58,9 +58,10 @@
             </div>
             <div class="drag-super" v-show="showSelected">
                 <div class="drag">
-                    <!--<div>-->
-                    <!--</div>-->
-                    <mt-cell :title="已选岗位" value="调整志愿等级"></mt-cell>
+                    <div class="">
+                        <span>已选 {{GWDMArray.length}}个岗位</span>
+                        <span>调整志愿等级</span>
+                    </div>
                     <draggable :list="GWDMArray" class="dragArea">
                         <div class="drag-cell" v-for="(item,index) in GWDMArray">
                          <span>志愿{{index + 1}}:{{item.GWMC}}</span>

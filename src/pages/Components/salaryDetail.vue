@@ -27,7 +27,7 @@
         <div class="detail-item" v-for="item in GWbOject.SALARYARRAY">
             <div class="detail-item-left">
                 <span class="sj">{{item.FFYF}}</span>
-                <span class="gs">工作{{item.GS}}天</span>
+                <span class="gs">工作{{item.GS}}小时</span>
             </div>
             <div class="detail-item-right">
                 <span class="gz">+{{item.SFJE}}</span>
