@@ -14,6 +14,7 @@
                 <button class="top-button" @click="goToApply" v-show="object.SFKSQ">申请新岗位</button>
                </div>
                 <myPosition :items="object.SGXX"></myPosition>
+                <nothingTips v-show="object.SGXX.length < 1"></nothingTips>
             </mt-tab-container-item>
 
             <mt-tab-container-item id="2">
@@ -125,7 +126,7 @@
             [TabContainerItem.name]: TabContainerItem,
             [Button.name]: Button,
             applyRecord,
-            myPosition
+            myPosition,
         }
     }
 </script>

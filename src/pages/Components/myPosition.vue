@@ -10,8 +10,8 @@
             <div class="line">
                 <span  class="date" >{{item.GZKSRQ}}-{{item.GZJSRQ}}</span><span  class="yhxiz">已获薪资</span>
             </div>
-
         </div>
+        <nothingTips v-show="items.length < 1"></nothingTips>
     </div>
 </template>
 <style scoped>
@@ -77,6 +77,8 @@
 
 </style>
 <script>
+
+    import nothingTips from './nothingTips.vue'
     export default{
         created(){
         },
@@ -91,7 +93,7 @@
             }
         },
         components: {
-
+            nothingTips,
         },
         props:['items']
     }

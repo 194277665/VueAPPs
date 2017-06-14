@@ -6,7 +6,9 @@
             <div class="cell" v-for="(obj,index2) in item.GWSQARRAY" @click="toSalaryDetail(index1,index2)">
                 <mt-cell :title="obj.GWMC" :value="obj.SHZT_DISPLAY" isLink></mt-cell>
             </div>
+            <nothingTips v-show="items.length < 1"></nothingTips>
         </div>
+
     </div>
 </template>
 <style scoped>
@@ -46,6 +48,7 @@
 <script>
     import {Cell} from 'mint-ui'
     import API from '../../API'
+    import nothingTips from './nothingTips.vue'
     export default{
         created(){
             let requestUrl = API.service + API.queryStudentJobApplyRecord + '?IDENTITY_ID=' +
@@ -69,7 +72,8 @@
             }
         },
         components: {
-            [Cell.name]: Cell
+            [Cell.name]: Cell,
+            nothingTips,
         }
     }
 </script>

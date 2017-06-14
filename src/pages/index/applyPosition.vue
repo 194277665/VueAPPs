@@ -44,6 +44,7 @@
                 <applyPositionCell class="applyPositionCell" :item="item" :length="GWDMArray.length" :flag="toggleFlag(item)" :GWDMArray="GWDMArray"
                                    v-for="(item,index) in canApplyPositions"
                                    @clickCell="clickCell"></applyPositionCell>
+                <nothingTips v-show="canApplyPositions.length < 1"></nothingTips>
 
 
             </div>
@@ -82,6 +83,9 @@
                     {{option.GWLXMC}}
                 </div>
             </div>
+
+
+
         </mt-search>
 
     </div>
@@ -359,6 +363,7 @@
     import API from '../../API'
     import $ from 'jquery'
     import {Toast, Search, Cell, Indicator} from 'mint-ui';
+    import nothingTips from '../Components/nothingTips.vue'
     export default{
         created(){
 
@@ -523,7 +528,8 @@
             applyPositionCell,
             [Toast.name]: Toast,
             [Search.name]: Search,
-            [Cell.name]:Cell
+            [Cell.name]:Cell,
+            nothingTips
         },
         watch:{
             value:function (newValue,oldValue) {
