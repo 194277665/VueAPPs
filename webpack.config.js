@@ -14,13 +14,16 @@ module.exports = {
       loader: 'vue-loader',
       options: {
         postcss: [require('postcss-cssnext')({
-          features: {
-            rem: false
-          }
-        }), require('postcss-pxtorem')({
-          rootValue: 20,
-          propWhiteList: []
-        })]
+            features: {
+              rem: false
+            }
+          })
+          // ,
+          // require('postcss-pxtorem')({
+          //   rootValue: 20,
+          //   propWhiteList: []
+          // })
+        ]
       }
     }, {
       test: /\.js$/,
@@ -46,6 +49,11 @@ module.exports = {
     }]
   },
   resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    modules: [
+      'src',
+      'node_modules'
+    ],
     alias: {
       'vue$': 'vue/dist/vue.common.js'
     }
@@ -53,7 +61,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    host: 'localhost',
+    host: '0.0.0.0',
     port: 8080
   },
   performance: {
@@ -69,19 +77,26 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
+      },
+      "WEBPACK_CONIFG_HOST":'location.origin + location.pathname.substring(0, location.pathname.indexOf("/", 1)) + "/"'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
       }
     }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   // sourceMap: true,
-    //   out: {
-    //     comments: false
-    //   },
-    //   compress: {
-    //     warnings: false
-    //   }
-    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
+    })
+  ])
+}else if (process.env.NODE_ENV === 'development') {
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"development"'
+      },
+      "WEBPACK_CONIFG_HOST":'"http://amptest.wisedu.com/xsfwfw/"'
     })
   ])
 }
