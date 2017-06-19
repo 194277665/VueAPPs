@@ -9,7 +9,7 @@
 export default {
     id:'1950008',
     type:'',
-    service:'http://amptest.wisedu.com/axsfw',
+    service:'http://amptest.wisedu.com/xsfwfw',
     // service:'../..',
     setDefaultRole:'/sys/qgzxapp/swMobileService/checkAuth/setDefaultRole.do',
     queryStudentWorkJob:'/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentWorkJob.do',

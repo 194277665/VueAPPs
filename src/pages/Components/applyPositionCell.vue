@@ -14,8 +14,8 @@
                 <span class="from-where">来自:{{item.DWDM_DISPLAY}}</span>
             </div>
             <div class="line">
-                <span class="campus">{{item.XQMC_DISPLAY}}</span>
-                <span class="type">{{item.GWLXDM_DISPLAY}}</span>
+                <span class="campus" v-if="item.XQMC_DISPLAY">{{item.XQMC_DISPLAY}}</span>
+                <span class="type" v-if="item.GWLXDM_DISPLAY">{{item.GWLXDM_DISPLAY}}</span>
             </div>
 
         </div>
@@ -83,24 +83,23 @@
     }
     .type{
         display: inline-block;
-        border: solid #2196F3 1PX;
+        border: solid #59b6ff 1PX;
+        background-color: #f0faff;
+        border-radius: 2Px;
+        padding: 1Px 4Px;
         color: #2196F3;
-        font-size: 14PX;
+        font-size: 12PX;
     }
 
     .right {
         width: 30%;
         height: auto;
-
+        padding: 10Px 0;
     }
     .money{
         display: inline-block;
-        width: 50%;
-        height: 100%;
-        line-height: 100%;
-        padding: 10PX;
         color: red;
-        font-size: 18PX;
+        font-size: 20PX;
         text-align: right;
     }
     .check-box-selected{

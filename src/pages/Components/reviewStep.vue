@@ -6,8 +6,8 @@
         <div class="stepItemContainer">
             <div class="stepItem" v-for="item in items">
                 <div class="leftPart">
-                    <span>{{item.CZRQ}}</span>
-                    <i class="iconfont checkStatusYes" v-if="item.SHYJ.length === 0">&#xe68c;</i>
+                    <span>{{item.CZRQ|parseDate}}</span>
+                    <i class="iconfont checkStatusYes" v-if="item.SHYJ&&item.SHYJ.length===0">&#xe68c;</i>
                     <i class="iconfont checkStatusNo" v-else="">&#xe67a;</i>
                 </div>
                 <div class="rightPart">
@@ -54,30 +54,27 @@
     }
 
     .stepItem {
-        width: 100%;
-        height: 150PX;
-        background: white;
+        min-height: 150PX;
+        background-color: #fff;
+        padding-left: 110Px;
+        position: relative;
     }
 
     .leftPart {
-        display: inline-block;
-        width: 30%;
-        height: 100%;
-        float: left;
-        position: relative;
-        background: white;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 110Px;
+        background-color: #fff;
         border-right: solid #f9f9f9 1PX;
-        /*margin-right: 1px;*/
     }
 
     .leftPart > span {
-
         width: 100%;
-        height: 10PX;
-        /*line-height: 10PX;*/
         display: block;
         font-size: 12PX;
-        color: #d3d3d3;
+        color: #888;
         text-align: right;
         padding-right: 30px;
         margin-bottom: 10PX;
@@ -85,18 +82,16 @@
     }
 
     .rightPart {
-        display: inline-block;
-        width: 70%;
+        width: calc(100vw - 110Px);
         height: 100%;
-        float: right;
-        background: white;
+        background-color: #fff;
     }
 
     .rightPart h2 {
         width: 100%;
         height: 30PX;
         font-size: 16PX;
-        color: #d3d3d3;
+        color: #888;
         padding-left: 30PX;
     }
 
@@ -113,7 +108,7 @@
         position: absolute;
         font-size: 25PX;
         top: 0;
-        right: -13PX;
+        left: 97Px;
         background-color: white;
 
     }
@@ -124,19 +119,25 @@
         position: absolute;
         font-size: 25PX;
         top: 0;
-        right: -13PX;
+        left: 97Px;
         background-color: white;
     }
 
 </style>
 <script scoped>
+    import moment from 'moment'
     export default{
         created(){
             console.log(this.$route.query.item);
         },
         data(){
             return {
-                msg: 'hello vue'
+                msg: 'hello vue',
+            }
+        },
+        filters: {
+        	parseDate(val){
+        		return moment(val).format('YYYY-MM-DD HH:mm:ss');
             }
         },
         components: {},

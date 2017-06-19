@@ -3,8 +3,10 @@
         <div class="top-header">
             <div class="line">
                 <span class="left-span title">{{object.GWMC}}</span>
-                <span class="midel-span">已获薪资</span>
-                <span class="right-span money">{{object.BCBZ}}</span>
+                <p>
+                    <span class="midel-span">已获薪资</span>
+                    <span class="right-span money">{{object.BCBZ}}</span>
+                </p>
             </div>
             <!--<div class="line">-->
                 <!--<span class="left-span"></span>-->
@@ -17,7 +19,7 @@
             <mt-cell title="更多详情" isLink></mt-cell>
         </div>
 
-        <reviewStep :items="object.SHXXARRAY"></reviewStep>
+        <reviewStep :items="(object.SHXXARRAY?object.SHXXARRAY:[])"></reviewStep>
     </div>
 </template>
 <style scoped>
@@ -33,10 +35,9 @@
     }
 
     .line {
-        width: 100%;
         height: auto;
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: baseline;
         padding: 10PX;
         font-size: 14PX;
@@ -45,18 +46,16 @@
 
     .line > .left-span {
         display: inline-block;
-        width: 60%;
     }
-    .line > .midel-span{
+    .line .midel-span{
         display: inline-block;
         /*width: 15%;*/
         color: #939393;
 
     }
 
-    .line > .right-span {
+    .line .right-span {
         display: inline-block;
-        width: 15%;
         text-align: right;
         font-size: 25PX;
 
@@ -64,10 +63,7 @@
 
     .title {
         color: black;
-        font-size: 18PX;
-        width: 40%;
-
-
+        font-size: 16PX;
     }
 
     .money {
@@ -103,7 +99,7 @@
                 Indicator.close();
                  return res.json();
             }).then(res=>{
-                this.object = res.data;
+                this.object = res.data?res.data:{};
             });
         },
         methods:{

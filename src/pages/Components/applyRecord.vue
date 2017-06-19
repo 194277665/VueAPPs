@@ -6,8 +6,9 @@
             <div class="cell" v-for="(obj,index2) in item.GWSQARRAY" @click="toSalaryDetail(index1,index2)">
                 <mt-cell :title="obj.GWMC" :value="obj.SHZT_DISPLAY" isLink></mt-cell>
             </div>
-            <nothingTips v-show="items.length < 1"></nothingTips>
+
         </div>
+        <nothingTips v-show="items === undefined || items.length < 1"></nothingTips>
 
     </div>
 </template>

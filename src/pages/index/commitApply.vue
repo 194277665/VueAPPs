@@ -14,6 +14,12 @@
             <mt-button class="mt-button" @click.native="commit">提交</mt-button>
     </div>
 </template>
+<style>
+    .mint-switch-input:checked+.mint-switch-core{
+        border-color: #56c2af !important;
+        background-color: #56c2af !important;
+    }
+</style>
 <style scoped>
     body {
         background-color: #ff0000;
@@ -61,7 +67,7 @@
     .allowChange>span{
         display: inline-block;
         padding: 10PX;
-        font-size: 18PX;
+        font-size: 16PX;
         color: #333;
         line-height: 100%;
         width: 80%;

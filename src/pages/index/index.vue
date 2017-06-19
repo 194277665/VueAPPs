@@ -13,8 +13,8 @@
                <div class="top-button-div">
                 <button class="top-button" @click="goToApply" v-show="object.SFKSQ">申请新岗位</button>
                </div>
-                <myPosition :items="object.SGXX"></myPosition>
-                <nothingTips v-show="object.SGXX.length < 1"></nothingTips>
+                <myPosition :items="object.SGXX?object.SGXX:[]"></myPosition>
+                <!--<nothingTips v-show="object.SGXX === undefined || object.SGXX.length < 1"></nothingTips>-->
             </mt-tab-container-item>
 
             <mt-tab-container-item id="2">

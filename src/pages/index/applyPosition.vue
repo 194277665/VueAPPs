@@ -16,7 +16,8 @@
                 <button class="filter-right" @click="clickFilterRight">岗位类型</button>
             </div>
             <div class="timeLimit">
-                <span>工作时间：{{setting.GZKSRQ}}-{{setting.GZJSRQ}} 申请截止:{{setting.SQJSRQ}}</span>
+                <span>工作时间：{{setting.GZKSRQ|paeseDate}}-{{setting.GZJSRQ|paeseDate}}</span>
+                <span>申请截止:{{setting.SQJSRQ|paeseDate}}</span>
             </div>
             <div class="main">
                 <!--<div class="applyPositionCell" v-for="(n,index) in list" @click="clickApplyPositionCell(index)">-->
@@ -51,7 +52,7 @@
 
             <div class="bottom">
                 <button class="bottomLeft" @click="clickSelected">
-                    <!--<i class="iconfont "> &#xe62c;</i>>-->
+                    <img src="../../../static/images/login.png" alt="">
                     <span>已选中{{GWDMArray.length}}个岗位</span>
                     <span>还可以选{{setting.YCGWS - GWDMArray.length}}个职位</span>
                 </button>
@@ -59,7 +60,7 @@
             </div>
             <div class="drag-super" v-show="showSelected">
                 <div class="drag">
-                    <div class="">
+                    <div class="infoC">
                         <span>已选 {{GWDMArray.length}}个岗位</span>
                         <span>调整志愿等级</span>
                     </div>
@@ -179,18 +180,19 @@
     }
 
     .timeLimit {
-        width: 100%;
         height: 30PX;
         background: #fefcec;
         padding: 5PX;
-        /*text-align: right;*/
+        display: flex;
+        justify-content: space-between;
+        font-size: 12Px;
     }
 
     .timeLimit > span {
         display: block;
         line-height: 20PX;
         color: orange;
-
+        white-space: nowrap;
     }
 
     .main {
@@ -292,6 +294,15 @@
         background: #2f343b;
         border: none;
         outline: none;
+        & >img{
+           position: absolute;
+           width: 40Px;
+           top: 10Px;
+           left: 15Px;
+           padding: 5Px;
+           border-radius: 20Px;
+           background-color: #56c2af;
+        }
     }
 
     .bottomLeft span {
@@ -355,7 +366,11 @@
     .iconfont{
         color: red;
     }
-
+    .infoC{
+        color: #fff;
+        padding: 5Px;
+        font-size: 14Px;
+    }
 </style>
 <script>
     import draggable from 'vuedraggable'
@@ -364,6 +379,8 @@
     import $ from 'jquery'
     import {Toast, Search, Cell, Indicator} from 'mint-ui';
     import nothingTips from '../Components/nothingTips.vue'
+    import moment from 'moment'
+
     export default{
         created(){
 
@@ -521,8 +538,7 @@
 
 
             }
-        }
-        ,
+        },
         components: {
             draggable,
             applyPositionCell,
@@ -539,5 +555,10 @@
 
             }
         },
+        filters: {
+        	paeseDate(val){
+        		return moment(val).format('YY.MM.DD')
+            }
+        }
     }
 </script>

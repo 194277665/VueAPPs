@@ -81,6 +81,7 @@
     import nothingTips from './nothingTips.vue'
     export default{
         created(){
+            console.log('items'+this.items);
         },
         methods:{
             toSalaryDetail:function (index) {
