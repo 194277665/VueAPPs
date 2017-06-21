@@ -405,6 +405,7 @@
                     return res.json();
                 }).then(res => {
                     this.setting = res.data;
+                    API.LXFS = res.data.LXFS;
                 });
             },
             queryCampus: function () {

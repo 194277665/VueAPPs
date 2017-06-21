@@ -10,8 +10,10 @@
 
             <mt-tab-container-item id="1">
                 <!--<button v-show="object.SFKSQ" @click="goToApply">+申请新岗位</button>-->
-               <div class="top-button-div">
-                <button class="top-button" @click="goToApply" v-show="object.SFKSQ">申请新岗位</button>
+               <div class="top-button-div"  v-show="object.SFKSQ">
+                   <div class="top-button" @click="goToApply">
+                       <i class="iconfont">&#xe6bf;</i><span>申请新岗位</span>
+                   </div>
                </div>
                 <myPosition :items="object.SGXX?object.SGXX:[]"></myPosition>
                 <!--<nothingTips v-show="object.SGXX === undefined || object.SGXX.length < 1"></nothingTips>-->
@@ -26,8 +28,14 @@
 </template>
 
 <style scoped>
+    html{
+        margin: 0;
+        padding: 0;
+    }
     body{
         background-color: #fff;
+        margin: 0;
+        padding: 0;
     }
     .index {
         background: #f9f9f9;
@@ -46,14 +54,13 @@
         height: 50PX;
         text-align: center;
         margin-bottom:10PX;
+        text-align: center;
+
 
     }
     .top-button {
-        background: #f9f9f9;
         border-radius: 3PX;
-        /*border: solid 1PX #999;*/
         box-shadow: 0 0 1PX rgba(0,0,0,0.5);
-        /*box-shadow: 0 0 1PX #f9f9f9;*/
         width: 96%;
         height: 50PX;
         outline: none;
@@ -61,9 +68,20 @@
         background: white;
         color: #56c2af;
         font-size: 16PX;
-        /*margin: 10PX auto;*/
+        margin: 0 auto;
         text-align: center;
-
+        line-height: 50Px;
+        & >i{
+           vertical-align: middle;
+           display: inline-block;
+        }
+        & >span{
+            display: inline-block;
+        }
+    }
+    .iconfont{
+        font-size: 25Px;
+        color: #56c2af;
     }
 
 
@@ -88,11 +106,11 @@
             let requestUrlRole = API.service + API.setDefaultRole + '?IDENTITY_ID='+API.id;
             Indicator.open();
             this.$http.get(requestUrlRole).then(res=>{
-                console.log(11);
                 Indicator.close();
                 return res.json();
             }).then(res=>{
                API.type = res.data.IDENTITY_TYPE;
+//               API.LXFS = res.data.LXFS;
                console.log('heollo '+API.type);
             });
 

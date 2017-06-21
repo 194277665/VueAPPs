@@ -1,10 +1,13 @@
 <template>
     <div class="container">
         <div class="phone-number">
-            <input class="textfiled" type="text" placeholder="请输入你的手机号码"/>
+            <input class="textfiled" type="text" placeholder="请输入你的手机号码" v-model="LXFS"/>
         </div>
         <div class="reson">
-            <textarea placeholder="请输入你的申请理由"></textarea>
+            <textarea placeholder="请输入你的申请理由" v-model="reson">
+
+            </textarea>
+            <span>{{reson.length}}/200</span>
         </div>
         <div class="allowChange">
             <span>服从调剂</span>
@@ -30,28 +33,48 @@
 
     .phone-number{
         width: 100%;
-
         color: #f9f9f9;
         height: 44PX;
-        margin-bottom: 1PX;
+        border-bottom: 1Px solid #f9f9f9;
     }
     .textfiled{
         width: 100%;
         height: 100%;
         padding: 10PX;
         font-size: 15PX;
+        border-bottom: solid 1PX #ddd !important;
+        border: none;
+        outline: none !important;
+        margin: 0 !important;
+
     }
     .reson{
-        width: 100%;
-        height: 200PX;
+        height: 220PX;
+        background-color: #fff;
         margin-bottom: 20PX;
+        border-bottom: solid 1PX #ddd;
+        position: relative;
+
+        & >span{
+               display: inline-block;
+               position: absolute;
+               right: 0;
+               bottom: 0;
+               font-size: 14PX;
+               color: #939393;
+       }
     }
     textarea{
         width: 100%;
-        height: 100%;
+        height: 190PX;
         font-size: 15PX;
         color: #030303;
-        padding: 10PX;
+        padding: 10PX ;
+        border: none !important;
+        outline: none !important;
+        margin: 0 !important;
+
+
 
     }
     .allowChange{
@@ -100,6 +123,7 @@
     export default{
         created(){
             this.GWDMList = this.$route.query.GWDMArray;
+            this.LXFS = API.LXFS;
         },
 
         methods:{
@@ -156,7 +180,9 @@
                 msg: 'hello vue',
                 GWDMList:[],
                 switchValue:'',
-                SFFCTJ:0
+                SFFCTJ:0,
+                LXFS:'',
+                reson:'',
             }
         },
         components: {
@@ -167,6 +193,13 @@
         watch: {
             switchValue: function (newValue, oldValue) {
 //                alert(newValue);
+
+            },
+            reson:function (newValue) {
+                if(newValue.length > 200){
+                    Toast('申请理由字数过长');
+                    this.reson = this.reson.substr(0, 200);
+                }
 
             }
         }

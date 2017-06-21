@@ -1,0 +1,33 @@
+﻿<?xml version="1.0"?>
+<permissions prefix="">
+    <!-- 移动端我的勤工助学 -->
+    <permission name="XS-yd-wdqgzx" cn="移动端我的勤工助学">
+        <attribute name="GNBS" value="mobile_wgqgzx" />
+        <attribute name="PX" value="1" />
+        <attribute name="GNFW" value="MOBILE" />
+        <path value="/sys/qgzxapp/modules/mobile_wgqgzx.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentWorkJob.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentWorkSalary.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentJobInfo.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryStudentJobApplyRecord.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryApplyJobInfo.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryCampus.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryWorkType.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryWorkStudySetting.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryCanApplyJob.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/applyStudentWokrStudy.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/queryApplyInputInfo.do" type="normal" />
+        <path value="/sys/qgzxapp/swMobileService/studentWorkStudy/reApplyJob.do" type="normal" />
+    </permission>
+    <!-- 全部 -->
+    <exclude>
+        <path value="/code/*" type="global" needLogin="true" />
+        <path value="/sys/qgzxapp/swMobileService/checkAuth/setDefaultRole.do" type="normal" />
+        <path value="/sys/emapcomponent/clearDicCache.do" type="global" needLogin="true" expr="false" />
+        <path value="/sys/emapcomponent/file/getAttachmentFile/*" type="global" needLogin="false" />
+        <path value="/sys/funauthapp/api/*" type="global" needLogin="true" />
+        <path value="/sys/qgzxapp/*default/index.do" type="global" needLogin="true" />
+        <path value="/sys/swpubapp/userinfo/getConfigUserInfo.do" type="global" needLogin="true" />
+        <path value="/sys/swpubapp/userinfo/getUserPhoto.do" type="global" needLogin="true" />
+    </exclude>
+</permissions>

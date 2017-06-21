@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- application package info -->
+<package_info>
+
+    <!-- 应用信息 -->
+    <application>
+        <!-- 应用类型: web、mobile、web/mobile -->
+        <type>mobile</type>
+        <!-- 应用申请的application ID -->
+        <identity>4954470489856922</identity>
+        <!-- 应用缩写，由字母数字下划线组成，不超过40字节 -->
+        <name>swmqgzxapp</name>
+        <!-- 应用中文名称，不超过20汉字 -->
+        <cname>移动勤工助学</cname>
+        <!-- 应用制造商,不超过20汉字 -->
+        <vendor>金智教育</vendor>
+        <!-- 应用的分类标签，用于定义云端应用的作用域。 -->
+        <category>01</category>
+        <!-- 应用描述，不超过300汉字 -->
+        <description></description>
+        <!-- 应用版本号: X.XX.XXX -->
+        <version>1.0.0</version>
+    </application>
+
+    <!-- 应用开发者调用总线API所需要的开发证书 -->
+    <cer>HOjIFRMbqSAVIByLhyuOOfYg+Qb+ae/bi9eYYxnA/BrytCXoi8at8yCKATDqxN5dJAT7eOC3JLgZEBkO7J9PX46WpbGeXjHvj4dUjbdVJSA/qt3rHGgFDWUIS2zmcaEjfRWKBvAQhz8zfjla/5/lgJaoNiKS5xdmulotEuqSvSVE/vL8j9Qpm30Uq/QpQG63fFvkXO2AFShao8s5CGeKwfeLQUHRys3uCFl1MzlaFULSQO+a4Tp6uLEQwmGZeToYNIiKqYyvwGptRJyPocWlNXB/Wj+fs1OG6Nai74lez+0AOS1mTRA/D575xHFe58NBmVWjoquHLpouuX/ULbIZTg==</cer>
+
+    <!-- API清单 -->
+    <apis>
+        <host>http://apisdev.wisedu.com:8081/</host>
+    </apis>
+
+</package_info>
